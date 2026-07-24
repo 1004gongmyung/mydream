@@ -6,6 +6,12 @@
 청소년 진로탐색 앱 '마이진로'의 표층(질문 레이어 + 시기 내비게이션)에서 출발한 MVP.
 설계 근거: 「앱_통합설계_v2_지도와나침반.md」 / 콘텐츠: 「답변엔진_63문_v3.md」·「질문레이어_v2.md」
 
+## 배포 (2026-07-25)
+
+- **서비스 URL**: https://1004gongmyung.github.io/myjinro/
+- 저장소: https://github.com/1004gongmyung/myjinro (공개, GitHub Pages — main 브랜치 루트)
+- **업데이트 배포 방법**: 이 폴더에서 수정 → 테스트 → `git add -A; git commit -m "메시지"; git push` — 푸시하면 1~2분 내 자동 반영
+
 ## 실행하는 법 (셋 중 아무거나)
 
 1. **그냥 열기**: `index.html`을 더블클릭 (콘텐츠가 `data/content.data.js`에 내장돼 있어 서버 없이 동작)
