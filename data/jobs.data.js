@@ -1,0 +1,66 @@
+// 조건 대시보드(모듈 B) v0 시드 — 직업 카드 10개 ('구조 한 줄' 10개 직업과 동일)
+// 정직 원칙: 검증 안 된 수치는 싣지 않는다. 임금 분포는 고용24 데이터 연동 후 표시 —
+// 그 전까지는 제도적 사실(경로·조건)과 구조 설명만 담는다. 미화 금지, 훈계 금지.
+// structureLine은 lens.data.js의 동일 직업명에서 가져와 렌더링한다 (§4 고정 슬롯).
+(function (root, factory) {
+  if (typeof module === "object" && module.exports) module.exports = factory();
+  else root.MAPSI_JOBS_DATA = factory();
+})(typeof self !== "undefined" ? self : this, function () {
+  return {
+    wagePendingNote: "임금 분포는 고용24 데이터 연동 후 직업별로 보여줄게요. 미리 어림값을 싣지 않아요.",
+    wageCommonRef: { text: "참고 — 또래(20~24세) 전체 평균 임금은 월 253.6만 원이에요(직업 무관, 남 268.3만·여 243.3만).", chip: { grade: "①", label: "청소년 통계 2026" } },
+    jobs: [
+      { id: "webtoon", name: "웹툰 작가", clusterId: "content", summary: "이야기와 그림으로 연재하는 일",
+        paths: { main: ["플랫폼 도전 코너·공모전으로 데뷔"], alt: ["관련 학과는 필수가 아니에요 — 포트폴리오 중심"] },
+        conditions: ["연재 마감 강도가 세요", "수입 편차가 커요 — 아래 구조 한 줄을 봐요"],
+        aiNote: "이야기의 취향을 만들고 독자와 약속을 지키는 부분은 사람 몫으로 남아 있어요.",
+        relatedQuestions: ["A2", "K9"] },
+      { id: "creator", name: "유튜버·크리에이터", clusterId: "content", summary: "콘텐츠로 관심을 모으는 일",
+        paths: { main: ["지금 바로 시작할 수 있어요 — 수익 정산은 만 19세 규정(K4 참고)"], alt: ["편집자·기획자 등 제작팀 직군도 넓어요"] },
+        conditions: ["수익이 안정되기까지 오래 걸리는 경우가 많아요", "부업으로 시작하는 경우가 흔해요"],
+        aiNote: "AI가 편집을 도와줘도, '누구에게 무엇을 말할까'는 사람이 정해요.",
+        relatedQuestions: ["A10", "K4"] },
+      { id: "developer", name: "소프트웨어 개발자", clusterId: "dev", summary: "코드로 문제를 푸는 일",
+        paths: { main: ["컴퓨터 관련 전공 → 취업"], alt: ["부트캠프·독학 + 포트폴리오 — 전공 무관 채용도 있어요"] },
+        conditions: ["포트폴리오가 학력만큼 봐지는 분야예요", "기술이 빨리 바뀌어서 계속 배우는 일이에요"],
+        aiNote: "코드 일부는 AI가 짜줘요. 무엇을 왜 만들지 정하고 검증하는 쪽이 사람 몫이에요.",
+        relatedQuestions: ["K1", "K2"] },
+      { id: "teacher", name: "교사", clusterId: "edu", summary: "배움과 성장을 돕는 일",
+        paths: { main: ["교대·사범대 → 임용시험"], alt: ["일반대 + 교직이수·교육대학원", "강사·교육 콘텐츠·에듀테크 경로"] },
+        conditions: ["국공립은 임용 경쟁이 있어요", "사립·기간제 등 고용 형태에 따라 조건이 달라요"],
+        aiNote: "지식 전달은 AI도 해요. 한 명 한 명의 마음을 읽고 동기를 만드는 건 사람 몫이에요.",
+        relatedQuestions: ["A12"] },
+      { id: "nurse", name: "간호사", clusterId: "care", summary: "환자 곁에서 회복을 지키는 일",
+        paths: { main: ["간호학과 → 국가고시 면허"], alt: ["보건교사·산업간호·보건직 공무원 등 병원 밖 경로도 있어요"] },
+        conditions: ["3교대 근무가 흔해요 — 체력 조건을 같이 봐요", "면허 기반이라 수요가 꾸준한 편이에요"],
+        aiNote: "기록·모니터링은 기계가 도와요. 돌봄과 긴급 판단은 사람 몫으로 남아요.",
+        relatedQuestions: ["E5"] },
+      { id: "civil", name: "공무원", clusterId: "public", summary: "공공의 일을 맡아 하는 일",
+        paths: { main: ["공채 시험(9급 등) — 학력 제한이 없어요"], alt: ["직렬(행정·기술·경찰·소방)마다 준비가 달라요"] },
+        conditions: ["안정적인 대신 초임이 높은 편은 아니에요", "직렬마다 하는 일이 많이 달라요 — 이름보다 직무를 봐요"],
+        aiNote: "서류 처리 일부는 자동화돼요. 판단과 책임, 현장 대응은 사람 몫이에요.",
+        relatedQuestions: ["A8"] },
+      { id: "doctor", name: "의사", clusterId: "care", summary: "진단하고 치료하는 일",
+        paths: { main: ["의대(6년) + 국가고시 → 인턴·레지던트 수련"], alt: ["보건·생명 분야의 다른 면허 직군(간호·약학·임상병리 등)도 같이 봐요"] },
+        conditions: ["수련까지 10년 안팎이 걸려요", "비용과 기간이 가장 큰 경로예요 — 비용은 G1에서"],
+        aiNote: "영상 판독 일부는 AI가 도와요. 최종 판단과 환자와의 대화는 사람 몫이에요.",
+        relatedQuestions: ["G1", "A12"] },
+      { id: "athlete", name: "운동선수", clusterId: "sports", summary: "몸으로 기록과 승부를 만드는 일",
+        paths: { main: ["학교 운동부·클럽 → 프로·실업팀"], alt: ["지도자·재활 트레이너·경기 분석·스포츠 마케팅 — 판을 만드는 직업이 더 넓어요"] },
+        conditions: ["선수 생활 기간이 짧은 편이에요 — 은퇴 후 경로를 같이 설계해요", "부상 관리가 곧 실력이에요"],
+        aiNote: "기록 분석은 데이터가 해요. 몸의 감각과 승부의 순간은 사람의 것이에요.",
+        relatedQuestions: ["A10"] },
+      { id: "gamedev", name: "게임 개발자", clusterId: "dev", summary: "놀이를 설계하고 만드는 일",
+        paths: { main: ["컴퓨터·게임 전공 또는 포트폴리오"], alt: ["기획·아트·QA·운영 등 한 게임에 여러 직군이 있어요"] },
+        conditions: ["작품(프로젝트) 단위로 팀을 옮기는 게 흔해요", "출시 전후로 업무 강도 차이가 커요"],
+        aiNote: "그래픽·코드 일부는 AI가 도와요. '재미'를 판단하는 감각은 사람 몫이에요.",
+        relatedQuestions: ["A10", "K1"] },
+      { id: "seller", name: "1인 셀러·창업가", clusterId: "founder", summary: "작게 팔아보며 사업을 키우는 일",
+        paths: { main: ["재학 중 가장 작은 실험부터(K4) — 사업자등록은 법정대리인 동의로 가능(K3)"], alt: ["플랫폼 판매 → 브랜드 → 법인, 단계마다 결정 지점이 있어요"] },
+        conditions: ["새 회사 10곳 중 5년 뒤 남는 곳은 4곳이 안 돼요(5년 생존율 36.4%)", "수입이 불규칙해요 — 실험 단계에선 학업과 병행 크기로"],
+        conditionChip: { grade: "①", label: "기업생멸행정통계 2024" },
+        aiNote: "상품 소개·응대 일부는 AI가 도와요. 뭘 팔지 정하고 신뢰를 쌓는 건 사람 몫이에요.",
+        relatedQuestions: ["K4", "K5"] },
+    ],
+  };
+});

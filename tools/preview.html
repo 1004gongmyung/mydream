@@ -1,0 +1,9 @@
+<!DOCTYPE html>
+<!-- 개발용: 학년을 지정해 화면을 바로 열기. 예) tools/preview.html?grade=중2&to=home -->
+<html lang="ko"><head><meta charset="UTF-8"><title>preview</title></head>
+<body><script>
+  const p = new URLSearchParams(location.search);
+  localStorage.setItem("mapsi.grade", p.get("grade") || "중2");
+  // 상대 경로: 로컬(루트)과 GitHub Pages(하위 경로) 모두에서 동작
+  location.replace("../index.html#" + (p.get("to") || "home"));
+</script></body></html>
