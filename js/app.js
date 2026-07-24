@@ -12,6 +12,7 @@
   const PARENTS = window.MAPSI_PARENTS_DATA;
   const DDAY = window.MAPSI_DDAY_DATA;
   const JOBDEX = window.MAPSI_JOBDEX_DATA;
+  const PATHS = window.MAPSI_PATHS_DATA;
   const Compass = window.MapsiCompass;
   const Reverse = window.MapsiReverse;
   const Care = window.MapsiCare;
@@ -85,6 +86,10 @@
     "첫 일자리 방패": "shield",
     "포트폴리오": "portfolio",
     "대화 카드": "parents", "다국어 카드": "parents",
+    // 경로 지도와 인접 목적지 연결
+    "경로 지도": "paths", "전환기 지도": "paths", "학교 지도": "paths",
+    "산업 지도": "jobs", "비용표": "jobs", "후보 카드": "jobs",
+    "AI 시작 지도": "explore", "조합 지도": "explore", "실험 가이드": "explore",
   };
   const TARGET_LINKS = { "검사 바로가기": "https://www.career.go.kr/cnet/front/examen/examenMain.do" };
 
@@ -174,6 +179,31 @@
     const teaser = $screen.querySelector("[data-lens]");
     if (teaser) teaser.addEventListener("click", () => go("lens/" + teaser.dataset.lens));
     $screen.querySelector("[data-nav=browse]").addEventListener("click", () => go("browse"));
+  }
+
+  // ---- 경로 지도 ----
+  function renderPaths() {
+    $screen.innerHTML = `
+      <button class="answer-back" data-nav="back">← 뒤로</button>
+      <div class="tool-kicker">경로 지도</div>
+      <h1 class="result-title">같은 목적지, 여러 개의 문</h1>
+      <p class="result-sub">${esc(PATHS.intro)}</p>
+      ${PATHS.sections.map((s) => `
+        <div class="section-label">${esc(s.title)}</div>
+        <div class="paths-note">${esc(s.note)}${s.noteChip ? chipsHtml([s.noteChip]) : ""}</div>
+        ${s.items.map((it) => `
+          <div class="cluster-card">
+            <div class="cluster-name">${esc(it.name)}</div>
+            <div class="job-path">${esc(it.line)}</div>
+            ${it.chip ? chipsHtml([it.chip]) : ""}
+            ${it.relatedQ ? `<button class="inline-link job-inline" data-q-link="${it.relatedQ}">관련 답변 보기 →</button>` : ""}
+            ${it.route ? `<button class="inline-link job-inline" data-route="${it.route}">${esc(it.routeLabel || "열기")} →</button>` : ""}
+          </div>`).join("")}`).join("")}
+      <div class="open-question">'포기냐 아니냐'가 아니라 '어느 문이냐'의 문제예요. 지금은 끌리는 문 하나만 기억해 둬요.</div>`;
+    $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
+    $screen.querySelectorAll("[data-q-link]").forEach((b) => b.addEventListener("click", () => go("q/" + b.dataset.qLink)));
+    $screen.querySelectorAll("[data-route]").forEach((b) => b.addEventListener("click", () => go(b.dataset.route)));
+    window.scrollTo(0, 0);
   }
 
   // ---- 낯선 직업 도감 ----
@@ -395,8 +425,9 @@
       <div class="answer-l3">
         <button class="l3-btn" id="l3Btn">${esc(a.l3.label)}</button>
         <div class="l3-note" id="l3Note">
-          ${a.l3.target ? `<strong>${esc(a.l3.target)}</strong> 기능은 다음 단계에서 열려요.<br>` : ""}
-          그때까지는 직접 해보는 게 가장 빨라요 — 위 한 가지면 충분해요.
+          ${a.l3.target ? `<strong>${esc(a.l3.target)}</strong> 기능은 준비 중이에요.<br>` : ""}
+          지금 필요한 핵심은 위 '솔직하게 말하면'에 담아뒀어요. 관련 질문은 전체 질문에서 더 볼 수 있어요.
+          <button class="inline-link" id="l3BrowseLink">전체 질문 열기 →</button>
         </div>
       </div>`;
     $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
@@ -406,6 +437,8 @@
       if (target && TARGET_LINKS[target]) return window.open(TARGET_LINKS[target], "_blank", "noopener");
       document.getElementById("l3Note").classList.add("show");
     });
+    const browseLink = document.getElementById("l3BrowseLink");
+    if (browseLink) browseLink.addEventListener("click", () => go("browse"));
     window.scrollTo(0, 0);
   }
 
@@ -1023,6 +1056,7 @@
     if (hash === "portfolio") return renderPortfolio();
     if (hash === "parents") return renderParents();
     if (hash === "jobdex") return renderJobdex();
+    if (hash === "paths") return renderPaths();
     if (hash.startsWith("q/")) return renderAnswer(hash.slice(2));
     return renderHome();
   }

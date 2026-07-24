@@ -31,6 +31,7 @@ const checks = [
   ["portfolio-empty", P("고2", "portfolio"), "아직 모은 흔적이 없어요"],
   ["parents", P("중2", "parents"), "같은 자료를 보는 대화"],
   ["jobdex", P("중2", "jobdex"), "낯선 직업 도감"],
+  ["paths", P("고2", "paths"), "여러 개의 문"],
   // 인터랙션 흐름 (e2e 자동 주행)
   ["flow-crisis", E("crisis"), "지금 이야기 나눌 수 있는 곳"],
   ["flow-search", E("search"), "관련 질문"],
