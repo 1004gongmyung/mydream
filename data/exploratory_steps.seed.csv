@@ -8,4 +8,10 @@ budd-e2,budd-jogye,출가 상담 전화 걸어보기,상담만으로는 아무�
 won-e1,won-gyomu,교당 진로 상담,가까운 교당 교무에게 과정을 물어봐요. 추천 제도가 있어서 상담이 공식 첫 단계예요.,,false,1회,https://www.won.or.kr
 won-e2,won-gyomu,원불교학과 안내 읽어보기,예비교무 과정이 어떤 공부인지 학과 안내로 미리 봐요.,,false,반나절,https://wonbuddhism.wku.ac.kr
 angl-e1,angl-priest,교구 사무처 상담,성직 과정의 조건(견진·청원 등)을 공식 창구에서 확인해요. 상담은 결정이 아니에요.,,false,1회,https://anglicankr.church
+hapdong-e1,prot-hapdong,소속 교단 확인해보기,다니는(또는 아는) 교회가 어느 교단인지 물어봐요. 교단에 따라 인준 신학교와 과정이 통째로 달라져요.,,false,5분,
+hapdong-e2,prot-hapdong,총회·신학대 입시 안내 읽어보기,교단 총회와 인준 신학교의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.,,false,반나절,https://www.gapck.org
+meth-e1,prot-methodist,소속 교단 확인해보기,다니는(또는 아는) 교회가 어느 교단인지 물어봐요. 감리회라면 인준 신학대학원 세 곳이 후보가 돼요.,,false,5분,
+meth-e2,prot-methodist,인준 신학대 안내 읽어보기,감신대·목원대·협성대의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.,,false,반나절,https://www.kmc.or.kr
+rel-e1,cath-religious,교구 성소 모임 알아보기,각 교구와 수도회가 성소 모임을 운영해요. 본당 사무실에 묻는 게 공식 경로예요. 참여는 탐색이지 결정이 아니에요.,,true,정기 모임,https://www.cbck.or.kr
+rel-e2,cath-religious,수도회 소개 자료 읽어보기,수도회마다 영성과 하는 일이 달라요. 관심 있는 수도회의 공식 소개 자료부터 읽어봐요.,,false,반나절,https://www.cbck.or.kr
 islam-e1,islam-imam,중앙회 방문·상담,서울중앙성원 안내 등 공식 창구에서 궁금한 걸 물어봐요. 유학 조건도 여기서 확인해요.,,false,1회,http://www.koreaislam.org

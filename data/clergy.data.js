@@ -383,6 +383,246 @@
       ]
     },
     {
+      "id": "prot-hapdong",
+      "religion": "PROTESTANT",
+      "denomination": "대한예수교장로회(합동)",
+      "role_name": "목사",
+      "summary": "교회 공동체의 예배를 인도하고 설교·상담·교육을 맡는 사람이에요. 교인들의 삶의 중요한 순간에 함께해요. 교회 행정과 운영도 실제 업무의 큰 부분이에요.",
+      "min_entry_age": null,
+      "is_open_to_minors": false,
+      "official_contact_name": "대한예수교장로회총회(합동)",
+      "official_contact_phone": null,
+      "official_contact_url": "https://www.gapck.org",
+      "reality_notes": "이 교단의 인준 신학교는 총신대학교예요. 신학대학원 뒤 강도사고시와 강도사 1년, 노회 목사고시를 거쳐 안수를 받는 구조라 학부부터 통상 8년 안팎이 걸려요. 교단마다 인준 신학교와 과정이 다르니 소속 교회의 교단 확인이 첫 순서예요.",
+      "source_name": "대한예수교장로회총회(합동) 공식 안내(2026-07 확인)",
+      "source_url": "https://www.gapck.org",
+      "verified_at": "2026-07-27",
+      "stages": [
+        {
+          "id": "hapdong-s1",
+          "step_order": 1,
+          "name": "4년제 대학 졸업(전공 무관)",
+          "typical_duration": "4년",
+          "prerequisites": null,
+          "is_reversible": true,
+          "reversibility_note": "학사 과정은 어느 진로로든 이어져요."
+        },
+        {
+          "id": "hapdong-s2",
+          "step_order": 2,
+          "name": "총신대 신학대학원(M.Div.)",
+          "typical_duration": "3년",
+          "prerequisites": "학사 학위",
+          "is_reversible": true,
+          "reversibility_note": "중도에 나오면 이수 학점·학위 과정 기록이 남아요."
+        },
+        {
+          "id": "hapdong-s3",
+          "step_order": 3,
+          "name": "강도사고시·강도사 과정",
+          "typical_duration": "1년",
+          "prerequisites": "신학대학원 수료",
+          "is_reversible": true,
+          "reversibility_note": "고시와 수련 단계까지는 언제든 방향을 바꿀 수 있어요."
+        },
+        {
+          "id": "hapdong-s4",
+          "step_order": 4,
+          "name": "노회 목사고시·목사 안수",
+          "typical_duration": null,
+          "prerequisites": "강도사 과정",
+          "is_reversible": false,
+          "reversibility_note": "안수는 교단 제도상 되돌리기 어려운 단계예요. 그 전까지는 되돌릴 수 있어요."
+        }
+      ],
+      "exploratory": [
+        {
+          "id": "hapdong-e1",
+          "name": "소속 교단 확인해보기",
+          "description": "다니는(또는 아는) 교회가 어느 교단인지 물어봐요. 교단에 따라 인준 신학교와 과정이 통째로 달라져요.",
+          "min_age": null,
+          "requires_guardian_consent": false,
+          "duration": "5분",
+          "official_contact_url": null
+        },
+        {
+          "id": "hapdong-e2",
+          "name": "총회·신학대 입시 안내 읽어보기",
+          "description": "교단 총회와 인준 신학교의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.",
+          "min_age": null,
+          "requires_guardian_consent": false,
+          "duration": "반나절",
+          "official_contact_url": "https://www.gapck.org"
+        }
+      ]
+    },
+    {
+      "id": "prot-methodist",
+      "religion": "PROTESTANT",
+      "denomination": "기독교대한감리회",
+      "role_name": "목사",
+      "summary": "교회 공동체의 예배를 인도하고 설교·상담·교육을 맡는 사람이에요. 감리회는 목회자를 연회(지역 조직)가 파송하는 구조라 임지 이동이 제도의 일부예요.",
+      "min_entry_age": null,
+      "is_open_to_minors": false,
+      "official_contact_name": "기독교대한감리회 본부",
+      "official_contact_phone": null,
+      "official_contact_url": "https://www.kmc.or.kr",
+      "reality_notes": "감리회가 인준하는 신학대학원은 감리교신학대·목원대·협성대 세 곳이에요. 인준 과정 수료 후 수련 과정과 연회 고시를 거쳐 안수를 받아요. 같은 개신교라도 교단마다 인준 학교가 다르니 소속 교회의 교단부터 확인해요.",
+      "source_name": "기독교대한감리회 공식 안내(2026-07 확인)",
+      "source_url": "https://www.kmc.or.kr",
+      "verified_at": "2026-07-27",
+      "stages": [
+        {
+          "id": "meth-s1",
+          "step_order": 1,
+          "name": "4년제 대학 졸업(전공 무관)",
+          "typical_duration": "4년",
+          "prerequisites": null,
+          "is_reversible": true,
+          "reversibility_note": "학사 과정은 어느 진로로든 이어져요."
+        },
+        {
+          "id": "meth-s2",
+          "step_order": 2,
+          "name": "인준 신학대학원(감신대·목원대·협성대)",
+          "typical_duration": null,
+          "prerequisites": "학사 학위",
+          "is_reversible": true,
+          "reversibility_note": "중도에 나오면 이수 학점·학위 과정 기록이 남아요."
+        },
+        {
+          "id": "meth-s3",
+          "step_order": 3,
+          "name": "수련 과정·연회 고시",
+          "typical_duration": null,
+          "prerequisites": "인준 과정 수료",
+          "is_reversible": true,
+          "reversibility_note": "고시 전까지는 언제든 방향을 바꿀 수 있어요."
+        },
+        {
+          "id": "meth-s4",
+          "step_order": 4,
+          "name": "목사 안수",
+          "typical_duration": null,
+          "prerequisites": "연회 고시 합격",
+          "is_reversible": false,
+          "reversibility_note": "안수는 교단 제도상 되돌리기 어려운 단계예요."
+        }
+      ],
+      "exploratory": [
+        {
+          "id": "meth-e1",
+          "name": "소속 교단 확인해보기",
+          "description": "다니는(또는 아는) 교회가 어느 교단인지 물어봐요. 감리회라면 인준 신학대학원 세 곳이 후보가 돼요.",
+          "min_age": null,
+          "requires_guardian_consent": false,
+          "duration": "5분",
+          "official_contact_url": null
+        },
+        {
+          "id": "meth-e2",
+          "name": "인준 신학대 안내 읽어보기",
+          "description": "감신대·목원대·협성대의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.",
+          "min_age": null,
+          "requires_guardian_consent": false,
+          "duration": "반나절",
+          "official_contact_url": "https://www.kmc.or.kr"
+        }
+      ]
+    },
+    {
+      "id": "cath-religious",
+      "religion": "CATHOLIC",
+      "denomination": "한국 천주교(수도회)",
+      "role_name": "수녀·수사(수도자)",
+      "summary": "수도회 공동체에 소속되어 기도와 공동생활을 중심으로 사는 사람이에요. 교육·의료·복지 등 수도회의 사명에 따라 다양한 현장에서 일해요. 사제(신부)와는 다른 길이고, 수녀는 여성·수사는 남성 수도자예요.",
+      "min_entry_age": null,
+      "is_open_to_minors": false,
+      "official_contact_name": "한국천주교주교회의(각 교구 성소 안내)",
+      "official_contact_phone": null,
+      "official_contact_url": "https://www.cbck.or.kr",
+      "reality_notes": "수도회마다 영성과 하는 일, 입회 조건이 달라서 '어느 수도회인지'가 사실상의 진로 선택이에요. 지원기·청원기·수련기까지는 언제든 떠날 수 있고, 유기서원도 기한이 끝나면 갱신하지 않을 수 있어요. 종신서원부터 되돌리기 어려워요. 성소 모임 참여는 결정이 아니라 탐색이에요.",
+      "source_name": "한국천주교주교회의·가톨릭신문 성소 안내(2026-07 확인)",
+      "source_url": "https://www.cbck.or.kr",
+      "verified_at": "2026-07-27",
+      "stages": [
+        {
+          "id": "rel-s1",
+          "step_order": 1,
+          "name": "성소 모임·수도회 탐색",
+          "typical_duration": null,
+          "prerequisites": null,
+          "is_reversible": true,
+          "reversibility_note": "모임 참여는 탐색일 뿐 아무것도 확정되지 않아요."
+        },
+        {
+          "id": "rel-s2",
+          "step_order": 2,
+          "name": "입회·지원기",
+          "typical_duration": "6개월~1년",
+          "prerequisites": "수도회별 입회 조건",
+          "is_reversible": true,
+          "reversibility_note": "지원기는 서로를 알아보는 기간이라 언제든 떠날 수 있어요."
+        },
+        {
+          "id": "rel-s3",
+          "step_order": 3,
+          "name": "청원기",
+          "typical_duration": "약 1년",
+          "prerequisites": "지원기 수료",
+          "is_reversible": true,
+          "reversibility_note": "청원기까지는 자유롭게 되돌릴 수 있어요."
+        },
+        {
+          "id": "rel-s4",
+          "step_order": 4,
+          "name": "수련기",
+          "typical_duration": "2년",
+          "prerequisites": "청원기 수료",
+          "is_reversible": true,
+          "reversibility_note": "수련기 중에도 떠날 수 있어요. 기록이 진로에 불이익으로 남지 않아요."
+        },
+        {
+          "id": "rel-s5",
+          "step_order": 5,
+          "name": "유기서원",
+          "typical_duration": "4~5년(갱신제)",
+          "prerequisites": "수련기 수료",
+          "is_reversible": true,
+          "reversibility_note": "기한이 있는 서원이라 만료 때 갱신하지 않으면 떠날 수 있어요."
+        },
+        {
+          "id": "rel-s6",
+          "step_order": 6,
+          "name": "종신서원",
+          "typical_duration": null,
+          "prerequisites": "유기서원기 수료",
+          "is_reversible": false,
+          "reversibility_note": "평생을 약속하는 서원이라 제도상 되돌리기 어려워요. 그 전 모든 단계에서는 떠날 수 있어요."
+        }
+      ],
+      "exploratory": [
+        {
+          "id": "rel-e1",
+          "name": "교구 성소 모임 알아보기",
+          "description": "각 교구와 수도회가 성소 모임을 운영해요. 본당 사무실에 묻는 게 공식 경로예요. 참여는 탐색이지 결정이 아니에요.",
+          "min_age": null,
+          "requires_guardian_consent": true,
+          "duration": "정기 모임",
+          "official_contact_url": "https://www.cbck.or.kr"
+        },
+        {
+          "id": "rel-e2",
+          "name": "수도회 소개 자료 읽어보기",
+          "description": "수도회마다 영성과 하는 일이 달라요. 관심 있는 수도회의 공식 소개 자료부터 읽어봐요.",
+          "min_age": null,
+          "requires_guardian_consent": false,
+          "duration": "반나절",
+          "official_contact_url": "https://www.cbck.or.kr"
+        }
+      ]
+    },
+    {
       "id": "islam-imam",
       "religion": "ISLAM",
       "denomination": "한국이슬람교중앙회",
@@ -565,6 +805,74 @@
       "website": "https://www.skhu.ac.kr",
       "source_name": "대한성공회(2026-07 확인)",
       "source_url": "https://anglicankr.church",
+      "verified_at": "2026-07-27"
+    },
+    {
+      "id": "hapdong-inst-chongshin",
+      "religion": "PROTESTANT",
+      "denomination": "대한예수교장로회(합동)",
+      "name": "총신대학교",
+      "is_denomination_approved": true,
+      "approving_body": "대한예수교장로회총회(합동)",
+      "is_accredited_university": true,
+      "degree_awarded": "신학사·신학석사(M.Div.)",
+      "program_years": null,
+      "region_sido": "서울",
+      "address": null,
+      "website": "https://www.chongshin.ac.kr",
+      "source_name": "대한예수교장로회총회(합동) 공식 안내(2026-07 확인)",
+      "source_url": "https://www.gapck.org",
+      "verified_at": "2026-07-27"
+    },
+    {
+      "id": "meth-inst-mtu",
+      "religion": "PROTESTANT",
+      "denomination": "기독교대한감리회",
+      "name": "감리교신학대학교",
+      "is_denomination_approved": true,
+      "approving_body": "기독교대한감리회",
+      "is_accredited_university": true,
+      "degree_awarded": "신학사·신학석사(M.Div.)",
+      "program_years": null,
+      "region_sido": "서울",
+      "address": null,
+      "website": "https://www.mtu.ac.kr",
+      "source_name": "기독교대한감리회 공식 안내(2026-07 확인)",
+      "source_url": "https://www.kmc.or.kr",
+      "verified_at": "2026-07-27"
+    },
+    {
+      "id": "meth-inst-mokwon",
+      "religion": "PROTESTANT",
+      "denomination": "기독교대한감리회",
+      "name": "목원대학교(신학과·신학대학원)",
+      "is_denomination_approved": true,
+      "approving_body": "기독교대한감리회",
+      "is_accredited_university": true,
+      "degree_awarded": "신학사·신학석사(M.Div.)",
+      "program_years": null,
+      "region_sido": "대전",
+      "address": null,
+      "website": "https://www.mokwon.ac.kr",
+      "source_name": "기독교대한감리회 공식 안내(2026-07 확인)",
+      "source_url": "https://www.kmc.or.kr",
+      "verified_at": "2026-07-27"
+    },
+    {
+      "id": "meth-inst-hyupsung",
+      "religion": "PROTESTANT",
+      "denomination": "기독교대한감리회",
+      "name": "협성대학교(신학과·신학대학원)",
+      "is_denomination_approved": true,
+      "approving_body": "기독교대한감리회",
+      "is_accredited_university": true,
+      "degree_awarded": "신학사·신학석사(M.Div.)",
+      "program_years": null,
+      "region_sido": "경기",
+      "address": null,
+      "website": "https://www.uhs.ac.kr",
+      "source_name": "기독교대한감리회 공식 안내(2026-07 확인)",
+      "source_url": "https://www.kmc.or.kr",
       "verified_at": "2026-07-27"
     }
   ]
