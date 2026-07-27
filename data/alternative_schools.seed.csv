@@ -1,0 +1,4 @@
+id,name,legal_status,accredits_diploma,detail_tier,school_levels,region_sido,region_sigungu,address,lat,lng,is_boarding,accepts_entrustment,annual_tuition_krw,tuition_note,capacity,admission_period,characteristics,religious_affiliation,contact_phone,website,source_name,source_url,verified_at
+sample-spec-high,(샘플) 푸른숲대안고등학교,SPECIALIZED_HIGH,true,1,HIGH,경기,가온시,경기 가온시 배움로 12 (가상 주소),,,true,false,3600000,기숙사비 별도 — 면담 시 안내,60,매년 10~11월,ECO|GENERAL,,000-0000-0000,https://example.com/sample,샘플 데이터(실제 학교 아님),https://www.alter-edu.re.kr,2026-07-27
+sample-registered,(샘플) 하늘씨앗배움터,REGISTERED,false,2,MIDDLE|HIGH,서울,마루구,서울 마루구 새길 34 (가상 주소),,,,,,,,,,,,,샘플 데이터(실제 학교 아님),https://www.alter-edu.re.kr,2026-07-27
+sample-entrusted,(샘플) 이음위탁교육센터,ENTRUSTED,true,1,HIGH,부산,바다구,부산 바다구 이음로 5 (가상 주소),,,false,true,,원적교 학적 유지 — 수업료는 공교육 기준,40,수시(원적교 협의),READJUSTMENT,,000-0000-0000,,샘플 데이터(실제 학교 아님),https://www.alter-edu.re.kr,2026-07-27

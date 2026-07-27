@@ -25,7 +25,7 @@
         { date: "2026-07-23", text: "친구 영상 편집 도와줄 때 재밌었다" },
       ]));
     }
-    location.hash = { reverse: "#reverse", compass: "#compass", crisis: "#home", search: "#home", journal: "#journal", quest: "#quests", signal: "#signal", shield: "#shield", portfolio: "#portfolio", parents: "#parents", guide: "#q/E7" }[FLOW] || "#home";
+    location.hash = { reverse: "#reverse", compass: "#compass", crisis: "#home", search: "#home", journal: "#journal", quest: "#quests", signal: "#signal", shield: "#shield", portfolio: "#portfolio", parents: "#parents", guide: "#q/E7", altmiss: "#altschools" }[FLOW] || "#home";
   </script>
 </head>
 <body>
@@ -53,6 +53,7 @@
   <script src="../data/hischool.data.js"></script>
   <script src="../data/majors.data.js"></script>
   <script src="../data/artprep.data.js"></script>
+  <script src="../data/altschools.data.js"></script>
   <script src="../js/content.js"></script>
   <script src="../js/compass.js"></script>
   <script src="../js/reverse.js"></script>
@@ -64,6 +65,7 @@
   <script src="../js/portfolio.js"></script>
   <script src="../js/api.js"></script>
   <script src="../js/daily.js"></script>
+  <script src="../js/altschools.js"></script>
   <script src="../js/app.js"></script>
   <script>
     const click = (sel) => { const el = document.querySelector(sel); if (el) el.click(); return !!el; };
@@ -108,6 +110,10 @@
         click('[data-worry="stability"]');
       } else if (FLOW === "guide") {
         click("#l3Btn"); // 답변(E7)의 L3 버튼 → 가이드 카드로 전환되는지
+      } else if (FLOW === "altmiss") {
+        // 목록에 없는 기관명 검색 → '확인되지 않은 시설' 안내 화면
+        document.querySelector("#altSearchInput").value = "무명배움터";
+        document.querySelector("#altSearchForm").dispatchEvent(new Event("submit", { cancelable: true }));
       }
     }, 150);
   </script>

@@ -17,6 +17,8 @@
   const HISCHOOL = window.MAPSI_HISCHOOL_DATA;
   const MAJORS = window.MAPSI_MAJORS_DATA;
   const ARTPREP = window.MAPSI_ARTPREP_DATA;
+  const ALTS = window.MAPSI_ALTSCHOOLS_DATA;
+  const Alt = window.MapsiAltschools;
   const Compass = window.MapsiCompass;
   const Reverse = window.MapsiReverse;
   const Care = window.MapsiCare;
@@ -570,6 +572,127 @@
           </div>`).join("")}`).join("")}
       <div class="open-question">${esc(ARTPREP.note)}</div>
       ${typeLinksHtml(ARTPREP.links)}`;
+    $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
+    $screen.querySelectorAll("[data-route]").forEach((b) => b.addEventListener("click", () => go(b.dataset.route)));
+    window.scrollTo(0, 0);
+  }
+
+  // ---- 대안학교 정보 (핵심: '교육청 등록 ≠ 학력 인정' 혼동을 구조로 차단) ----
+  const altState = { accreditOnly: false, level: null, boarding: false, entrust: false, sido: null, query: "" };
+
+  function altBadgesHtml(s) {
+    return `<div class="alt-badges">${Alt.badges(s).map((b) => `<span class="alt-badge ${b.kind}">${esc(b.text)}</span>`).join("")}</div>`;
+  }
+
+  function renderAltschools() {
+    const all = ALTS.schools;
+    // 이름 검색 — DB에 없으면 '확인되지 않음' 안내 (임의 판정 금지)
+    const searched = altState.query ? Alt.searchByName(all, altState.query) : null;
+    const list = Alt.filterSchools(searched || all, {
+      accredit: altState.accreditOnly ? true : null,
+      level: altState.level, sido: altState.sido,
+      boarding: altState.boarding, entrust: altState.entrust,
+    });
+    const missScreen = altState.query && searched.length === 0;
+    $screen.innerHTML = `
+      <button class="answer-back" data-nav="back">← 뒤로</button>
+      <div class="tool-kicker">대안학교 정보</div>
+      <h1 class="result-title">학력 인정 여부부터 확인해요</h1>
+      <p class="result-sub">교육청에 <strong>등록</strong>된 기관은 '학교' 이름을 쓸 수 있지만 <strong>학력은 인정되지 않아요</strong>. 이 화면은 그 구분을 돕기 위해 있어요 — 카드마다 맨 위 배지가 그 표시예요.</p>
+      ${ALTS.allSample ? `
+        <div class="lens-counter"><strong>지금은 구조 확인용 샘플 데이터만 있어요(실제 학교 아님).</strong> 검증된 명단은 준비 중이에요 — 실제 기관 확인은 아래 공식 창구에서 해요.</div>` : ""}
+      <form id="altSearchForm" class="search-form" autocomplete="off">
+        <input id="altSearchInput" class="search-input" type="search" placeholder="기관 이름으로 확인해보기" value="${esc(altState.query)}" maxlength="40" />
+        <button class="search-btn" type="submit">확인</button>
+      </form>
+      ${missScreen ? `
+        <div class="cluster-card">
+          <div class="alt-badges"><span class="alt-badge warn">확인되지 않은 시설</span></div>
+          <div class="job-path">"${esc(altState.query)}" — 이 목록에서 확인되지 않는 이름이에요.</div>
+          <div class="job-path soft">교육청에 인가·등록되지 않은 시설일 수 있어요. 인가·등록 여부와 학력 인정 여부는 관할 교육청에서 확인할 수 있어요.</div>
+          <button class="ghost-btn" data-alt-clear>전체 목록 다시 보기</button>
+        </div>` : `
+        <div class="subject-grid">
+          <button class="subject-chip${altState.accreditOnly ? " on" : ""}" data-alt-filter="accreditOnly">학력 인정만</button>
+          <button class="subject-chip${altState.level === "MIDDLE" ? " on" : ""}" data-alt-level="MIDDLE">중등</button>
+          <button class="subject-chip${altState.level === "HIGH" ? " on" : ""}" data-alt-level="HIGH">고등</button>
+          <button class="subject-chip${altState.boarding ? " on" : ""}" data-alt-filter="boarding">기숙</button>
+          <button class="subject-chip${altState.entrust ? " on" : ""}" data-alt-filter="entrust">위탁 가능</button>
+          ${Alt.sidoList(all).map((sd) => `<button class="subject-chip${altState.sido === sd ? " on" : ""}" data-alt-sido="${esc(sd)}">${esc(sd)}</button>`).join("")}
+        </div>
+        ${list.length ? list.map((s) => `
+          <button class="qcard alt-card" data-alt="${s.id}">
+            ${altBadgesHtml(s)}
+            ${esc(s.name)}
+            <span class="qmeta">${esc(s.region_sido)} ${esc(s.region_sigungu)}${(s.school_levels || []).length ? " · " + s.school_levels.map((l) => esc(Alt.LEVEL_LABELS[l] || l)).join("·") : ""}${s.detail_tier === 2 ? " · 상세 정보 미제공" : ""}</span>
+          </button>`).join("")
+        : `<div class="open-question">지금 조건에 맞는 기관이 목록에 없어요. 필터를 풀거나, 아래 공식 창구에서 확인해봐요.</div>`}`}
+      <div class="section-label">공식 확인 창구</div>
+      ${typeLinksHtml([
+        { url: "https://www.alter-edu.re.kr", label: "대안교육기관지원센터 — 등록 기관 현황" },
+        { url: "https://www.schoolinfo.go.kr", label: "학교알리미 — 특성화중·고, 인가 대안학교" },
+        { route: "hischool", label: "고교 지도 — 학교 밖·기타 갈래 보기" },
+      ])}
+      <div class="dday-note">학력이 인정되지 않는 기관에 다녀도 검정고시로 학력을 만들 수 있어요 — 각 기관 상세에서 안내해요. 최종 확인은 관할 교육청에 문의하세요.</div>`;
+    $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
+    document.getElementById("altSearchForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const text = document.getElementById("altSearchInput").value.trim();
+      if (text && Care.detectCrisis(CARE, text)) return go("care-now"); // 모든 입력은 위기 감지 경유
+      altState.query = text;
+      renderAltschools();
+    });
+    const clearBtn = $screen.querySelector("[data-alt-clear]");
+    if (clearBtn) clearBtn.addEventListener("click", () => { altState.query = ""; renderAltschools(); });
+    $screen.querySelectorAll("[data-alt-filter]").forEach((b) =>
+      b.addEventListener("click", () => { altState[b.dataset.altFilter] = !altState[b.dataset.altFilter]; renderAltschools(); }));
+    $screen.querySelectorAll("[data-alt-level]").forEach((b) =>
+      b.addEventListener("click", () => { altState.level = altState.level === b.dataset.altLevel ? null : b.dataset.altLevel; renderAltschools(); }));
+    $screen.querySelectorAll("[data-alt-sido]").forEach((b) =>
+      b.addEventListener("click", () => { altState.sido = altState.sido === b.dataset.altSido ? null : b.dataset.altSido; renderAltschools(); }));
+    $screen.querySelectorAll("[data-alt]").forEach((b) =>
+      b.addEventListener("click", () => go("altschool/" + b.dataset.alt)));
+    $screen.querySelectorAll("[data-route]").forEach((b) => b.addEventListener("click", () => go(b.dataset.route)));
+    window.scrollTo(0, 0);
+  }
+
+  function renderAltschoolDetail(id) {
+    const s = ALTS.schools.find((x) => x.id === id);
+    if (!s) return go("altschools");
+    const row = (label, v) => (v == null || v === "" ? "" : `<div class="job-path">· <strong>${esc(label)}</strong> — ${esc(v)}</div>`);
+    const yn = (v) => (v === true ? "가능" : v === false ? "아니요" : null);
+    $screen.innerHTML = `
+      <button class="answer-back" data-nav="back">← 뒤로</button>
+      <div class="tool-kicker">대안학교 정보</div>
+      ${altBadgesHtml(s)}
+      <h1 class="result-title">${esc(s.name)}</h1>
+      <p class="result-sub">${esc(s.region_sido)} ${esc(s.region_sigungu)} · ${esc(Alt.LEGAL_LABELS[s.legal_status] || s.legal_status)}</p>
+      <div class="cluster-card">
+        ${row("주소", s.address)}
+        ${row("과정", (s.school_levels || []).map((l) => Alt.LEVEL_LABELS[l] || l).join("·") || null)}
+        ${row("기숙", yn(s.is_boarding))}
+        ${row("위탁 수학(원적교 학적 유지)", yn(s.accepts_entrustment))}
+        ${s.annual_tuition_krw != null ? row("연간 학비", s.annual_tuition_krw.toLocaleString() + "원") : ""}
+        ${row("학비 참고", s.tuition_note)}
+        ${row("모집 시기", s.admission_period)}
+        ${row("특성", (s.characteristics || []).map((c) => Alt.CHARACTER_LABELS[c] || c).join("·") || null)}
+        ${row("종교", s.religious_affiliation)}
+        ${row("연락처", s.contact_phone)}
+        ${s.website ? `<a class="guide-link" href="${esc(s.website)}" target="_blank" rel="noopener">기관 홈페이지 → <span class="fresh-tag">수시 업데이트</span></a>` : ""}
+        ${s.detail_tier === 2 ? `<div class="job-path soft">상세 정보 미제공 — 등록 기관은 이름·소재지·법적 지위만 확인해서 제공해요. 빈칸은 앱이 임의로 채우지 않아요.</div>` : ""}
+      </div>
+      ${Alt.needsGedNotice(s) ? `
+        <div class="lens-counter">
+          <strong>이곳을 다니면 학력(졸업장)은 별도로 만들어야 해요.</strong>
+          검정고시(해마다 4월·8월)로 학력을 만들 수 있고, 대학 지원도 가능해요. 다니기 전에 이 구조를 알고 결정하는 게 중요해요.
+        </div>
+        <button class="ghost-btn" data-route="q/H2">검정고시 → 대학 경로 답변 보기 →</button>
+        <button class="ghost-btn" data-route="hischool">고교 지도 — 다른 갈래도 같이 보기 →</button>` : ""}
+      <div class="cluster-card">
+        <div class="job-path soft">기준일 ${esc(s.verified_at)} · 출처 ${esc(s.source_name)}</div>
+        <a class="guide-link" href="${esc(s.source_url)}" target="_blank" rel="noopener">출처 확인하기 → <span class="fresh-tag">수시 업데이트</span></a>
+        <div class="job-path soft">최종 확인은 관할 교육청에 문의하세요.</div>
+      </div>`;
     $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
     $screen.querySelectorAll("[data-route]").forEach((b) => b.addEventListener("click", () => go(b.dataset.route)));
     window.scrollTo(0, 0);
@@ -1219,6 +1342,8 @@
     if (hash === "hischool") return renderHischool();
     if (hash === "majors") return renderMajors();
     if (hash === "artprep") return renderArtprep();
+    if (hash === "altschools") return renderAltschools();
+    if (hash.startsWith("altschool/")) return renderAltschoolDetail(hash.slice(10));
     if (hash.startsWith("guide/")) return renderGuide(hash.slice(6));
     if (hash.startsWith("q/")) return renderAnswer(hash.slice(2));
     return renderHome();

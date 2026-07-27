@@ -290,6 +290,14 @@ body {
 /* 외부 포털 링크의 '수시 업데이트' 표시 — 앱 정보 기준일과 대비되는 최신성 안내 */
 .fresh-tag { font-size: 10.5px; font-weight: 700; opacity: 0.65; vertical-align: 1px; white-space: nowrap; }
 
+/* 대안학교 — 학력 인정 배지: 학교명보다 위, 색+텍스트 병기 (색만으로 구분 금지) */
+.alt-badges { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 8px; }
+.alt-badge { font-size: 12px; font-weight: 800; padding: 4px 10px; border-radius: 999px; }
+.alt-badge.ok { background: var(--brand-soft); color: var(--brand); }
+.alt-badge.warn { background: #fbe9e7; color: #b3261e; }
+.alt-badge.plain { background: none; color: var(--ink-soft); border: 1px solid var(--line); }
+.alt-card { display: block; }
+
 /* 첫 일자리 방패 */
 .calc-row { display: flex; gap: 10px; margin-top: 12px; }
 .calc-label { flex: 1; font-size: 12px; font-weight: 700; color: var(--ink-soft); }

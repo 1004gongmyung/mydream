@@ -40,6 +40,9 @@ const checks = [
   ["hischool-fresh", P("중3", "hischool"), "수시 업데이트"],
   ["majors", P("고1", "majors"), "적성 신호로 학과를"],
   ["artprep", P("중3", "artprep"), "순서 설계예요"],
+  ["altschools", P("중3", "altschools"), "학력 인정 여부부터"],
+  ["altschool-detail", P("중3", "altschool/sample-registered"), "교육청 등록"],
+  ["altschool-ged", P("중3", "altschool/sample-registered"), "검정고시"],
   ["guide-E7", P("고3", "guide/E7"), "감정 말고 조건으로"],
   ["guide-C4", P("중3", "guide/C4"), "이 순서로 비교해요"],
   ["guide-A4", P("중2", "guide/A4"), "이렇게 뜯어봐요"],
@@ -54,6 +57,7 @@ const checks = [
   ["flow-portfolio", E("portfolio"), "문장 초안"],
   ["flow-parents", E("parents"), "대화를 여는 질문"],
   ["flow-guide", E("guide"), "감정 말고 조건으로"],
+  ["flow-altmiss", E("altmiss"), "확인되지 않은 시설"],
 ];
 
 let fail = 0;

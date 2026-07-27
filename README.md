@@ -46,10 +46,15 @@ mapsi-app/
   data/hischool.data.js 저작 시드 — 고교 지도: 학교 유형 9종(영재·과학·마이스터·특성화·예체고·일반·외고국제·자사·학교밖) 진학방법·연간일정·자격증 안내
   data/majors.data.js   저작 시드 — 학과 지도: 계열 7종(역방향과 1:1) 학과·적성 신호·자격 + 대학 리서치 4단계·지원 자격
   data/artprep.data.js  저작 시드 — 실기·포트폴리오 가이드: 예고·체고 입시 / 대입 실기·비실기 / 포트폴리오 순서 / 학원 없이 시작
+  data/alternative_schools.seed.csv  원본 — 대안학교 시드 (사람이 확인한 데이터만, 현재 가상 샘플 3행)
+  data/altschools.data.js  생성물 — 손으로 고치지 말 것 (tools/load-alt-schools.mjs가 생성)
+  js/altschools.js      로직: 대안학교 — 학력 인정 배지·정합 검증·필터·검색 ('등록≠인가' 혼동 차단)
   tools/build-content.mjs  마크다운 원본 → data/ 생성
   tools/preview.html    개발용: 학년 지정해 화면 바로 열기
   tools/e2e.html        개발용: 헤드리스 클릭 주행 (?flow=compass|reverse|crisis|search|journal|quest|signal|shield|portfolio|parents|guide)
-  tools/sweep.mjs       개발용: 전 화면 렌더링 스윕 — 서버 실행 후 `node tools/sweep.mjs` (43개 라우트·흐름 마커 검사)
+  tools/sweep.mjs       개발용: 전 화면 렌더링 스윕 — 서버 실행 후 `node tools/sweep.mjs` (49개 라우트·흐름 마커 검사)
+  tools/load-alt-schools.mjs   대안학교 CSV → data/altschools.data.js (필수 필드·정합 검사, 불량 행 스킵)
+  tools/verify-alt-schools.mjs 대안학교 검증 — 기준일 180일 경과·출처 URL 응답·법적지위×학력인정 정합
   tools/audit-links.mjs 개발용: 클릭 목적지 전수 감사 — `node tools/audit-links.mjs` (라우트·질문 ID·L3 타깃·가이드 링크 정합 검사)
   test/content.test.mjs 콘텐츠·회전 로직 테스트 (9)
   test/modules.test.mjs 나침반·역방향 로직 테스트 (13)
@@ -59,7 +64,7 @@ mapsi-app/
   test/signal-shield.test.mjs 신호 리포트·방패 계산기 테스트 (10)
 ```
 
-테스트 실행 (93개): `node --test test/content.test.mjs test/modules.test.mjs test/care.test.mjs test/lens.test.mjs test/modules-bcd.test.mjs test/signal-shield.test.mjs test/stage2.test.mjs test/daily.test.mjs test/paths.test.mjs test/guides.test.mjs test/school.test.mjs`
+테스트 실행 (100개): `node --test test/content.test.mjs test/modules.test.mjs test/care.test.mjs test/lens.test.mjs test/modules-bcd.test.mjs test/signal-shield.test.mjs test/stage2.test.mjs test/daily.test.mjs test/paths.test.mjs test/guides.test.mjs test/school.test.mjs test/altschools.test.mjs`
 
 ## 콘텐츠 수정 워크플로우 (중요)
 
@@ -111,6 +116,13 @@ mapsi-app/
 - **학과 지도**(`#majors`): 역방향 지도와 동일한 계열 7종별 대표 학과(각 3개↑)·적성 신호·자격 안내 + 대학·학과 리서치 4단계(커리어넷→어디가→대학알리미→모집요강 원문) + 대학 지원 자격 기초(수시·정시 공통 자격, 특성화고·재직자 등 자격 전형). 진입: 역방향 결과 하단, 고1 5분 몫, E3 가이드
 - **실기·포트폴리오 가이드**(`#artprep`): 예고·체고 입시(중) / 대입 실기·비실기(고) / 포트폴리오 만드는 순서 5단계(많이 말고 연결되게·과정 기록·날짜·출처·핵심 3개) / 학원 없이 시작하기. 학원 추천·합격 보장 표현 금지(테스트 강제). 진입: 고교 지도 예술고 카드, 학과 지도 예체능 계열
 - 통계성 수치는 전부 미탑재(테스트로 금지) — 수치가 필요한 자리는 공식 창구 링크로 대체 (정직 원칙)
+
+## 대안학교 정보 모듈 (2026-07-27 신설 — 설계: mydream-alt-school-module-prompt.md)
+
+- **핵심 목적**: 학교 목록이 아니라 **"졸업하면 학력이 인정되는가"의 구분** — '교육청 등록 기관은 학교 명칭·취학유예는 되지만 학력 미인정'이라는 최대 혼동 지점을 UI 구조로 차단
+- **목록**(`#altschools`): 카드마다 **학력 인정/미인정 배지를 학교명보다 위에** 텍스트로 표기(색만으로 구분 금지), REGISTERED는 '교육청 등록'+'학력 미인정' 병기(테스트 강제). 필터(학력인정·학교급·기숙·위탁·시도), 이름 검색 → **DB에 없으면 '확인되지 않은 시설' 안내**("없음"이 아니라 "확인되지 않음" — 앱이 임의 판정하지 않음). 랭킹·추천 없음, 정렬은 시도→이름순
+- **상세**(`#altschool/<id>`): 배지 상단 고정, null 필드는 표시하지 않음(Tier 2 "상세 정보 미제공"), **학력 미인정이면 검정고시 안내 카드**(#q/H2·고교 지도 연결, 테스트 강제), 하단 고정 푸터 "기준일·출처·최종 확인은 관할 교육청"
+- **데이터 절대 규칙**: `accredits_diploma`는 `legal_status`에서 파생 금지(둘 다 원본 확인 후 명시 입력 — 로더·감사·테스트 3중 검증), `verified_at` 없는 레코드 거부, **모델이 학교 데이터 생성·추정 금지 — 사람이 확인한 CSV만 주입**. 현재는 가상 샘플 3행뿐이며 목록에 "샘플 데이터" 배너 자동 표시(실데이터 주입 시 자동 소멸). 갱신 절차: `docs/alt-school-module.md`
 
 ## 조건 대시보드 · 체험 지도 · 퀘스트 · 강점 저널 (구현 완료)
 

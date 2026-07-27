@@ -254,6 +254,7 @@
         },
         relatedQ: "H2",
         links: [
+          { route: "altschools", label: "대안학교 정보 — 학력 인정부터 확인하기" },
           { route: "paths", label: "경로 지도 — 전환기 섹션 보기" },
           { route: "explore", label: "체험 지도 — 꿈드림 보기" },
         ],

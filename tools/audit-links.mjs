@@ -34,6 +34,8 @@ const GUIDES = d("guides.data.js");
 const HISCHOOL = d("hischool.data.js");
 const MAJORS = d("majors.data.js");
 const ARTPREP = d("artprep.data.js");
+const ALTS = d("altschools.data.js");
+const Alt = require(path.join(root, "js", "altschools.js"));
 
 const appSrc = readFileSync(path.join(root, "js", "app.js"), "utf8");
 
@@ -52,7 +54,7 @@ const TARGET_LINKS = extractObject("TARGET_LINKS");
 const STATIC_ROUTES = new Set([
   "home", "onboarding", "browse", "compass", "reverse", "search", "care-now", "help",
   "lens", "jobs", "explore", "quests", "journal", "signal", "shield", "portfolio",
-  "parents", "jobdex", "paths", "hischool", "majors", "artprep",
+  "parents", "jobdex", "paths", "hischool", "majors", "artprep", "altschools",
 ]);
 const qids = new Set(content.questions.map((q) => q.id));
 const jobIds = new Set(JOBS.jobs.map((j) => j.id));
@@ -64,6 +66,7 @@ function validRoute(r) {
   if (r.startsWith("job/")) return jobIds.has(r.slice(4));
   if (r.startsWith("lens/")) return lensIds.has(r.slice(5));
   if (r.startsWith("guide/")) return !!GUIDES.byQuestion[r.slice(6)];
+  if (r.startsWith("altschool/")) return ALTS.schools.some((s) => s.id === r.slice(10));
   return false;
 }
 
@@ -156,6 +159,13 @@ const trackIds = new Set(MD.tracks.map((t) => t.id));
 for (const tr of MAJORS.tracks) if (!trackIds.has(tr.trackId)) p("학과 지도", `계열 ${tr.trackId} — 역방향 지도에 없음`);
 checkLinks("학과 지도", MAJORS.links);
 checkLinks("실기 가이드", ARTPREP.links);
+
+// 8d. 대안학교 — 법적 지위×학력 인정 정합, 출처·기준일 필수 (파생 금지 원칙 검증)
+for (const s of ALTS.schools) {
+  if (!Alt.checkConsistency(s)) p("대안학교", `${s.id}(${s.name}) — legal_status(${s.legal_status})×accredits_diploma(${s.accredits_diploma}) 정합 오류`);
+  if (!s.verified_at || !s.source_name || !s.source_url) p("대안학교", `${s.id} — 기준일/출처 누락 (절대 규칙 위반)`);
+}
+if (ALTS.allSample) n("대안학교", `현재 전부 샘플 데이터(${ALTS.schools.length}건) — 실제 명단은 사람이 확인한 CSV 주입 필요 (docs/alt-school-module.md)`);
 
 // 8c. 학교 명단 기준일 경과 검사 — 11개월부터 재검증 필요 알림
 const fm = /^(\d{4})-(\d{2})$/.exec(HISCHOOL.checkedAt || "");
