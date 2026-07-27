@@ -23,6 +23,8 @@ const checks = [
   ["lens-card", P("중2", "lens/delivery"), "다르게 보면"],
   ["jobs", P("고1", "jobs"), "조건이 다른 직업"],
   ["job-teacher", P("고1", "job/teacher"), "임용시험"],
+  ["job-aircraftmech", P("고1", "job/aircraftmech"), "국가자격 시험"],
+  ["job-marketer", P("고1", "job/marketer"), "판을 짜는 일"],
   ["explore", P("중2", "explore"), "개인 신청 가능"],
   ["quests", P("중2", "quests"), "앱 밖에서 하고 오기"],
   ["journal", P("중2", "journal"), "어떤 기분이에요"],

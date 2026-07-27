@@ -36,8 +36,8 @@ test("원칙 1: 단정·주입 표현 금지 (전체 렌즈 콘텐츠)", () => {
   for (const b of banned) assert.ok(!text.includes(b), `금지 표현: ${b}`);
 });
 
-test("구조 한 줄: 정확히 10개 직업분, '이유 —' 구조 설명 형식", () => {
-  assert.equal(DATA.structureLines.length, 10);
+test("구조 한 줄: 정확히 17개 직업분, '이유 —' 구조 설명 형식", () => {
+  assert.equal(DATA.structureLines.length, 17);
   for (const s of DATA.structureLines) {
     assert.ok(s.job && s.line, `${s.job}: 필드 누락`);
     assert.ok(s.line.includes("이유 —"), `${s.job}: 구조 설명 형식 아님`);

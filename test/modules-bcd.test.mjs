@@ -64,8 +64,8 @@ test("퀘스트 진행 집계: 역량별 완료 수, 미션 조회", () => {
 });
 
 // ---- 조건 대시보드 ----
-test("직업 카드: 10개, 필수 섹션 완비, 나침반 직업군과 연결", () => {
-  assert.equal(JOBS.jobs.length, 10);
+test("직업 카드: 17개, 필수 섹션 완비, 나침반 직업군과 연결", () => {
+  assert.equal(JOBS.jobs.length, 17);
   const clusterIds = new Set(MODULES.clusters.map((c) => c.id));
   for (const j of JOBS.jobs) {
     assert.ok(j.name && j.summary && j.aiNote, `${j.id}: 필드 누락`);
@@ -76,9 +76,14 @@ test("직업 카드: 10개, 필수 섹션 완비, 나침반 직업군과 연결"
   }
 });
 
-test("직업 카드: 구조 한 줄(렌즈 데이터)과 10개 전부 1:1 매칭", () => {
+test("직업 카드: 구조 한 줄(렌즈 데이터)과 17개 전부 1:1 매칭", () => {
   const lensJobs = new Set(LENS.structureLines.map((s) => s.job));
   for (const j of JOBS.jobs) assert.ok(lensJobs.has(j.name), `${j.id}(${j.name}): 구조 한 줄 없음`);
+});
+
+test("직업 카드: 나침반 14개 직업군 전부에 카드 최소 1장 (도감 연결 보장)", () => {
+  const covered = new Set(JOBS.jobs.map((j) => j.clusterId));
+  for (const c of MODULES.clusters) assert.ok(covered.has(c.id), `직업군 ${c.id}(${c.name}): 조건 카드 없음`);
 });
 
 test("직업 카드 정직 원칙: 미검증 임금 수치 없음, 유일한 수치는 검증 칩과 함께", () => {
