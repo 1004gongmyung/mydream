@@ -25,7 +25,7 @@
         { date: "2026-07-23", text: "친구 영상 편집 도와줄 때 재밌었다" },
       ]));
     }
-    location.hash = { reverse: "#reverse", compass: "#compass", crisis: "#home", search: "#home", journal: "#journal", quest: "#quests", signal: "#signal", shield: "#shield", portfolio: "#portfolio", parents: "#parents", guide: "#q/E7", altmiss: "#altschools" }[FLOW] || "#home";
+    location.hash = { reverse: "#reverse", compass: "#compass", crisis: "#home", search: "#home", journal: "#journal", quest: "#quests", signal: "#signal", shield: "#shield", portfolio: "#portfolio", parents: "#parents", guide: "#q/E7", altmiss: "#altschools", jobsearch: "#home" }[FLOW] || "#home";
   </script>
 </head>
 <body>
@@ -86,9 +86,10 @@
         click('[data-sub="phys"]');
         click('[data-sub="info"]');
         setTimeout(() => click("#mapBtn"), 80);
-      } else if (FLOW === "crisis" || FLOW === "search") {
+      } else if (FLOW === "crisis" || FLOW === "search" || FLOW === "jobsearch") {
+        // 학년 주입이 고1이므로 search는 고1에 해당하는 질문어, jobsearch는 직업명으로 2층 구조를 검사
         const input = document.querySelector("#searchInput");
-        input.value = FLOW === "crisis" ? "사라지고 싶어요" : "특성화고 가면 어떻게 돼요";
+        input.value = FLOW === "crisis" ? "사라지고 싶어요" : FLOW === "jobsearch" ? "간호사" : "선택과목 어떻게 골라요";
         document.querySelector("#searchForm").dispatchEvent(new Event("submit", { cancelable: true }));
       } else if (FLOW === "journal") {
         click('[data-mood="heavy"]');

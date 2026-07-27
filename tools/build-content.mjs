@@ -3,6 +3,7 @@
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
 import { fileURLToPath } from "node:url";
 import { dirname, join } from "node:path";
+import { createRequire } from "node:module";
 
 const here = dirname(fileURLToPath(import.meta.url));
 const docsDir = join(here, "..", "..");
@@ -104,6 +105,20 @@ function parseAnswers(md) {
 
 const questions = parseQuestions(readFileSync(QUESTIONS_MD, "utf8"));
 const answers = parseAnswers(readFileSync(ANSWERS_MD, "utf8"));
+
+// 직업군 태그(jobTags) 주입 — 조건 카드 시드(jobs.data.js)의 relatedQuestions를 역인덱싱한다.
+// 새 저작 없이 기존 큐레이션(직업→질문)을 뒤집은 것이라 검증 부담이 없다.
+// 직업 검색의 부결과는 이 태그가 매칭되는 질문만 노출한다 (0건이면 빈 상태 — 전체 목록 대체 금지).
+const require = createRequire(import.meta.url);
+const JOBS = require(join(here, "..", "data", "jobs.data.js"));
+const tagMap = new Map();
+for (const job of JOBS.jobs) {
+  for (const qid of job.relatedQuestions || []) {
+    if (!tagMap.has(qid)) tagMap.set(qid, new Set());
+    tagMap.get(qid).add(job.clusterId);
+  }
+}
+for (const q of questions) q.jobTags = [...(tagMap.get(q.id) || [])];
 
 // 정합성 검증: 질문·답변 1:1, [확인 후 기입] 잔존 금지(연동 마커 제외)
 const qIds = questions.map((q) => q.id);

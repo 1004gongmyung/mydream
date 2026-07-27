@@ -57,6 +57,9 @@ const checks = [
   // 인터랙션 흐름 (e2e 자동 주행)
   ["flow-crisis", E("crisis"), "지금 이야기 나눌 수 있는 곳"],
   ["flow-search", E("search"), "관련 질문"],
+  ["flow-search-grade", E("search"), "고1 기준"],
+  ["flow-jobsearch", E("jobsearch"), "이 직업과 관련된 질문"],
+  ["flow-jobsearch-card", E("jobsearch"), "조건 카드 —"],
   ["flow-compass", E("compass"), "이런 하루를 사는 사람이 많은 직업군"],
   ["flow-reverse", E("reverse"), "네 취향과 자주 만나는 계열"],
   ["flow-quest", E("quest"), "완료 ·"],

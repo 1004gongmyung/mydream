@@ -128,12 +128,12 @@
   }
 
   // 검색 폼 — 모든 입력은 위기 감지를 먼저 통과한다 (답변엔진 부록: 위기 라우팅)
-  let searchQuery = "";
+  // 검색어는 해시 쿼리(#search/<검색어>)에 반영된다 — 뒤로가기·공유·새로고침에도 유지
   function searchFormHtml(value) {
     return `
       <form id="searchForm" class="search-form" autocomplete="off">
         <input id="searchInput" class="search-input" type="search" inputmode="search"
-          placeholder="지금 고민을 검색해도 돼요" value="${esc(value || "")}" maxlength="80" />
+          placeholder="고민이나 직업 이름을 검색해도 돼요" value="${esc(value || "")}" maxlength="80" />
         <button id="searchBtn" class="search-btn" type="submit" aria-label="검색">찾기</button>
       </form>`;
   }
@@ -143,8 +143,8 @@
       const text = document.getElementById("searchInput").value.trim();
       if (!text) return;
       if (Care.detectCrisis(CARE, text)) return go("care-now"); // 검색·답변 실행 없이 즉시 전환
-      searchQuery = text;
-      if (location.hash === "#search") renderSearch(); else go("search");
+      const target = "search/" + encodeURIComponent(text);
+      if (location.hash === "#" + target) renderSearch(text); else go(target);
     });
   }
 
@@ -330,21 +330,47 @@
     window.scrollTo(0, 0);
   }
 
-  // ---- 검색 결과 ----
-  function renderSearch() {
-    const results = M.searchQuestions(content, searchQuery);
+  // ---- 검색 결과 (2층: 주결과=직업 카드 / 부결과=태그 매칭 질문, 학년 조건 적용) ----
+  function renderSearch(query) {
+    const grade = getGrade();
+    const matchedJobs = query ? M.findJobsByQuery(JOBS.jobs, query) : [];
+    let body = "";
+    if (!query) {
+      body = `<div class="open-question">고민을 문장으로 써도 되고, 직업 이름(간호사, 개발자…)을 넣어도 돼요.</div>`;
+    } else if (matchedJobs.length) {
+      // 주결과: 인식된 직업의 조건 카드
+      const relQs = [];
+      const seen = new Set();
+      for (const j of matchedJobs) {
+        for (const q of M.questionsForJob(content, j, grade)) {
+          if (!seen.has(q.id)) { seen.add(q.id); relQs.push(q); }
+        }
+      }
+      body = `
+        <div class="section-label">직업 정보 · "${esc(query)}"</div>
+        ${matchedJobs.map((j) => `
+          <button class="qcard" data-job="${j.id}">${esc(j.name)}<span class="qmeta">조건 카드 — ${esc(j.summary)}</span></button>`).join("")}
+        <div class="section-label">이 직업과 관련된 질문${grade ? ` · ${esc(grade)} 기준` : ""}</div>
+        ${relQs.length
+          ? relQs.slice(0, M.SEARCH_LIMIT).map(qcardHtml).join("")
+          : `<div class="open-question">지금 시기(${esc(grade || "전체")})에 해당하는 연결 질문이 아직 없어요. 위 조건 카드에서 경로·조건을 바로 볼 수 있어요.</div>`}`;
+    } else {
+      const results = M.searchQuestions(content, query, grade);
+      body = results.length
+        ? `<div class="section-label">"${esc(query)}" 관련 질문 · ${results.length}개${grade ? ` · ${esc(grade)} 기준` : ""}</div>${results.map(qcardHtml).join("")}`
+        : `<div class="open-question">"${esc(query)}"에 딱 맞는 질문을 못 찾았어요. 단어를 바꿔보거나, 전체 질문에서 골라봐도 좋아요.</div>
+           <button class="browse-link" data-nav="browse">전체 질문 보기</button>`;
+    }
     $screen.innerHTML = `
       <button class="answer-back" data-nav="home">← 홈으로</button>
-      ${searchFormHtml(searchQuery)}
-      ${results.length
-        ? `<div class="section-label">"${esc(searchQuery)}" 관련 질문 · ${results.length}개</div>${results.map(qcardHtml).join("")}`
-        : `<div class="open-question">딱 맞는 질문을 못 찾았어요. 단어를 바꿔보거나, 전체 질문에서 골라봐도 좋아요.</div>
-           <button class="browse-link" data-nav="browse">전체 질문 보기</button>`}`;
+      ${searchFormHtml(query || "")}
+      ${body}`;
     $screen.querySelector("[data-nav=home]").addEventListener("click", () => go("home"));
     const browseBtn = $screen.querySelector("[data-nav=browse]");
     if (browseBtn) browseBtn.addEventListener("click", () => go("browse"));
     wireSearchForm();
     wireCards();
+    wireJobLinks();
     window.scrollTo(0, 0);
   }
 
@@ -1453,7 +1479,8 @@
     if (hash === "browse") return renderBrowse();
     if (hash === "compass") { compassState.step = -1; return renderCompass(); }
     if (hash === "reverse") return renderReverse();
-    if (hash === "search") return renderSearch();
+    if (hash === "search") return renderSearch("");
+    if (hash.startsWith("search/")) return renderSearch(decodeURIComponent(hash.slice(7)));
     if (hash === "care-now") return renderCareNow();
     if (hash === "help") return renderHelp();
     if (hash === "lens") return renderLensHome();

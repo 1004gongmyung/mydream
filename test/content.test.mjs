@@ -75,3 +75,45 @@ test("전체 열람: 11개 군 모두 노출 (배제하지 않음 — I·H 포�
 test("시기 내비게이션: 모든 학년에 한 줄 존재", () => {
   for (const grade of Mapsi.GRADES) assert.ok(Mapsi.periodNavFor(grade).length > 0);
 });
+
+// ---- 직업 검색 2층 구조 (v2.3) ----
+const JOBS = require(join(here, "..", "data", "jobs.data.js"));
+const MODULES = require(join(here, "..", "data", "modules.data.js"));
+
+test("직업군 태그: 조건 카드 역인덱스와 정합 — 태그는 전부 유효한 직업군 id", () => {
+  const clusterIds = new Set(MODULES.clusters.map((c) => c.id));
+  for (const q of content.questions) {
+    assert.ok(Array.isArray(q.jobTags), `${q.id}: jobTags 필드 없음`);
+    for (const t of q.jobTags) assert.ok(clusterIds.has(t), `${q.id}: 없는 직업군 태그 ${t}`);
+  }
+  for (const j of JOBS.jobs) {
+    for (const qid of j.relatedQuestions || []) {
+      const q = content.questions.find((x) => x.id === qid);
+      assert.ok(q.jobTags.includes(j.clusterId), `${qid}: ${j.id}(${j.clusterId}) 역인덱스 누락`);
+    }
+  }
+});
+
+test("직업 인식: 직업명이 든 문장에서 조건 카드 매칭, 무관 입력은 빈 배열", () => {
+  assert.deepEqual(Mapsi.findJobsByQuery(JOBS.jobs, "간호사").map((j) => j.id), ["nurse"]);
+  assert.ok(Mapsi.findJobsByQuery(JOBS.jobs, "게임 개발자 되려면").some((j) => j.id === "gamedev"));
+  assert.deepEqual(Mapsi.findJobsByQuery(JOBS.jobs, "오늘 점심 뭐 먹지"), []);
+  assert.deepEqual(Mapsi.findJobsByQuery(JOBS.jobs, "가"), [], "한 글자는 무시");
+});
+
+test("검색 학년 조건: 시기에 안 맞는 질문은 결과에서 제외", () => {
+  const jung3 = Mapsi.searchQuestions(content, "특성화고", "중3");
+  assert.ok(jung3.some((q) => q.group === "C"), "중3은 C군 노출");
+  const go1 = Mapsi.searchQuestions(content, "특성화고", "고1");
+  assert.ok(!go1.some((q) => q.group === "C"), "고1엔 중3 전용 C군 비노출");
+  assert.deepEqual(Mapsi.searchQuestions(content, "특성화고"), Mapsi.searchQuestions(content, "특성화고", null), "학년 없으면 전체 풀");
+});
+
+test("직업 관련 질문: 태그+학년 매칭만 노출, 0건이면 빈 배열(전체 대체 금지)", () => {
+  const nurse = JOBS.jobs.find((j) => j.id === "nurse");
+  const go2 = Mapsi.questionsForJob(content, nurse, "고2");
+  assert.ok(go2.length >= 1 && go2.every((q) => q.jobTags.includes("care")), "care 태그 질문만");
+  assert.ok(go2.some((q) => q.id === "E5"), "고2엔 E5 포함");
+  assert.ok(!Mapsi.questionsForJob(content, nurse, "중1").some((q) => q.id === "E5"), "중1엔 E5(고2·3 전용) 제외");
+  assert.deepEqual(Mapsi.questionsForJob(content, { clusterId: "없는군" }, "중1"), [], "매칭 0건은 빈 배열");
+});

@@ -80,12 +80,14 @@
   }
 
   // 질문 검색 — 단순 토큰 포함 매칭. 위기 감지(MapsiCare.detectCrisis)를 통과한 뒤에만 호출할 것.
+  // grade를 주면 그 시기에 해당하는 질문만 조건에 넣는다.
   const SEARCH_LIMIT = 8; // 무한 피드 금지: 검색 결과도 상한 고정
 
-  function searchQuestions(content, query) {
+  function searchQuestions(content, query, grade) {
     const tokens = String(query || "").trim().split(/\s+/).filter((t) => t.length >= 2);
     if (tokens.length === 0) return [];
-    const scored = content.questions.map((q) => {
+    const pool = grade ? content.questions.filter((q) => q.grades.includes(grade)) : content.questions;
+    const scored = pool.map((q) => {
       const a = content.answers[q.id];
       const answerText = a ? a.l1.headline + " " + a.l1.body + " " + a.l2.body : "";
       let score = 0;
@@ -102,5 +104,24 @@
       .map((s) => s.q);
   }
 
-  return { GRADES, CARD_COUNT, SEARCH_LIMIT, periodNavFor, rotationFor, groupsFor, searchQuestions, _internal: { pick, dayIndex, eligible } };
+  // 직업명 인식 — 입력이 직업명을 담고 있으면 해당 조건 카드를 찾는다 (공백 무시, 양방향 포함)
+  const normText = (t) => String(t || "").replace(/\s+/g, "").toLowerCase();
+  function findJobsByQuery(jobs, query) {
+    const nq = normText(query);
+    if (nq.length < 2) return [];
+    return jobs.filter((j) => {
+      const nn = normText(j.name);
+      return nn.includes(nq) || nq.includes(nn);
+    }).slice(0, 3);
+  }
+
+  // 직업 관련 질문 — jobTags가 그 직업의 직업군과 매칭되는 질문만, 학년 조건 적용 (0건이면 빈 배열 그대로)
+  function questionsForJob(content, job, grade) {
+    return content.questions
+      .filter((q) => (q.jobTags || []).includes(job.clusterId))
+      .filter((q) => !grade || q.grades.includes(grade))
+      .slice(0, SEARCH_LIMIT);
+  }
+
+  return { GRADES, CARD_COUNT, SEARCH_LIMIT, periodNavFor, rotationFor, groupsFor, searchQuestions, findJobsByQuery, questionsForJob, _internal: { pick, dayIndex, eligible } };
 });
