@@ -368,7 +368,7 @@
             <div class="cluster-name">${esc(e.name)}</div>
             <div class="job-path">${esc(e.line)}</div>
             ${relJob ? `<button class="inline-link job-inline" data-job="${relJob.id}">비슷한 결의 조건 카드: ${esc(relJob.name)} →</button>` : ""}
-            ${e.route ? `<button class="ghost-btn" data-route="${e.route}">성직 경로 안내 보기 →</button>` : ""}
+            ${e.route ? `<button class="ghost-btn" data-route="${e.route}">${esc(e.routeLabel || "안내 보기")} →</button>` : ""}
           </div>`;
         }).join("")}
         ${matchedDict.length ? `
