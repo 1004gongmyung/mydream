@@ -600,16 +600,17 @@
       <h1 class="result-title">학력 인정 여부부터 확인해요</h1>
       <p class="result-sub">교육청에 <strong>등록</strong>된 기관은 '학교' 이름을 쓸 수 있지만 <strong>학력은 인정되지 않아요</strong>. 이 화면은 그 구분을 돕기 위해 있어요 — 카드마다 맨 위 배지가 그 표시예요.</p>
       ${ALTS.allSample ? `
-        <div class="lens-counter"><strong>지금은 구조 확인용 샘플 데이터만 있어요(실제 학교 아님).</strong> 검증된 명단은 준비 중이에요 — 실제 기관 확인은 아래 공식 창구에서 해요.</div>` : ""}
+        <div class="lens-counter"><strong>지금은 구조 확인용 샘플 데이터만 있어요(실제 학교 아님).</strong> 검증된 명단은 준비 중이에요 — 실제 기관 확인은 아래 공식 창구에서 해요.</div>` : `
+        <div class="dday-note">지금은 ${Alt.sidoList(all).map(esc).join("·")} 지역의 확인을 마친 인가 학교 ${all.length}곳부터 담았어요. 단계적으로 늘려가는 중이라, <strong>여기 없다고 인가·등록이 아닌 게 아니에요</strong> — 전체 현황은 아래 공식 창구가 기준이에요.</div>`}
       <form id="altSearchForm" class="search-form" autocomplete="off">
         <input id="altSearchInput" class="search-input" type="search" placeholder="기관 이름으로 확인해보기" value="${esc(altState.query)}" maxlength="40" />
         <button class="search-btn" type="submit">확인</button>
       </form>
       ${missScreen ? `
         <div class="cluster-card">
-          <div class="alt-badges"><span class="alt-badge warn">확인되지 않은 시설</span></div>
+          <div class="alt-badges"><span class="alt-badge warn">이 목록에서 확인 안 됨</span></div>
           <div class="job-path">"${esc(altState.query)}" — 이 목록에서 확인되지 않는 이름이에요.</div>
-          <div class="job-path soft">교육청에 인가·등록되지 않은 시설일 수 있어요. 인가·등록 여부와 학력 인정 여부는 관할 교육청에서 확인할 수 있어요.</div>
+          <div class="job-path soft">아직 이 목록에 담기지 않은 인가·등록 기관일 수도 있고, 교육청에 인가·등록되지 않은 시설일 수도 있어요. 인가·등록 여부와 학력 인정 여부는 관할 교육청과 대안교육기관지원센터에서 확인할 수 있어요.</div>
           <button class="ghost-btn" data-alt-clear>전체 목록 다시 보기</button>
         </div>` : `
         <div class="subject-grid">

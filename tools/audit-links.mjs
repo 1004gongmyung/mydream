@@ -166,6 +166,7 @@ for (const s of ALTS.schools) {
   if (!s.verified_at || !s.source_name || !s.source_url) p("대안학교", `${s.id} — 기준일/출처 누락 (절대 규칙 위반)`);
 }
 if (ALTS.allSample) n("대안학교", `현재 전부 샘플 데이터(${ALTS.schools.length}건) — 실제 명단은 사람이 확인한 CSV 주입 필요 (docs/alt-school-module.md)`);
+if (!ALTS.schools.some((s) => s.legal_status === "REGISTERED")) n("대안학교", `Tier 2(등록 대안교육기관) 미수록 — 교육부 '대안교육기관 현황' hwpx 자료 확인 후 확충 과제 (docs/alt-school-module.md)`);
 
 // 8c. 학교 명단 기준일 경과 검사 — 11개월부터 재검증 필요 알림
 const fm = /^(\d{4})-(\d{2})$/.exec(HISCHOOL.checkedAt || "");

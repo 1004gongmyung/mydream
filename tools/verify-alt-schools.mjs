@@ -32,7 +32,8 @@ if (stale.length) {
 const urls = [...new Set(DATA.schools.map((s) => s.source_url))];
 for (const u of urls) {
   try {
-    const res = await fetch(u, { method: "HEAD", redirect: "follow", signal: AbortSignal.timeout(8000) });
+    let res = await fetch(u, { method: "HEAD", redirect: "follow", signal: AbortSignal.timeout(8000) });
+    if (res.status === 405) res = await fetch(u, { method: "GET", redirect: "follow", signal: AbortSignal.timeout(8000) }); // HEAD 미지원 서버
     console.log(`  출처 ${res.ok ? "✓" : "△ HTTP " + res.status}: ${u}`);
   } catch (e) {
     console.log(`  출처 △ 확인 실패(${e.name}): ${u}`);

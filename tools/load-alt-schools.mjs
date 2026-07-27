@@ -19,7 +19,7 @@ const EXPECTED_ACCREDITS = {
   REGISTERED: false, UNREGISTERED: false,
 };
 const REQUIRED = ["id", "name", "legal_status", "accredits_diploma", "detail_tier", "region_sido", "region_sigungu", "address", "source_name", "source_url", "verified_at"];
-const TIER1_EXPECTED = ["school_levels", "admission_period", "characteristics"]; // 비면 경고(스킵 아님)
+const TIER1_EXPECTED = ["school_levels", "characteristics"]; // 비면 경고(스킵 아님) — 모집 시기 등은 단계 보강 대상
 
 // 간단 CSV 파서 — 따옴표 필드 지원
 function parseCsv(text) {

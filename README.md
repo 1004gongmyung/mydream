@@ -46,13 +46,13 @@ mapsi-app/
   data/hischool.data.js 저작 시드 — 고교 지도: 학교 유형 9종(영재·과학·마이스터·특성화·예체고·일반·외고국제·자사·학교밖) 진학방법·연간일정·자격증 안내
   data/majors.data.js   저작 시드 — 학과 지도: 계열 7종(역방향과 1:1) 학과·적성 신호·자격 + 대학 리서치 4단계·지원 자격
   data/artprep.data.js  저작 시드 — 실기·포트폴리오 가이드: 예고·체고 입시 / 대입 실기·비실기 / 포트폴리오 순서 / 학원 없이 시작
-  data/alternative_schools.seed.csv  원본 — 대안학교 시드 (사람이 확인한 데이터만, 현재 가상 샘플 3행)
+  data/alternative_schools.seed.csv  원본 — 대안학교 시드 (교육청 공식 자료로 확인분만 — 1차: 경기·전북 인가 학교 29곳)
   data/altschools.data.js  생성물 — 손으로 고치지 말 것 (tools/load-alt-schools.mjs가 생성)
   js/altschools.js      로직: 대안학교 — 학력 인정 배지·정합 검증·필터·검색 ('등록≠인가' 혼동 차단)
   tools/build-content.mjs  마크다운 원본 → data/ 생성
   tools/preview.html    개발용: 학년 지정해 화면 바로 열기
   tools/e2e.html        개발용: 헤드리스 클릭 주행 (?flow=compass|reverse|crisis|search|journal|quest|signal|shield|portfolio|parents|guide)
-  tools/sweep.mjs       개발용: 전 화면 렌더링 스윕 — 서버 실행 후 `node tools/sweep.mjs` (49개 라우트·흐름 마커 검사)
+  tools/sweep.mjs       개발용: 전 화면 렌더링 스윕 — 서버 실행 후 `node tools/sweep.mjs` (50개 라우트·흐름 마커 검사)
   tools/load-alt-schools.mjs   대안학교 CSV → data/altschools.data.js (필수 필드·정합 검사, 불량 행 스킵)
   tools/verify-alt-schools.mjs 대안학교 검증 — 기준일 180일 경과·출처 URL 응답·법적지위×학력인정 정합
   tools/audit-links.mjs 개발용: 클릭 목적지 전수 감사 — `node tools/audit-links.mjs` (라우트·질문 ID·L3 타깃·가이드 링크 정합 검사)
@@ -122,7 +122,8 @@ mapsi-app/
 - **핵심 목적**: 학교 목록이 아니라 **"졸업하면 학력이 인정되는가"의 구분** — '교육청 등록 기관은 학교 명칭·취학유예는 되지만 학력 미인정'이라는 최대 혼동 지점을 UI 구조로 차단
 - **목록**(`#altschools`): 카드마다 **학력 인정/미인정 배지를 학교명보다 위에** 텍스트로 표기(색만으로 구분 금지), REGISTERED는 '교육청 등록'+'학력 미인정' 병기(테스트 강제). 필터(학력인정·학교급·기숙·위탁·시도), 이름 검색 → **DB에 없으면 '확인되지 않은 시설' 안내**("없음"이 아니라 "확인되지 않음" — 앱이 임의 판정하지 않음). 랭킹·추천 없음, 정렬은 시도→이름순
 - **상세**(`#altschool/<id>`): 배지 상단 고정, null 필드는 표시하지 않음(Tier 2 "상세 정보 미제공"), **학력 미인정이면 검정고시 안내 카드**(#q/H2·고교 지도 연결, 테스트 강제), 하단 고정 푸터 "기준일·출처·최종 확인은 관할 교육청"
-- **데이터 절대 규칙**: `accredits_diploma`는 `legal_status`에서 파생 금지(둘 다 원본 확인 후 명시 입력 — 로더·감사·테스트 3중 검증), `verified_at` 없는 레코드 거부, **모델이 학교 데이터 생성·추정 금지 — 사람이 확인한 CSV만 주입**. 현재는 가상 샘플 3행뿐이며 목록에 "샘플 데이터" 배너 자동 표시(실데이터 주입 시 자동 소멸). 갱신 절차: `docs/alt-school-module.md`
+- **데이터 절대 규칙**: `accredits_diploma`는 `legal_status`에서 파생 금지(둘 다 원본 확인 후 명시 입력 — 로더·감사·테스트 3중 검증), `verified_at` 없는 레코드 거부, **모델이 학교 데이터 생성·추정 금지 — 확인된 데이터만 주입**
+- **실데이터 1차 배치**(2026-07-27): 경기 23곳(경기도교육청 2025 현황 PDF — 각종학교 10·특성화중 7·특성화고 6) + 전북 6곳(전북교육청 대안교육지원센터) = **29곳, 전부 학력 인정 인가 학교**. 부분 수록이므로 커버리지 안내("여기 없다고 인가·등록이 아닌 게 아니에요") 자동 표시. **Tier 2(등록 기관 259곳, 2024-06 교육부 기준)는 hwpx 자료 수동 확인 후 확충 과제** — 감사 스크립트가 미수록을 알림. 갱신 절차: `docs/alt-school-module.md`
 
 ## 조건 대시보드 · 체험 지도 · 퀘스트 · 강점 저널 (구현 완료)
 
