@@ -120,6 +120,16 @@
     return jobs.filter((j) => matchesName(j.name, nq)).slice(0, 3);
   }
 
+  // 이름+별칭 목록 검색 — 직업 사전·도감처럼 {name, aliases?} 형태의 목록에서 인식
+  function findByNames(list, query) {
+    const nq = normText(query);
+    if (nq.length < 2) return [];
+    return list.filter((e) =>
+      matchesName(e.name, nq) ||
+      (e.aliases || []).some((a) => { const na = normText(a); return na.length >= 2 && (na.includes(nq) || nq.includes(na)); })
+    ).slice(0, 3);
+  }
+
   // 직업 관련 질문 — jobTags가 그 직업의 직업군과 매칭되는 질문만, 학년 조건 적용 (0건이면 빈 배열 그대로)
   // 정렬: 태그 수가 적은(=그 직업군에 특화된) 질문 먼저, 보편 질문(전 직업군 태그)은 뒤로
   function questionsForJob(content, job, grade) {
@@ -130,5 +140,5 @@
       .slice(0, SEARCH_LIMIT);
   }
 
-  return { GRADES, CARD_COUNT, SEARCH_LIMIT, periodNavFor, rotationFor, groupsFor, searchQuestions, findJobsByQuery, questionsForJob, matchesName, _internal: { pick, dayIndex, eligible } };
+  return { GRADES, CARD_COUNT, SEARCH_LIMIT, periodNavFor, rotationFor, groupsFor, searchQuestions, findJobsByQuery, findByNames, questionsForJob, matchesName, _internal: { pick, dayIndex, eligible } };
 });

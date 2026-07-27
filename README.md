@@ -52,7 +52,8 @@ mapsi-app/
   tools/build-content.mjs  마크다운 원본 → data/ 생성
   tools/preview.html    개발용: 학년 지정해 화면 바로 열기
   tools/e2e.html        개발용: 헤드리스 클릭 주행 (?flow=compass|reverse|crisis|search|journal|quest|signal|shield|portfolio|parents|guide)
-  tools/sweep.mjs       개발용: 전 화면 렌더링 스윕 — 서버 실행 후 `node tools/sweep.mjs` (61개 라우트·흐름 마커 검사)
+  data/jobdict.data.js  저작 시드 — 직업 사전 90여 종 (검색 인식용: 이름·별칭→직업군, 정성 한 줄, 수치 금지)
+  tools/sweep.mjs       개발용: 전 화면 렌더링 스윕 — 서버 실행 후 `node tools/sweep.mjs` (64개 라우트·흐름 마커 검사)
   tools/load-clergy.mjs        성직자 4개 CSV 조인 → data/clergy.data.js (안전장치·빌드 가드 판정)
   tools/verify-clergy-data.mjs 성직자 검증 — 빌드 가드·180일·출처 URL·미성년 전화·개별 시설 패턴
   tools/load-alt-schools.mjs   대안학교 CSV → data/altschools.data.js (필수 필드·정합 검사, 불량 행 스킵)
@@ -66,7 +67,7 @@ mapsi-app/
   test/signal-shield.test.mjs 신호 리포트·방패 계산기 테스트 (10)
 ```
 
-테스트 실행 (114개): `node --test test/content.test.mjs test/modules.test.mjs test/care.test.mjs test/lens.test.mjs test/modules-bcd.test.mjs test/signal-shield.test.mjs test/stage2.test.mjs test/daily.test.mjs test/paths.test.mjs test/guides.test.mjs test/school.test.mjs test/altschools.test.mjs test/clergy.test.mjs`
+테스트 실행 (118개): `node --test test/content.test.mjs test/modules.test.mjs test/care.test.mjs test/lens.test.mjs test/modules-bcd.test.mjs test/signal-shield.test.mjs test/stage2.test.mjs test/daily.test.mjs test/paths.test.mjs test/guides.test.mjs test/school.test.mjs test/altschools.test.mjs test/clergy.test.mjs test/jobdict.test.mjs`
 
 ## 콘텐츠 수정 워크플로우 (중요)
 
@@ -97,7 +98,7 @@ mapsi-app/
 
 ## 안심 DB + 위기 라우팅 (로드맵 4단계 — 구현 완료)
 
-- **검색 기능**(v2.3 개편): 검색어는 해시 쿼리(`#search/<검색어>`)에 반영 — 뒤로가기·새로고침·공유에도 유지. **학년 값이 검색 조건**에 들어가 시기에 안 맞는 질문(예: 고1의 중3 전용 C군)은 제외. **2층 결과**: 입력에서 직업명을 인식하면(공백 무시 양방향 매칭, 17개 조건 카드) ① 주결과 = 그 직업의 조건 카드 ② 부결과 = **직업군 태그(jobTags)가 매칭되는 질문만**(0건이면 빈 상태 안내 — 전체 목록 대체 금지). jobTags는 빌드에서 조건 카드 relatedQuestions 역인덱싱 + 보완 큐레이션(EXTRA_JOB_TAGS — 보편 3문(A2·A7·G1)은 전 직업군, 학년별 특화 16문은 관련 직업군만)으로 주입. **v2.5 커버리지 보강: 17개 직업 × 7개 학년 전 조합 최소 4건**(이전 0~1건 51개 조합), 특화 질문이 보편 질문보다 먼저 정렬(태그 수 오름차순 — 테스트 강제). **성직 경로도 검색 인식**(별칭 분해 매칭: "스님이 되고 싶어요"→조계종, "수녀"→수도자, "목사"→3교단) — 주결과에 성직 카드 표시. 직업 미인식 시 기존 질문 검색(학년 조건 적용). 검색 전 **반드시 위기 감지를 통과** — 위기 계열이면 검색·답변을 실행하지 않고 즉시 안내 화면 전환
+- **검색 기능**(v2.3 개편): 검색어는 해시 쿼리(`#search/<검색어>`)에 반영 — 뒤로가기·새로고침·공유에도 유지. **학년 값이 검색 조건**에 들어가 시기에 안 맞는 질문(예: 고1의 중3 전용 C군)은 제외. **2층 결과**: 입력에서 직업명을 인식하면(공백 무시 양방향 매칭, 17개 조건 카드) ① 주결과 = 그 직업의 조건 카드 ② 부결과 = **직업군 태그(jobTags)가 매칭되는 질문만**(0건이면 빈 상태 안내 — 전체 목록 대체 금지). jobTags는 빌드에서 조건 카드 relatedQuestions 역인덱싱 + 보완 큐레이션(EXTRA_JOB_TAGS — 보편 3문(A2·A7·G1)은 전 직업군, 학년별 특화 16문은 관련 직업군만)으로 주입. **v2.5 커버리지 보강: 17개 직업 × 7개 학년 전 조합 최소 4건**(이전 0~1건 51개 조합), 특화 질문이 보편 질문보다 먼저 정렬(태그 수 오름차순 — 테스트 강제). **성직 경로도 검색 인식**(별칭 분해 매칭: "스님이 되고 싶어요"→조계종, "수녀"→수도자, "목사"→3교단) — 주결과에 성직 카드 표시. **v2.6 직업 사전**(`data/jobdict.data.js`): 세부 직업 90여 종(간호조무사·직업군인·경찰·환경미화원·요리사·변호사·파일럿 등, 별칭 포함) + 도감 37종을 검색에 통합 — 사전 카드(정성 한 줄, 수치 금지)에서 같은 직업군의 '비슷한 결' 조건 카드·커리어넷/고용24 공식 창구·학년별 태그 질문으로 연결. 선교사 등 특수 항목은 성직 경로로 라우팅. 직업 미인식 시 기존 질문 검색(학년 조건 적용). 검색 전 **반드시 위기 감지를 통과** — 위기 계열이면 검색·답변을 실행하지 않고 즉시 안내 화면 전환
 - **위기 안내 화면**(`#care-now`): 판단·상담 문구 없이 연결만 — 1388 전화(tel:)·문자(sms:)·사이버상담 채팅 버튼 + "돌아가기" 경로. "마이드림은 상담 도구가 아니라서, 더 잘 들어줄 수 있는 곳으로 연결해요" 명시
 - **도움 창구**(`#help`, 안심 DB): 상황 4종(마음/폭력·괴롭힘/알바·일터/학교 밖) × 공공 창구(1388·109·1577-0199·117·112·1366·1350·청소년근로권익센터·꿈드림·cyber1388). 전 화면 하단 푸터에서 진입 가능
 - **감지 규칙**: 공백 무시 부분 일치, 과잉 감지가 과소 감지보다 안전(화면에서 되돌아가기 제공). 저널·체크인 등 입력 기능이 추가되면 같은 `MapsiCare.detectCrisis`를 반드시 거칠 것

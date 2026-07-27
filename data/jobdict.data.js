@@ -1,0 +1,127 @@
+// 직업 사전 시드 — 검색 인식용 세부 직업 90여 종 (조건 카드 17장·도감 37종의 확장 계층)
+// 원칙: 실재하는 일반 직업만, 정성 설명 한 줄(수치·서열·유망 단정 금지), 자격·면허 언급은 제도가 확실한 경우만.
+// clusterId: 나침반 14개 직업군 — 이 값으로 학년별 질문 태그(jobTags)와 '비슷한 결의 조건 카드'가 연결된다.
+// route: 직업군 대신 앱 내 화면으로 연결하는 특수 항목(예: 선교사 → 성직 경로).
+// 상세 정보는 수록하지 않는다 — 커리어넷·고용24 공식 창구로 안내한다 (미검증 정보 금지 원칙).
+(function (root, factory) {
+  if (typeof module === "object" && module.exports) module.exports = factory();
+  else root.MAPSI_JOBDICT_DATA = factory();
+})(typeof self !== "undefined" ? self : this, function () {
+  return {
+    note: "이름·별칭으로 검색을 인식하는 사전이에요. 자세한 정보는 공식 창구(커리어넷·고용24)가 기준이에요.",
+    entries: [
+      // 의료·돌봄 (care)
+      { name: "간호조무사", aliases: ["조무사"], clusterId: "care", line: "간호사를 도와 진료 보조와 환자 돌봄을 맡는 사람이에요. 국가 자격시험이 있어요." },
+      { name: "물리치료사", aliases: [], clusterId: "care", line: "다친 몸의 회복을 운동과 치료 기구로 돕는 면허 직업이에요." },
+      { name: "치과위생사", aliases: [], clusterId: "care", line: "치과에서 진료 보조와 구강 관리 교육을 맡는 면허 직업이에요." },
+      { name: "방사선사", aliases: [], clusterId: "care", line: "엑스레이·CT 같은 영상 촬영을 맡는 면허 직업이에요." },
+      { name: "응급구조사", aliases: [], clusterId: "care", line: "응급 현장에서 처치와 이송을 맡는 자격 직업이에요." },
+      { name: "수의사", aliases: [], clusterId: "care", line: "동물의 진료와 수술을 맡는 면허 직업이에요. 수의예과가 경로예요." },
+      { name: "약사", aliases: [], clusterId: "care", line: "약을 조제하고 복약을 안내하는 면허 직업이에요. 약학대학이 경로예요." },
+      { name: "한의사", aliases: [], clusterId: "care", line: "한방 진료를 하는 면허 직업이에요. 한의예과가 경로예요." },
+      { name: "요양보호사", aliases: [], clusterId: "care", line: "어르신의 일상과 건강을 곁에서 돌보는 자격 직업이에요." },
+      { name: "사회복지사", aliases: [], clusterId: "care", line: "도움이 필요한 사람을 제도와 연결하는 자격 직업이에요." },
+      { name: "상담심리사", aliases: ["심리상담사"], clusterId: "care", line: "마음의 어려움을 상담으로 돕는 사람이에요. 대학원 과정이 흔해요." },
+      // 공공·안전 (public)
+      { name: "직업군인", aliases: ["군인", "부사관", "장교"], clusterId: "public", line: "나라의 안보를 맡는 직업이에요. 부사관·장교·군 기술특기 등 진입 문이 여러 개예요." },
+      { name: "경찰관", aliases: ["경찰", "직업경찰"], clusterId: "public", line: "치안과 수사를 맡는 공공 직업이에요. 공채 시험과 경찰 관련 학과 경로가 있어요." },
+      { name: "소방관", aliases: ["소방공무원"], clusterId: "public", line: "화재 진압과 구조·구급을 맡는 공공 직업이에요." },
+      { name: "교도관", aliases: [], clusterId: "public", line: "교정 시설의 안전과 재사회화를 맡는 공무원이에요." },
+      { name: "군무원", aliases: [], clusterId: "public", line: "군에서 행정·기술 업무를 맡는 공무원이에요." },
+      { name: "환경미화원", aliases: ["미화원", "환경공무직"], clusterId: "public", line: "거리와 생활 환경을 깨끗하게 유지하는 공공 일자리예요. 지자체 공개 채용으로 뽑아요." },
+      { name: "우편집배원", aliases: ["집배원"], clusterId: "public", line: "우편물을 배달하며 동네를 잇는 공공 서비스 직업이에요." },
+      { name: "철도기관사", aliases: ["기관사"], clusterId: "public", line: "열차를 운전하는 면허 직업이에요. 철도 관련 학과·공채 경로가 있어요." },
+      // 서비스·환대 (service)
+      { name: "요리사", aliases: ["조리사", "셰프"], clusterId: "service", line: "식당·호텔에서 음식을 만드는 사람이에요. 조리 기능사 자격이 흔한 출발점이에요." },
+      { name: "제과제빵사", aliases: ["파티시에", "제빵사"], clusterId: "service", line: "빵과 디저트를 만드는 사람이에요. 제과·제빵 기능사 자격이 있어요." },
+      { name: "바리스타", aliases: [], clusterId: "service", line: "커피를 내리고 매장을 꾸려가는 사람이에요." },
+      { name: "미용사", aliases: ["헤어디자이너"], clusterId: "service", line: "머리를 다듬고 스타일을 만드는 면허 직업이에요." },
+      { name: "메이크업아티스트", aliases: ["메이크업"], clusterId: "service", line: "방송·행사·웨딩에서 화장을 담당하는 사람이에요." },
+      { name: "네일아티스트", aliases: ["네일리스트"], clusterId: "service", line: "손톱 미용을 맡는 사람이에요. 미용사(네일) 면허가 있어요." },
+      { name: "호텔리어", aliases: [], clusterId: "service", line: "호텔에서 손님을 맞이하고 운영을 맡는 사람이에요." },
+      { name: "관광통역안내사", aliases: ["여행가이드", "관광가이드"], clusterId: "service", line: "여행자에게 우리나라를 안내하는 국가 자격 직업이에요." },
+      { name: "플로리스트", aliases: [], clusterId: "service", line: "꽃으로 공간과 행사를 꾸미는 사람이에요." },
+      { name: "웨딩플래너", aliases: [], clusterId: "service", line: "결혼식을 처음부터 끝까지 설계하는 사람이에요." },
+      { name: "반려동물미용사", aliases: ["펫미용사", "애견미용사"], clusterId: "service", line: "반려동물의 미용과 위생을 맡는 사람이에요." },
+      // 기술·엔지니어링 (tech)
+      { name: "자동차정비사", aliases: ["카센터정비사"], clusterId: "tech", line: "자동차를 점검하고 수리하는 자격 직업이에요." },
+      { name: "전기기술자", aliases: ["전기기사"], clusterId: "tech", line: "건물과 설비의 전기를 다루는 자격 직업이에요." },
+      { name: "용접기술자", aliases: ["용접사"], clusterId: "tech", line: "금속을 잇는 기술로 조선·건설 현장을 받치는 직업이에요." },
+      { name: "배관기술자", aliases: ["배관공"], clusterId: "tech", line: "물과 가스가 다니는 길을 설치·수리하는 기술 직업이에요." },
+      { name: "항공기조종사", aliases: ["파일럿", "조종사"], clusterId: "tech", line: "비행기를 조종하는 면허 직업이에요. 운항학과·군·훈련원 등 경로가 여러 갈래예요." },
+      { name: "승강기정비원", aliases: ["엘리베이터정비"], clusterId: "tech", line: "승강기를 점검하고 수리하는 기술 직업이에요." },
+      { name: "반도체장비기술자", aliases: [], clusterId: "tech", line: "반도체 공장의 장비를 운용·정비하는 기술 직업이에요." },
+      { name: "조선기술자", aliases: [], clusterId: "tech", line: "배를 만드는 현장의 기술 직업이에요." },
+      // 건축·공간 (build)
+      { name: "건축가", aliases: ["건축사"], clusterId: "build", line: "건물을 설계하는 직업이에요. 건축학 전공과 건축사 자격 경로가 있어요." },
+      { name: "토목기술자", aliases: ["토목기사"], clusterId: "build", line: "도로·다리 같은 기반 시설을 설계·시공하는 직업이에요." },
+      { name: "조경가", aliases: ["조경기술자"], clusterId: "build", line: "공원과 정원 같은 야외 공간을 설계하는 직업이에요." },
+      { name: "도시계획가", aliases: [], clusterId: "build", line: "도시의 공간과 쓰임새를 계획하는 직업이에요." },
+      { name: "목수", aliases: ["건축목공"], clusterId: "build", line: "나무로 구조물과 가구를 만드는 기술 직업이에요." },
+      { name: "측량기술자", aliases: ["측량사"], clusterId: "build", line: "땅의 위치와 높낮이를 재는 자격 직업이에요." },
+      // 개발·데이터 (dev)
+      { name: "웹개발자", aliases: ["프론트엔드개발자", "백엔드개발자"], clusterId: "dev", line: "웹 서비스를 만드는 개발 직업이에요." },
+      { name: "앱개발자", aliases: ["모바일개발자"], clusterId: "dev", line: "스마트폰 앱을 만드는 개발 직업이에요." },
+      { name: "데이터분석가", aliases: ["데이터사이언티스트"], clusterId: "dev", line: "데이터에서 의미를 찾아 결정을 돕는 직업이에요." },
+      { name: "AI엔지니어", aliases: ["인공지능개발자", "머신러닝엔지니어"], clusterId: "dev", line: "인공지능 모델을 만들고 서비스에 얹는 직업이에요." },
+      { name: "정보보안전문가", aliases: ["보안전문가"], clusterId: "dev", line: "해킹을 막고 시스템을 지키는 직업이에요." },
+      { name: "클라우드엔지니어", aliases: [], clusterId: "dev", line: "인터넷 서버 인프라를 설계하고 운영하는 직업이에요." },
+      // 디자인 (design)
+      { name: "패션디자이너", aliases: [], clusterId: "design", line: "옷을 기획하고 디자인하는 직업이에요." },
+      { name: "제품디자이너", aliases: ["산업디자이너"], clusterId: "design", line: "물건의 형태와 쓰임새를 설계하는 직업이에요." },
+      { name: "UX디자이너", aliases: ["UI디자이너"], clusterId: "design", line: "앱과 웹 화면의 사용 경험을 설계하는 직업이에요." },
+      { name: "일러스트레이터", aliases: ["삽화가"], clusterId: "design", line: "책·광고·게임의 그림을 그리는 직업이에요." },
+      { name: "캐릭터디자이너", aliases: [], clusterId: "design", line: "캐릭터를 만들어 상품과 콘텐츠에 입히는 직업이에요." },
+      { name: "주얼리디자이너", aliases: ["귀금속디자이너"], clusterId: "design", line: "장신구를 디자인하고 만드는 직업이에요." },
+      // 콘텐츠·창작 (content)
+      { name: "기자", aliases: ["언론인"], clusterId: "content", line: "취재로 사실을 확인해 기사로 전하는 직업이에요." },
+      { name: "작가", aliases: ["소설가", "시나리오작가"], clusterId: "content", line: "글로 이야기를 만드는 직업이에요. 공모·연재·출판 등 문이 여러 개예요." },
+      { name: "방송PD", aliases: ["프로듀서"], clusterId: "content", line: "방송과 콘텐츠 제작을 총괄하는 직업이에요." },
+      { name: "아나운서", aliases: [], clusterId: "content", line: "방송에서 소식을 전달하는 직업이에요." },
+      { name: "성우", aliases: [], clusterId: "content", line: "목소리로 연기하는 직업이에요." },
+      { name: "번역가", aliases: ["통역사"], clusterId: "content", line: "언어를 옮기는 직업이에요. 분야 전문성이 무기가 돼요." },
+      { name: "영상편집자", aliases: [], clusterId: "content", line: "촬영된 영상을 작품으로 완성하는 직업이에요." },
+      { name: "사진작가", aliases: ["포토그래퍼"], clusterId: "content", line: "사진으로 기록하고 표현하는 직업이에요." },
+      { name: "만화가", aliases: [], clusterId: "content", line: "만화를 그리는 직업이에요. 웹툰 작가와 결이 닿아요." },
+      { name: "배우", aliases: ["연기자"], clusterId: "content", line: "연기로 이야기를 표현하는 직업이에요. 오디션이 문이에요." },
+      { name: "가수", aliases: ["보컬"], clusterId: "content", line: "노래로 무대에 서는 직업이에요. 기획사·오디션·독립 활동 등 문이 여러 개예요." },
+      { name: "모델", aliases: [], clusterId: "content", line: "패션과 광고에서 몸으로 표현하는 직업이에요." },
+      { name: "무용가", aliases: ["댄서", "안무가"], clusterId: "content", line: "춤으로 표현하는 공연 직업이에요." },
+      // 교육 (edu)
+      { name: "유치원교사", aliases: [], clusterId: "edu", line: "유아 교육을 맡는 자격 직업이에요. 유아교육과가 경로예요." },
+      { name: "보육교사", aliases: [], clusterId: "edu", line: "어린이집에서 아이들을 돌보고 가르치는 자격 직업이에요." },
+      { name: "특수교사", aliases: [], clusterId: "edu", line: "장애 학생의 배움을 돕는 교사예요. 특수교육과가 경로예요." },
+      { name: "학원강사", aliases: ["강사"], clusterId: "edu", line: "학원에서 과목을 가르치는 직업이에요." },
+      { name: "사서", aliases: ["도서관사서"], clusterId: "edu", line: "도서관의 자료와 이용자를 잇는 자격 직업이에요." },
+      { name: "직업상담사", aliases: [], clusterId: "edu", line: "일자리를 찾는 사람을 돕는 자격 직업이에요." },
+      // 연구·과학 (research)
+      { name: "생명공학연구원", aliases: ["바이오연구원"], clusterId: "research", line: "생명 현상을 연구해 신약·식품에 응용하는 직업이에요. 대학원 과정이 흔해요." },
+      { name: "환경연구원", aliases: [], clusterId: "research", line: "환경 문제를 조사하고 분석하는 연구 직업이에요." },
+      { name: "식품연구원", aliases: [], clusterId: "research", line: "식품의 안전과 개발을 연구하는 직업이에요." },
+      { name: "로봇공학자", aliases: ["로봇연구원"], clusterId: "research", line: "로봇을 설계하고 연구하는 직업이에요." },
+      // 기획·마케팅 (plan)
+      { name: "광고기획자", aliases: ["광고AE"], clusterId: "plan", line: "광고 캠페인을 기획하는 직업이에요." },
+      { name: "서비스기획자", aliases: ["프로덕트매니저"], clusterId: "plan", line: "앱과 서비스의 기능을 설계하는 직업이에요." },
+      { name: "상품기획자", aliases: ["MD"], clusterId: "plan", line: "어떤 상품을 팔지 고르고 기획하는 직업이에요." },
+      { name: "홍보전문가", aliases: ["PR전문가"], clusterId: "plan", line: "조직의 소식을 세상에 알리는 직업이에요." },
+      { name: "이벤트기획자", aliases: ["행사기획자"], clusterId: "plan", line: "행사와 축제를 설계하는 직업이에요." },
+      // 금융·법·행정 (finance)
+      { name: "은행원", aliases: [], clusterId: "finance", line: "은행에서 금융 업무를 맡는 직업이에요." },
+      { name: "세무사", aliases: [], clusterId: "finance", line: "세금 신고와 상담을 맡는 전문 자격 직업이에요." },
+      { name: "변호사", aliases: [], clusterId: "finance", line: "법률 문제를 대리하고 자문하는 직업이에요. 법학전문대학원이 경로예요." },
+      { name: "판사", aliases: [], clusterId: "finance", line: "재판을 맡는 법관이에요. 법조 경력을 거쳐 임용돼요." },
+      { name: "검사", aliases: [], clusterId: "finance", line: "범죄를 수사하고 재판에 세우는 법률가예요." },
+      { name: "변리사", aliases: [], clusterId: "finance", line: "특허와 지식재산을 다루는 전문 자격 직업이에요." },
+      { name: "노무사", aliases: ["공인노무사"], clusterId: "finance", line: "일터의 권리 문제를 다루는 전문 자격 직업이에요." },
+      { name: "법무사", aliases: [], clusterId: "finance", line: "법률 서류와 등기를 돕는 자격 직업이에요." },
+      { name: "펀드매니저", aliases: ["자산운용가"], clusterId: "finance", line: "투자금을 운용하는 금융 직업이에요." },
+      // 스포츠 (sports)
+      { name: "스포츠트레이너", aliases: ["퍼스널트레이너"], clusterId: "sports", line: "운동을 지도하고 몸 관리를 돕는 직업이에요." },
+      { name: "생활체육지도자", aliases: ["체육지도자"], clusterId: "sports", line: "생활 체육을 가르치는 자격 직업이에요." },
+      { name: "경기심판", aliases: ["심판"], clusterId: "sports", line: "경기의 규칙을 지키게 하는 직업이에요." },
+      { name: "프로게이머", aliases: ["e스포츠선수"], clusterId: "sports", line: "게임 경기로 겨루는 직업이에요. 선수 밖 직군(코치·분석)도 넓어요." },
+      // 특수 — 앱 내 다른 화면으로 연결
+      { name: "선교사", aliases: [], clusterId: null, route: "clergy", line: "종교 단체의 파송을 받아 국내외에서 활동하는 사람이에요. 교단·종단마다 제도가 달라서 소속 교단의 공식 창구 확인이 첫 단계예요." },
+    ],
+  };
+});

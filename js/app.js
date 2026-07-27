@@ -21,6 +21,7 @@
   const Alt = window.MapsiAltschools;
   const CLERGY = window.MAPSI_CLERGY_DATA;
   const Clergy = window.MapsiClergy;
+  const JOBDICT = window.MAPSI_JOBDICT_DATA;
   const Compass = window.MapsiCompass;
   const Reverse = window.MapsiReverse;
   const Care = window.MapsiCare;
@@ -336,29 +337,51 @@
     const matchedJobs = query ? M.findJobsByQuery(JOBS.jobs, query) : [];
     // 성직 경로도 직업 검색에서 인식 (빌드 가드 통과 시에만)
     const matchedClergy = (query && CLERGY.guard.visible) ? Clergy.findPathsByQuery(CLERGY.paths, query) : [];
+    // 직업 사전(세부 직업 90여 종) + 도감 37종에서도 인식 — 조건 카드가 이미 잡혔으면 같은 이름 중복 제외
+    const dictPool = JOBDICT.entries.concat(JOBDEX.jobs.map((d) => ({ name: d.name, aliases: [], clusterId: d.clusterId, line: d.lines[0] })));
+    const jobNames = new Set(matchedJobs.map((j) => j.name));
+    const matchedDict = query ? M.findByNames(dictPool, query).filter((e) => !jobNames.has(e.name)) : [];
     let body = "";
     if (!query) {
-      body = `<div class="open-question">고민을 문장으로 써도 되고, 직업 이름(간호사, 개발자…)을 넣어도 돼요.</div>`;
-    } else if (matchedJobs.length || matchedClergy.length) {
-      // 주결과: 인식된 직업의 조건 카드
+      body = `<div class="open-question">고민을 문장으로 써도 되고, 직업 이름(간호사, 요리사, 경찰…)을 넣어도 돼요.</div>`;
+    } else if (matchedJobs.length || matchedClergy.length || matchedDict.length) {
+      // 부결과: 인식된 직업들의 직업군 태그로 매칭되는 질문 (학년 조건 적용, 특화 우선)
+      const clusterSet = new Set([...matchedJobs.map((j) => j.clusterId), ...matchedDict.map((e) => e.clusterId).filter(Boolean)]);
       const relQs = [];
       const seen = new Set();
-      for (const j of matchedJobs) {
-        for (const q of M.questionsForJob(content, j, grade)) {
+      for (const c of clusterSet) {
+        for (const q of M.questionsForJob(content, { clusterId: c }, grade)) {
           if (!seen.has(q.id)) { seen.add(q.id); relQs.push(q); }
         }
       }
+      relQs.sort((a, b) => a.jobTags.length - b.jobTags.length);
       body = `
         <div class="section-label">직업 정보 · "${esc(query)}"</div>
         ${matchedJobs.map((j) => `
           <button class="qcard" data-job="${j.id}">${esc(j.name)}<span class="qmeta">조건 카드 — ${esc(j.summary)}</span></button>`).join("")}
         ${matchedClergy.map((p) => `
           <button class="qcard" data-clergy-path="${p.id}">${esc(p.role_name)}<span class="qmeta">성직 경로 — ${esc(Clergy.RELIGION_LABELS[p.religion] || p.religion)} · ${esc(p.denomination)}</span></button>`).join("")}
-        ${matchedJobs.length ? `
+        ${matchedDict.map((e) => {
+          const relJob = e.clusterId ? JOBS.jobs.find((j) => j.clusterId === e.clusterId) : null;
+          return `
+          <div class="cluster-card">
+            <div class="cluster-name">${esc(e.name)}</div>
+            <div class="job-path">${esc(e.line)}</div>
+            ${relJob ? `<button class="inline-link job-inline" data-job="${relJob.id}">비슷한 결의 조건 카드: ${esc(relJob.name)} →</button>` : ""}
+            ${e.route ? `<button class="ghost-btn" data-route="${e.route}">성직 경로 안내 보기 →</button>` : ""}
+          </div>`;
+        }).join("")}
+        ${matchedDict.length ? `
+          <div class="dday-note">이 직업의 자세한 정보(하는 일·전망·되는 길)는 공식 창구에서 이름으로 검색해요.</div>
+          ${typeLinksHtml([
+            { url: "https://www.career.go.kr", label: "커리어넷 — 직업정보 검색" },
+            { url: "https://www.work24.go.kr", label: "고용24 — 직업·전망 정보" },
+          ])}` : ""}
+        ${clusterSet.size ? `
           <div class="section-label">이 직업과 관련된 질문${grade ? ` · ${esc(grade)} 기준` : ""}</div>
           ${relQs.length
             ? relQs.slice(0, M.SEARCH_LIMIT).map(qcardHtml).join("")
-            : `<div class="open-question">지금 시기(${esc(grade || "전체")})에 해당하는 연결 질문이 아직 없어요. 위 조건 카드에서 경로·조건을 바로 볼 수 있어요.</div>`}` : ""}`;
+            : `<div class="open-question">지금 시기(${esc(grade || "전체")})에 해당하는 연결 질문이 아직 없어요. 위 카드에서 경로·조건을 바로 볼 수 있어요.</div>`}` : ""}`;
     } else {
       const results = M.searchQuestions(content, query, grade);
       body = results.length
@@ -374,6 +397,7 @@
     const browseBtn = $screen.querySelector("[data-nav=browse]");
     if (browseBtn) browseBtn.addEventListener("click", () => go("browse"));
     $screen.querySelectorAll("[data-clergy-path]").forEach((b) => b.addEventListener("click", () => go("clergy/" + b.dataset.clergyPath)));
+    $screen.querySelectorAll("[data-route]").forEach((b) => b.addEventListener("click", () => go(b.dataset.route)));
     wireSearchForm();
     wireCards();
     wireJobLinks();

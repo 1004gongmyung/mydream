@@ -38,6 +38,7 @@ const ALTS = d("altschools.data.js");
 const Alt = require(path.join(root, "js", "altschools.js"));
 const CLERGY = d("clergy.data.js");
 const Clergy = require(path.join(root, "js", "clergy.js"));
+const JOBDICT = d("jobdict.data.js");
 
 const appSrc = readFileSync(path.join(root, "js", "app.js"), "utf8");
 
@@ -170,6 +171,13 @@ for (const s of ALTS.schools) {
 }
 if (ALTS.allSample) n("대안학교", `현재 전부 샘플 데이터(${ALTS.schools.length}건) — 실제 명단은 사람이 확인한 CSV 주입 필요 (docs/alt-school-module.md)`);
 if (!ALTS.schools.some((s) => s.legal_status === "REGISTERED")) n("대안학교", `Tier 2(등록 대안교육기관) 미수록 — 교육부 '대안교육기관 현황' hwpx 자료 확인 후 확충 과제 (docs/alt-school-module.md)`);
+
+// 8f. 직업 사전 — 직업군/route 정합 (검색 인식이 깨진 목적지로 이어지지 않게)
+const dictClusters = new Set(MD.clusters.map((c) => c.id));
+for (const e of JOBDICT.entries) {
+  if (e.clusterId && !dictClusters.has(e.clusterId)) p("직업 사전", `${e.name} — 없는 직업군 ${e.clusterId}`);
+  if (!e.clusterId && (!e.route || !validRoute(e.route))) p("직업 사전", `${e.name} — 직업군도 유효한 route도 없음`);
+}
 
 // 8e. 성직자 진로 — 빌드 가드 정합·안전장치·필수 필드
 if (CLERGY.guard.visible !== Clergy.isVisible(CLERGY.paths)) p("성직자", "빌드 가드 판정이 생성물과 로직에서 다름 — 로더 재실행 필요");
