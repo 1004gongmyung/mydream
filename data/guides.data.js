@@ -55,6 +55,7 @@
         note: "이건 확정이 아니라 후보 줄이기예요. 꿈은 학교를 정한 다음에 찾아도 돼요.",
         chip: null,
         links: [
+          { route: "hischool", label: "고교 지도 — 유형별 진학 방법 보기" },
           { route: "guide/C4", label: "후보 3곳 비교하는 법" },
           { route: "paths", label: "경로 지도 — 성적 밖 특기 트랙 보기" },
         ],
@@ -74,6 +75,7 @@
         links: [
           { url: "https://www.schoolinfo.go.kr", label: "학교알리미 열기" },
           { route: "guide/C5", label: "편성표 읽는 법 30초 가이드" },
+          { route: "hischool", label: "고교 지도 — 유형·일정 한눈에 보기" },
         ],
       },
       C5: {
@@ -156,6 +158,7 @@
         chip: { grade: "②", label: "전형 구조" },
         links: [
           { route: "paths", label: "경로 지도 — 대학으로 가는 문 전부 보기" },
+          { route: "majors", label: "학과 지도 — 계열·학과·지원 자격 보기" },
           { route: "q/D3", label: "과목 선택 판단 기준 보기" },
         ],
       },

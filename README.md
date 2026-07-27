@@ -43,10 +43,13 @@ mapsi-app/
   data/quest.data.js    저작 시드 — 탐험 미션 15개 (5역량+관찰, 강소·신기술 40%↑)
   data/shield.data.js   저작 시드 — 노동권 정보 (최저임금 2026 검증치, 연 1회 갱신)
   data/guides.data.js   저작 시드 — 가이드 카드 14개 (L3 버튼의 미니 도구·절차·기준표, 새 수치 금지 원칙)
+  data/hischool.data.js 저작 시드 — 고교 지도: 학교 유형 9종(영재·과학·마이스터·특성화·예체고·일반·외고국제·자사·학교밖) 진학방법·연간일정·자격증 안내
+  data/majors.data.js   저작 시드 — 학과 지도: 계열 7종(역방향과 1:1) 학과·적성 신호·자격 + 대학 리서치 4단계·지원 자격
+  data/artprep.data.js  저작 시드 — 실기·포트폴리오 가이드: 예고·체고 입시 / 대입 실기·비실기 / 포트폴리오 순서 / 학원 없이 시작
   tools/build-content.mjs  마크다운 원본 → data/ 생성
   tools/preview.html    개발용: 학년 지정해 화면 바로 열기
   tools/e2e.html        개발용: 헤드리스 클릭 주행 (?flow=compass|reverse|crisis|search|journal|quest|signal|shield|portfolio|parents|guide)
-  tools/sweep.mjs       개발용: 전 화면 렌더링 스윕 — 서버 실행 후 `node tools/sweep.mjs` (38개 라우트·흐름 마커 검사)
+  tools/sweep.mjs       개발용: 전 화면 렌더링 스윕 — 서버 실행 후 `node tools/sweep.mjs` (43개 라우트·흐름 마커 검사)
   tools/audit-links.mjs 개발용: 클릭 목적지 전수 감사 — `node tools/audit-links.mjs` (라우트·질문 ID·L3 타깃·가이드 링크 정합 검사)
   test/content.test.mjs 콘텐츠·회전 로직 테스트 (9)
   test/modules.test.mjs 나침반·역방향 로직 테스트 (13)
@@ -56,7 +59,7 @@ mapsi-app/
   test/signal-shield.test.mjs 신호 리포트·방패 계산기 테스트 (10)
 ```
 
-테스트 실행 (85개): `node --test test/content.test.mjs test/modules.test.mjs test/care.test.mjs test/lens.test.mjs test/modules-bcd.test.mjs test/signal-shield.test.mjs test/stage2.test.mjs test/daily.test.mjs test/paths.test.mjs test/guides.test.mjs`
+테스트 실행 (93개): `node --test test/content.test.mjs test/modules.test.mjs test/care.test.mjs test/lens.test.mjs test/modules-bcd.test.mjs test/signal-shield.test.mjs test/stage2.test.mjs test/daily.test.mjs test/paths.test.mjs test/guides.test.mjs test/school.test.mjs`
 
 ## 콘텐츠 수정 워크플로우 (중요)
 
@@ -100,6 +103,13 @@ mapsi-app/
 - **열린 질문 한 줄 답**: 선택 입력, 위기 감지(`detectCrisis`) 경유 후 기기에만 저장 — 누적 신호의 시작
 - **구조 한 줄 17개 직업분**(`#lens` 하단): 웹툰 작가·유튜버·개발자·교사·간호사·공무원·운동선수·의사·게임 개발자·1인 셀러 + 항공정비사·인테리어 디자이너·그래픽 디자이너·연구원·마케터·회계사·승무원(2026-07-27 확충) — "조건이 왜 이런지"의 시스템 차원 설명 + 렌즈 참조. 조건 카드와 1:1 매칭(테스트 강제). **확충으로 나침반 14개 직업군 전부에 카드 1장 이상 → 도감 37종 모두 '비슷한 결의 조건 카드' 버튼 표시**
 - 진입: K9 답변 L3 "렌즈 카드" 버튼 + 렌즈 요일 홈 티저 (기능을 입구에 내세우지 않음)
+
+## 고교 지도 · 학과 지도 · 실기 가이드 (2026-07-27 신설)
+
+- **고교 지도**(`#hischool`): 학교 유형 9종(영재학교·과학고·마이스터고·특성화고·예술고체육고·일반고·외고국제고·자사고·대안/방송통신/학교밖)을 별도/전기/후기/기타 모집군으로 정리 — 유형별 한 줄 소개·'이런 결이면'(적성 신호)·들어가는 문(전형 방식)·준비 체크·공식 링크(고입정보포털·하이파이브·학교알리미). 상단에 중3 기준 연간 일정(5~6월 영재학교 → 12월 후기 동시) — **날짜는 통상 시즌으로만, "정확한 일정은 교육청 공고" 병기 강제(테스트)**. 하단에 자격증 안내(기능사 학력 제한 없음·큐넷 일정·검정고시 연 2회). 제도 사실은 2026-07 웹 조사로 검증(고입정보포털·시도교육청 공고·큐넷)
+- **학과 지도**(`#majors`): 역방향 지도와 동일한 계열 7종별 대표 학과(각 3개↑)·적성 신호·자격 안내 + 대학·학과 리서치 4단계(커리어넷→어디가→대학알리미→모집요강 원문) + 대학 지원 자격 기초(수시·정시 공통 자격, 특성화고·재직자 등 자격 전형). 진입: 역방향 결과 하단, 고1 5분 몫, E3 가이드
+- **실기·포트폴리오 가이드**(`#artprep`): 예고·체고 입시(중) / 대입 실기·비실기(고) / 포트폴리오 만드는 순서 5단계(많이 말고 연결되게·과정 기록·날짜·출처·핵심 3개) / 학원 없이 시작하기. 학원 추천·합격 보장 표현 금지(테스트 강제). 진입: 고교 지도 예술고 카드, 학과 지도 예체능 계열
+- 통계성 수치는 전부 미탑재(테스트로 금지) — 수치가 필요한 자리는 공식 창구 링크로 대체 (정직 원칙)
 
 ## 조건 대시보드 · 체험 지도 · 퀘스트 · 강점 저널 (구현 완료)
 

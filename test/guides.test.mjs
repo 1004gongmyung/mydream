@@ -15,7 +15,7 @@ const appSrc = readFileSync(join(here, "..", "js", "app.js"), "utf8");
 const STATIC_ROUTES = new Set([
   "home", "onboarding", "browse", "compass", "reverse", "search", "care-now", "help",
   "lens", "jobs", "explore", "quests", "journal", "signal", "shield", "portfolio",
-  "parents", "jobdex", "paths",
+  "parents", "jobdex", "paths", "hischool", "majors", "artprep",
 ]);
 const validRoute = (r) =>
   STATIC_ROUTES.has(r) ||

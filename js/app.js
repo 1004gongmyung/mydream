@@ -14,6 +14,9 @@
   const JOBDEX = window.MAPSI_JOBDEX_DATA;
   const PATHS = window.MAPSI_PATHS_DATA;
   const GUIDES = window.MAPSI_GUIDES_DATA;
+  const HISCHOOL = window.MAPSI_HISCHOOL_DATA;
+  const MAJORS = window.MAPSI_MAJORS_DATA;
+  const ARTPREP = window.MAPSI_ARTPREP_DATA;
   const Compass = window.MapsiCompass;
   const Reverse = window.MapsiReverse;
   const Care = window.MapsiCare;
@@ -88,7 +91,7 @@
     "포트폴리오": "portfolio",
     "대화 카드": "parents", "다국어 카드": "parents",
     // 경로 지도와 인접 목적지 연결
-    "경로 지도": "paths", "전환기 지도": "paths", "학교 지도": "paths",
+    "경로 지도": "paths", "전환기 지도": "paths", "학교 지도": "hischool",
     "산업 지도": "jobs", "비용표": "jobs", "후보 카드": "jobs",
     "AI 시작 지도": "explore", "조합 지도": "explore", "실험 가이드": "explore",
     // 과목 지도 = 역방향 지도(과목 취향 → 계열)가 그 기능
@@ -202,6 +205,7 @@
             ${it.relatedQ ? `<button class="inline-link job-inline" data-q-link="${it.relatedQ}">관련 답변 보기 →</button>` : ""}
             ${it.route ? `<button class="inline-link job-inline" data-route="${it.route}">${esc(it.routeLabel || "열기")} →</button>` : ""}
           </div>`).join("")}`).join("")}
+      <button class="ghost-btn" data-route="hischool">고교 유형·진학 방법 자세히 → 고교 지도</button>
       <div class="open-question">'포기냐 아니냐'가 아니라 '어느 문이냐'의 문제예요. 지금은 끌리는 문 하나만 기억해 둬요.</div>`;
     $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
     $screen.querySelectorAll("[data-q-link]").forEach((b) => b.addEventListener("click", () => go("q/" + b.dataset.qLink)));
@@ -448,6 +452,111 @@
     window.scrollTo(0, 0);
   }
 
+  // ---- 고교 지도 (학교 유형·진학 방법·연간 일정·자격증) ----
+  function typeLinksHtml(links) {
+    return (links || []).map((l) => l.url
+      ? `<a class="guide-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} →</a>`
+      : `<button class="ghost-btn" data-route="${l.route}">${esc(l.label)} →</button>`).join("");
+  }
+
+  function renderHischool() {
+    const groups = ["별도 모집", "전기 모집", "후기 모집", "학교 밖·기타"];
+    $screen.innerHTML = `
+      <button class="answer-back" data-nav="back">← 뒤로</button>
+      <div class="tool-kicker">고교 지도</div>
+      <h1 class="result-title">고등학교, 유형부터 보면 길이 보여요</h1>
+      <p class="result-sub">${esc(HISCHOOL.intro)}</p>
+      <div class="section-label">1년의 리듬 — 중3 기준</div>
+      <div class="cluster-card">
+        ${HISCHOOL.timeline.map((t) => `<div class="job-path">· <strong>${esc(t.when)}</strong> ${esc(t.what)}</div>`).join("")}
+        <div class="cluster-why">${esc(HISCHOOL.timelineNote)}</div>
+        ${chipsHtml([HISCHOOL.timelineChip])}
+      </div>
+      ${groups.map((g) => `
+        <div class="section-label">${esc(g)}</div>
+        ${HISCHOOL.types.filter((t) => t.group === g).map((t) => `
+          <div class="cluster-card">
+            <div class="cluster-head"><span class="cluster-name">${esc(t.name)}</span></div>
+            <div class="cluster-day">${esc(t.one)}</div>
+            <div class="cluster-why">이런 결이면 — ${esc(t.fit)}</div>
+            <div class="job-alt-label">들어가는 문</div>
+            ${t.how.map((h) => `<div class="job-path">· ${esc(h)}</div>`).join("")}
+            <div class="job-alt-label">준비 체크</div>
+            ${t.check.map((c) => `<div class="job-path soft">· ${esc(c)}</div>`).join("")}
+            ${t.relatedQ ? `<button class="inline-link job-inline" data-q-link="${t.relatedQ}">관련 답변 보기 →</button>` : ""}
+            ${typeLinksHtml(t.links)}
+          </div>`).join("")}`).join("")}
+      <div class="section-label">${esc(HISCHOOL.cert.title)}</div>
+      <div class="cluster-card">
+        ${HISCHOOL.cert.lines.map((l) => `<div class="job-path">· ${esc(l)}</div>`).join("")}
+        ${chipsHtml([HISCHOOL.cert.chip])}
+        ${typeLinksHtml(HISCHOOL.cert.links)}
+      </div>
+      <div class="open-question">전부 볼 필요 없어요. '이런 결이면'이 나랑 겹치는 카드 두 개만 고르고, 그 학교 요강을 열어보는 것까지가 오늘의 몫이에요.</div>
+      <button class="ghost-btn" data-route="majors">학과 지도 — 적성 신호로 학과 찾기 →</button>`;
+    $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
+    $screen.querySelectorAll("[data-q-link]").forEach((b) => b.addEventListener("click", () => go("q/" + b.dataset.qLink)));
+    $screen.querySelectorAll("[data-route]").forEach((b) => b.addEventListener("click", () => go(b.dataset.route)));
+    window.scrollTo(0, 0);
+  }
+
+  // ---- 학과 지도 (적성 신호 → 계열 → 학과 + 대학 리서치·지원 자격) ----
+  function renderMajors() {
+    const trackName = (id) => { const t = MD.tracks.find((x) => x.id === id); return t ? t.name : id; };
+    $screen.innerHTML = `
+      <button class="answer-back" data-nav="back">← 뒤로</button>
+      <div class="tool-kicker">학과 지도</div>
+      <h1 class="result-title">적성 신호로 학과를 좁혀가요</h1>
+      <p class="result-sub">${esc(MAJORS.intro)}</p>
+      <button class="ghost-btn" data-route="reverse">아직 계열 감이 없으면 — 역방향 지도 2분 먼저 →</button>
+      ${MAJORS.tracks.map((tr) => `
+        <div class="section-label">${esc(trackName(tr.trackId))} 계열</div>
+        <div class="cluster-card">
+          <div class="cluster-why">이런 신호면 — ${esc(tr.signals)}</div>
+          ${tr.majors.map((m) => `<div class="job-path">· <strong>${esc(m.name)}</strong> — ${esc(m.one)}</div>`).join("")}
+          ${tr.certNote ? `<div class="stem-note">${esc(tr.certNote)}</div>` : ""}
+          ${tr.stem ? `<div class="job-path soft">이공계 일부 학과는 핵심과목 이수를 봐요 — 권장과목은 역방향 지도에서 확인해요.</div>` : ""}
+          ${tr.artprep ? `<button class="ghost-btn" data-route="artprep">실기·포트폴리오 준비 가이드 →</button>` : ""}
+        </div>`).join("")}
+      <div class="section-label">대학·학과 리서치 4단계</div>
+      ${MAJORS.researchSteps.map((s) => `
+        <div class="cluster-card">
+          <div class="cluster-name">${esc(s.head)}</div>
+          <div class="job-path">${esc(s.body)}</div>
+        </div>`).join("")}
+      <div class="section-label">${esc(MAJORS.eligibility.title)}</div>
+      <div class="cluster-card">
+        ${MAJORS.eligibility.lines.map((l) => `<div class="job-path">· ${esc(l)}</div>`).join("")}
+        ${chipsHtml([MAJORS.eligibility.chip])}
+      </div>
+      ${typeLinksHtml(MAJORS.links)}
+      <div class="open-question">계열 하나, 학과 둘까지만 좁혀도 큰 진전이에요. 오늘은 커리어넷에서 그 학과 하나만 검색해봐요.</div>`;
+    $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
+    $screen.querySelectorAll("[data-route]").forEach((b) => b.addEventListener("click", () => go(b.dataset.route)));
+    window.scrollTo(0, 0);
+  }
+
+  // ---- 실기·포트폴리오 준비 가이드 ----
+  function renderArtprep() {
+    $screen.innerHTML = `
+      <button class="answer-back" data-nav="back">← 뒤로</button>
+      <div class="tool-kicker">실기·포트폴리오 가이드</div>
+      <h1 class="result-title">실기는 재능보다 순서 설계예요</h1>
+      <p class="result-sub">${esc(ARTPREP.intro)}</p>
+      ${ARTPREP.sections.map((s) => `
+        <div class="section-label">${esc(s.title)}</div>
+        ${s.items.map((it) => `
+          <div class="cluster-card">
+            <div class="cluster-name">${esc(it.head)}</div>
+            <div class="job-path">${esc(it.body)}</div>
+          </div>`).join("")}`).join("")}
+      <div class="open-question">${esc(ARTPREP.note)}</div>
+      ${typeLinksHtml(ARTPREP.links)}`;
+    $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
+    $screen.querySelectorAll("[data-route]").forEach((b) => b.addEventListener("click", () => go(b.dataset.route)));
+    window.scrollTo(0, 0);
+  }
+
   // ---- 가이드 카드 (L3 버튼이 약속한 미니 도구·절차·기준표) ----
   function renderGuide(id) {
     const g = GUIDES.byQuestion[id];
@@ -596,10 +705,12 @@
             <div class="cluster-jobs">${r.track.majors.map((m) => `<span class="job-tag">${esc(m)}</span>`).join("")}</div>
             ${r.track.stem ? `<div class="stem-note">이공계 일부 학과는 핵심과목 이수를 봐요 — '2028학년도 권장과목 안내'에서 확인해요. <button class="inline-link" data-q-link="D2">관련 답변 보기</button></div>` : ""}
           </div>`).join("")}
+        <button class="ghost-btn" data-majors>이 계열의 학과·자격증 자세히 → 학과 지도</button>
         <div class="open-question">과목 선택엔 2~3학년에 조정 지점이 있어요. 지금은 이 가설을 후보로 적어두는 것까지면 충분해요.</div>`;
       $out.querySelectorAll("[data-q-link]").forEach((b) =>
         b.addEventListener("click", () => go("q/" + b.dataset.qLink))
       );
+      $out.querySelector("[data-majors]").addEventListener("click", () => go("majors"));
       $out.scrollIntoView({ behavior: "smooth", block: "start" });
     });
     window.scrollTo(0, 0);
@@ -1087,6 +1198,9 @@
     if (hash === "parents") return renderParents();
     if (hash === "jobdex") return renderJobdex();
     if (hash === "paths") return renderPaths();
+    if (hash === "hischool") return renderHischool();
+    if (hash === "majors") return renderMajors();
+    if (hash === "artprep") return renderArtprep();
     if (hash.startsWith("guide/")) return renderGuide(hash.slice(6));
     if (hash.startsWith("q/")) return renderAnswer(hash.slice(2));
     return renderHome();

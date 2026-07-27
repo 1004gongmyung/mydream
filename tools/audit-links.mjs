@@ -31,6 +31,9 @@ const CARE = d("care.data.js");
 const PARENTS = d("parents.data.js");
 const MD = d("modules.data.js");
 const GUIDES = d("guides.data.js");
+const HISCHOOL = d("hischool.data.js");
+const MAJORS = d("majors.data.js");
+const ARTPREP = d("artprep.data.js");
 
 const appSrc = readFileSync(path.join(root, "js", "app.js"), "utf8");
 
@@ -49,7 +52,7 @@ const TARGET_LINKS = extractObject("TARGET_LINKS");
 const STATIC_ROUTES = new Set([
   "home", "onboarding", "browse", "compass", "reverse", "search", "care-now", "help",
   "lens", "jobs", "explore", "quests", "journal", "signal", "shield", "portfolio",
-  "parents", "jobdex", "paths",
+  "parents", "jobdex", "paths", "hischool", "majors", "artprep",
 ]);
 const qids = new Set(content.questions.map((q) => q.id));
 const jobIds = new Set(JOBS.jobs.map((j) => j.id));
@@ -135,6 +138,24 @@ for (const e of EXPLORE.entries) if (!e.url || !/^https?:/.test(e.url)) p("체�
 for (const s of CARE.situations)
   for (const l of s.lines)
     if (!l.contact && !l.url) p("안심 DB", `"${s.title}" › "${l.name}" 연락처·링크 둘 다 없음`);
+
+// 8b. 고교 지도·학과 지도·실기 가이드 — relatedQ·링크 목적지 정합
+const checkLinks = (where, links) => {
+  for (const l of links || []) {
+    if (l.route && !validRoute(l.route)) p(where, `링크 라우트 "${l.route}" 없음`);
+    if (l.url && !/^https:\/\//.test(l.url)) p(where, `외부 링크가 https 아님: ${l.url}`);
+    if (!l.route && !l.url) p(where, `링크에 route/url 둘 다 없음`);
+  }
+};
+for (const t of HISCHOOL.types) {
+  if (t.relatedQ && !qids.has(t.relatedQ)) p("고교 지도", `${t.name} relatedQ ${t.relatedQ} 없음`);
+  checkLinks(`고교 지도/${t.name}`, t.links);
+}
+checkLinks("고교 지도/자격증", HISCHOOL.cert.links);
+const trackIds = new Set(MD.tracks.map((t) => t.id));
+for (const tr of MAJORS.tracks) if (!trackIds.has(tr.trackId)) p("학과 지도", `계열 ${tr.trackId} — 역방향 지도에 없음`);
+checkLinks("학과 지도", MAJORS.links);
+checkLinks("실기 가이드", ARTPREP.links);
 
 // 9. 부모 카드 언어 키
 for (const l of PARENTS.shareCard.langs)
