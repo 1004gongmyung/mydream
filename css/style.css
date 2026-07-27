@@ -287,6 +287,8 @@ body {
   display: block; text-align: center; margin-top: 10px; padding: 13px; border-radius: var(--radius);
   background: var(--brand-soft); color: var(--brand); font-size: 14px; font-weight: 700; text-decoration: none;
 }
+/* 외부 포털 링크의 '수시 업데이트' 표시 — 앱 정보 기준일과 대비되는 최신성 안내 */
+.fresh-tag { font-size: 10.5px; font-weight: 700; opacity: 0.65; vertical-align: 1px; white-space: nowrap; }
 
 /* 첫 일자리 방패 */
 .calc-row { display: flex; gap: 10px; margin-top: 12px; }

@@ -36,6 +36,21 @@ test("고교 지도: 연간 일정에 확인 안내·출처 칩 병기, 자격�
   assert.ok(HISCHOOL.cert.links.some((l) => l.url && l.url.includes("q-net")), "큐넷 링크 필요");
 });
 
+test("고교 지도: 검증된 학교 명단 — 영재 8·과학고 20·국제고 8·전국자사고 10, 기준일·출처 칩 필수", () => {
+  const byId = Object.fromEntries(HISCHOOL.types.map((t) => [t.id, t]));
+  assert.equal(byId.gifted.schools.items.length, 8, "영재학교 8개교");
+  assert.equal(byId.science.schools.items.length, 20, "과학고 20개교");
+  assert.equal(byId.foreign.schools.items.length, 8, "국제고 8개교");
+  assert.equal(byId.autonomous.schools.items.length, 10, "전국단위 자사고 10개교");
+  for (const t of HISCHOOL.types) {
+    assert.ok(t.schools && t.schools.checkedAt && t.schools.chip, `${t.id}: 명단 기준일·출처 칩 누락`);
+    assert.ok(t.schools.items || t.schools.note, `${t.id}: 명단도 검색 안내도 없음`);
+    for (const n of t.schools.items || []) assert.ok(n.includes("("), `${t.id}: 지역 표기 누락 — ${n}`);
+  }
+  assert.ok(HISCHOOL.checkedAt, "정보 기준일 필요");
+  assert.ok(HISCHOOL.updateNote.includes("수시 업데이트"), "포털 업데이트 안내 문구 필요");
+});
+
 test("고교 지도: 서열화·미화·훈계 표현 금지 ('좋은 학교' 프레임 금지)", () => {
   const text = JSON.stringify(HISCHOOL);
   for (const b of ["명문", "좋은 학교", "인생 망", "해야 해요", "추천해요", "무조건", "상위권 학교"]) {

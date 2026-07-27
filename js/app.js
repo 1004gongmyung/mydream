@@ -453,9 +453,10 @@
   }
 
   // ---- 고교 지도 (학교 유형·진학 방법·연간 일정·자격증) ----
+  // 외부 포털 링크에는 '수시 업데이트' 표시 — 앱 데이터(기준일 고정)와 달리 항상 최신임을 알린다
   function typeLinksHtml(links) {
     return (links || []).map((l) => l.url
-      ? `<a class="guide-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} →</a>`
+      ? `<a class="guide-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} → <span class="fresh-tag">수시 업데이트</span></a>`
       : `<button class="ghost-btn" data-route="${l.route}">${esc(l.label)} →</button>`).join("");
   }
 
@@ -463,9 +464,10 @@
     const groups = ["별도 모집", "전기 모집", "후기 모집", "학교 밖·기타"];
     $screen.innerHTML = `
       <button class="answer-back" data-nav="back">← 뒤로</button>
-      <div class="tool-kicker">고교 지도</div>
+      <div class="tool-kicker">고교 지도 · 정보 기준일 ${esc(HISCHOOL.checkedAt)}</div>
       <h1 class="result-title">고등학교, 유형부터 보면 길이 보여요</h1>
       <p class="result-sub">${esc(HISCHOOL.intro)}</p>
+      <div class="dday-note">${esc(HISCHOOL.updateNote)}</div>
       <div class="section-label">1년의 리듬 — 중3 기준</div>
       <div class="cluster-card">
         ${HISCHOOL.timeline.map((t) => `<div class="job-path">· <strong>${esc(t.when)}</strong> ${esc(t.what)}</div>`).join("")}
@@ -483,6 +485,11 @@
             ${t.how.map((h) => `<div class="job-path">· ${esc(h)}</div>`).join("")}
             <div class="job-alt-label">준비 체크</div>
             ${t.check.map((c) => `<div class="job-path soft">· ${esc(c)}</div>`).join("")}
+            ${t.schools ? `
+              <div class="job-alt-label">학교 명단 · ${esc(t.schools.checkedAt)} 조사 기준</div>
+              ${t.schools.items ? `<div class="subject-grid">${t.schools.items.map((n) => `<span class="subject-chip">${esc(n)}</span>`).join("")}</div>` : ""}
+              ${t.schools.note ? `<div class="job-path soft">${esc(t.schools.note)}</div>` : ""}
+              ${t.schools.chip ? chipsHtml([t.schools.chip]) : ""}` : ""}
             ${t.relatedQ ? `<button class="inline-link job-inline" data-q-link="${t.relatedQ}">관련 답변 보기 →</button>` : ""}
             ${typeLinksHtml(t.links)}
           </div>`).join("")}`).join("")}

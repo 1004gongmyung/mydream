@@ -36,6 +36,8 @@ const checks = [
   ["paths", P("고2", "paths"), "여러 개의 문"],
   ["answer-I2", P("중2", "q/I2"), "4개 언어 요약 카드"],
   ["hischool", P("중3", "hischool"), "유형부터 보면 길이 보여요"],
+  ["hischool-list", P("중3", "hischool"), "한국과학영재학교"],
+  ["hischool-fresh", P("중3", "hischool"), "수시 업데이트"],
   ["majors", P("고1", "majors"), "적성 신호로 학과를"],
   ["artprep", P("중3", "artprep"), "순서 설계예요"],
   ["guide-E7", P("고3", "guide/E7"), "감정 말고 조건으로"],
