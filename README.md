@@ -1,4 +1,4 @@
-# 마이드림 — 청소년 진로탐색 웹앱
+﻿# 마이드림 — 청소년 진로탐색 웹앱
 
 > 브랜드 (2026-07-27): **마이드림**으로 변경 (이력: 맵시 → 진로코칭 → 마이진로 → 드림웨이 검토 → 마이진로 → 마이드림). 사용자 노출 문자열은 전부 변경.
 > 코드 내부 식별자(`MAPSI_*` 전역, `mapsi.*` localStorage 키, 폴더명 `mapsi-app`)와 저장소·배포 URL(`myjinro`)은 기존 사용자 저장 데이터·링크 호환을 위해 유지한다. KIPRIS 상표 확인은 남은 과제.
@@ -8,8 +8,8 @@
 
 ## 배포 (2026-07-25)
 
-- **서비스 URL**: https://1004gongmyung.github.io/myjinro/
-- 저장소: https://github.com/1004gongmyung/myjinro (공개, GitHub Pages — main 브랜치 루트)
+- **서비스 URL**: https://1004gongmyung.github.io/mydream/
+- 저장소: https://github.com/1004gongmyung/mydream (공개, GitHub Pages — main 브랜치 루트)
 - **업데이트 배포 방법**: 이 폴더에서 수정 → 테스트 → `git add -A; git commit -m "메시지"; git push` — 푸시하면 1~2분 내 자동 반영
 
 ## 실행하는 법 (셋 중 아무거나)
