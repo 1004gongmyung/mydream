@@ -114,10 +114,10 @@
   function matchesName(name, nq) {
     return nameAliases(name).some((a) => a.includes(nq) || nq.includes(a));
   }
-  function findJobsByQuery(jobs, query) {
-    const nq = normText(query);
-    if (nq.length < 2) return [];
-    return jobs.filter((j) => matchesName(j.name, nq)).slice(0, 3);
+  // aliasMap: {jobId: [별칭...]} — 스튜어디스→승무원처럼 흔한 다른 이름도 인식
+  function findJobsByQuery(jobs, query, aliasMap) {
+    const map = aliasMap || {};
+    return findByNames(jobs.map((j) => ({ ...j, aliases: map[j.id] || [] })), query);
   }
 
   // 이름+별칭 목록 검색 — 직업 사전·도감처럼 {name, aliases?} 형태의 목록에서 인식

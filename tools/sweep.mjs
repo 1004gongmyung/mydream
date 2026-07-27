@@ -62,6 +62,7 @@ const checks = [
   ["flow-jobsearch-card", E("jobsearch"), "조건 카드 —"],
   ["search-clergy", P("중3", "search/수녀"), "성직 경로 —"],
   ["search-dict", P("중3", "search/간호조무사"), "비슷한 결의 조건 카드"],
+  ["search-alias", P("고2", "search/스튜어디스"), "승무원"],
   ["search-dict-cook", P("고1", "search/요리사"), "커리어넷"],
   ["search-missionary", P("중2", "search/선교사"), "성직 경로 안내 보기"],
   ["flow-compass", E("compass"), "이런 하루를 사는 사람이 많은 직업군"],

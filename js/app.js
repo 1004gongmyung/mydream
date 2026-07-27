@@ -334,7 +334,7 @@
   // ---- 검색 결과 (2층: 주결과=직업 카드 / 부결과=태그 매칭 질문, 학년 조건 적용) ----
   function renderSearch(query) {
     const grade = getGrade();
-    const matchedJobs = query ? M.findJobsByQuery(JOBS.jobs, query) : [];
+    const matchedJobs = query ? M.findJobsByQuery(JOBS.jobs, query, JOBS.jobAliases) : [];
     // 성직 경로도 직업 검색에서 인식 (빌드 가드 통과 시에만)
     const matchedClergy = (query && CLERGY.guard.visible) ? Clergy.findPathsByQuery(CLERGY.paths, query) : [];
     // 직업 사전(세부 직업 90여 종) + 도감 37종에서도 인식 — 조건 카드가 이미 잡혔으면 같은 이름 중복 제외

@@ -135,3 +135,16 @@ test("직업 인식 별칭: 병기형 이름('유튜버·크리에이터')의 �
   assert.ok(Mapsi.findJobsByQuery(JOBS.jobs, "웹툰 작가는 어때").some((j) => j.id === "webtoon"));
   assert.ok(Mapsi.findJobsByQuery(JOBS.jobs, "창업가").some((j) => j.id === "seller"));
 });
+
+test("조건 카드 별칭: 스튜어디스→승무원, 선생님→교사, 과학자→연구원, 축구선수→운동선수, 프로그래머→개발자", () => {
+  const find = (q) => Mapsi.findJobsByQuery(JOBS.jobs, q, JOBS.jobAliases);
+  assert.ok(find("스튜어디스").some((j) => j.id === "crew"));
+  assert.ok(find("스튜어디스가 되고 싶어요").some((j) => j.id === "crew"));
+  assert.ok(find("선생님").some((j) => j.id === "teacher"));
+  assert.ok(find("과학자").some((j) => j.id === "researcher"));
+  assert.ok(find("축구선수").some((j) => j.id === "athlete"));
+  assert.ok(find("프로그래머").some((j) => j.id === "developer"));
+  // 별칭은 실제 카드 id에만 걸려 있어야 한다
+  const jobIds = new Set(JOBS.jobs.map((j) => j.id));
+  for (const id of Object.keys(JOBS.jobAliases)) assert.ok(jobIds.has(id), `별칭 맵의 없는 직업 id: ${id}`);
+});

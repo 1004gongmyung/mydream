@@ -1,4 +1,4 @@
-// 직업 사전 테스트 — 세부 직업 인식이 직업군·질문·공식 창구로 바르게 이어지는지
+﻿// 직업 사전 테스트 — 세부 직업 인식이 직업군·질문·공식 창구로 바르게 이어지는지
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
@@ -25,12 +25,12 @@ test("사전 정합: 직업군 id 유효(또는 route), 이름 중복 없음(조
     seen.add(e.name);
     assert.ok(e.line && e.line.endsWith("요."), `${e.name}: 한 줄 설명 형식`);
   }
-  assert.ok(DICT.entries.length >= 80, `사전 규모 ${DICT.entries.length} — 80종 이상 유지`);
+  assert.ok(DICT.entries.length >= 110, `사전 규모 ${DICT.entries.length} — 110종 이상 유지`);
 });
 
 test("검색 인식: 요청된 세부 직업들이 전부 잡힌다 (별칭·문장 포함)", () => {
   const pool = DICT.entries;
-  for (const q of ["간호조무사", "직업군인", "직업경찰", "환경미화원", "요리사", "선교사", "군인이 되고 싶어요", "셰프", "파일럿", "변호사"]) {
+  for (const q of ["간호조무사", "직업군인", "직업경찰", "환경미화원", "요리사", "선교사", "군인이 되고 싶어요", "셰프", "파일럿", "변호사", "외교관", "큐레이터", "작곡가", "굴착기기사", "공인중개사", "택배기사"]) {
     assert.ok(Mapsi.findByNames(pool, q).length >= 1, `미인식: ${q}`);
   }
   assert.deepEqual(Mapsi.findByNames(pool, "오늘 뭐하지"), [], "무관 문장은 미인식");
