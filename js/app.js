@@ -453,6 +453,16 @@
   }
 
   // ---- 고교 지도 (학교 유형·진학 방법·연간 일정·자격증) ----
+  // 기준일("YYYY-MM")에서 12개월 이상 지나면 자동으로 낡음 경고를 만든다 — 갱신을 잊어도 앱이 스스로 알린다 (정직 원칙)
+  function staleWarningHtml(ym) {
+    const m = /^(\d{4})-(\d{2})$/.exec(ym || "");
+    if (!m) return "";
+    const now = new Date();
+    const months = (now.getFullYear() - Number(m[1])) * 12 + (now.getMonth() + 1 - Number(m[2]));
+    if (months < 12) return "";
+    return `<div class="lens-counter"><strong>이 명단은 기준일(${esc(ym)})에서 1년이 지났어요.</strong> 그 사이 학교 지정·전환이 있었을 수 있어요 — '수시 업데이트' 표시가 붙은 공식 포털 쪽이 정확해요.</div>`;
+  }
+
   // 외부 포털 링크에는 '수시 업데이트' 표시 — 앱 데이터(기준일 고정)와 달리 항상 최신임을 알린다
   function typeLinksHtml(links) {
     return (links || []).map((l) => l.url
@@ -468,6 +478,7 @@
       <h1 class="result-title">고등학교, 유형부터 보면 길이 보여요</h1>
       <p class="result-sub">${esc(HISCHOOL.intro)}</p>
       <div class="dday-note">${esc(HISCHOOL.updateNote)}</div>
+      ${staleWarningHtml(HISCHOOL.checkedAt)}
       <div class="section-label">1년의 리듬 — 중3 기준</div>
       <div class="cluster-card">
         ${HISCHOOL.timeline.map((t) => `<div class="job-path">· <strong>${esc(t.when)}</strong> ${esc(t.what)}</div>`).join("")}

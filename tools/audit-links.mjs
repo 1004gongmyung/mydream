@@ -157,6 +157,15 @@ for (const tr of MAJORS.tracks) if (!trackIds.has(tr.trackId)) p("학과 지도"
 checkLinks("학과 지도", MAJORS.links);
 checkLinks("실기 가이드", ARTPREP.links);
 
+// 8c. 학교 명단 기준일 경과 검사 — 11개월부터 재검증 필요 알림
+const fm = /^(\d{4})-(\d{2})$/.exec(HISCHOOL.checkedAt || "");
+if (!fm) p("고교 지도", `정보 기준일(checkedAt) 형식 이상: ${HISCHOOL.checkedAt}`);
+else {
+  const now = new Date();
+  const months = (now.getFullYear() - Number(fm[1])) * 12 + (now.getMonth() + 1 - Number(fm[2]));
+  if (months >= 11) n("고교 지도", `학교 명단 기준일 ${HISCHOOL.checkedAt} — ${months}개월 경과, 웹 재검증 조사 필요 (types[].schools + checkedAt 갱신)`);
+}
+
 // 9. 부모 카드 언어 키
 for (const l of PARENTS.shareCard.langs)
   if (!PARENTS.shareCard.texts[l.id]) p("부모 카드", `언어 "${l.id}" 본문 없음 (클릭 시 화면 깨짐)`);
