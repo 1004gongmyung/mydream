@@ -117,3 +117,21 @@ test("직업 관련 질문: 태그+학년 매칭만 노출, 0건이면 빈 배�
   assert.ok(!Mapsi.questionsForJob(content, nurse, "중1").some((q) => q.id === "E5"), "중1엔 E5(고2·3 전용) 제외");
   assert.deepEqual(Mapsi.questionsForJob(content, { clusterId: "없는군" }, "중1"), [], "매칭 0건은 빈 배열");
 });
+
+test("커버리지: 17개 직업 × 7개 학년 전 조합에서 관련 질문 2건 이상, 첫 결과는 특화 질문", () => {
+  const total = MODULES.clusters.length;
+  for (const j of JOBS.jobs) {
+    for (const g of Mapsi.GRADES) {
+      const qs = Mapsi.questionsForJob(content, j, g);
+      assert.ok(qs.length >= 2, `${j.id}×${g}: ${qs.length}건 — 최소 2건 보장 실패`);
+      assert.ok(qs[0].jobTags.length < total, `${j.id}×${g}: 첫 결과가 보편 질문 — 특화 질문이 먼저여야 함`);
+    }
+  }
+});
+
+test("직업 인식 별칭: 병기형 이름('유튜버·크리에이터')의 문장 속 언급도 매칭", () => {
+  assert.ok(Mapsi.findJobsByQuery(JOBS.jobs, "유튜버 되고 싶어요").some((j) => j.id === "creator"));
+  assert.ok(Mapsi.findJobsByQuery(JOBS.jobs, "크리에이터").some((j) => j.id === "creator"));
+  assert.ok(Mapsi.findJobsByQuery(JOBS.jobs, "웹툰 작가는 어때").some((j) => j.id === "webtoon"));
+  assert.ok(Mapsi.findJobsByQuery(JOBS.jobs, "창업가").some((j) => j.id === "seller"));
+});

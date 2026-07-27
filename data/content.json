@@ -50,7 +50,17 @@
         "content",
         "build",
         "design",
-        "service"
+        "service",
+        "dev",
+        "research",
+        "care",
+        "edu",
+        "plan",
+        "tech",
+        "public",
+        "founder",
+        "sports",
+        "finance"
       ]
     },
     {
@@ -131,7 +141,11 @@
       ],
       "rotation": true,
       "note": "냉소로 안 받기. \"공부\"의 범위 해체(학과 공부≠모든 배움) + 비교과 경로",
-      "jobTags": []
+      "jobTags": [
+        "tech",
+        "service",
+        "founder"
+      ]
     },
     {
       "id": "A7",
@@ -152,7 +166,20 @@
       "rotation": true,
       "note": "자동화 위험 데이터 + 불확실성 명시 + 인간 고유 역량",
       "jobTags": [
-        "design"
+        "design",
+        "content",
+        "dev",
+        "research",
+        "care",
+        "edu",
+        "plan",
+        "service",
+        "tech",
+        "build",
+        "public",
+        "founder",
+        "sports",
+        "finance"
       ]
     },
     {
@@ -263,7 +290,11 @@
       "note": "등급 컷 제시 금지(서열화 금지 원칙). 같은 직업으로 가는 복수 경로 제시로 답함",
       "jobTags": [
         "edu",
-        "care"
+        "care",
+        "tech",
+        "public",
+        "finance",
+        "sports"
       ]
     },
     {
@@ -326,7 +357,9 @@
       "jobTags": [
         "tech",
         "build",
-        "service"
+        "service",
+        "sports",
+        "design"
       ]
     },
     {
@@ -370,7 +403,13 @@
       ],
       "rotation": true,
       "note": "전제 해체형. 취업·진학 실데이터로 답하되 미화 금지(격차 있으면 있다고)",
-      "jobTags": []
+      "jobTags": [
+        "tech",
+        "dev",
+        "design",
+        "service",
+        "build"
+      ]
     },
     {
       "id": "C3",
@@ -384,7 +423,13 @@
       ],
       "rotation": true,
       "note": "특성화고 출신 진학 경로(수시 특별전형·재직자전형 등) 데이터",
-      "jobTags": []
+      "jobTags": [
+        "tech",
+        "dev",
+        "design",
+        "service",
+        "build"
+      ]
     },
     {
       "id": "C4",
@@ -426,7 +471,10 @@
       ],
       "rotation": true,
       "note": "제도 비교 + 취업 조건 데이터",
-      "jobTags": []
+      "jobTags": [
+        "tech",
+        "dev"
+      ]
     },
     {
       "id": "D1",
@@ -455,7 +503,11 @@
       "rotation": true,
       "note": "전공별 권장과목 자료 기반 + '되돌릴 수 있는 지점' 명시로 불안 완화",
       "jobTags": [
-        "research"
+        "research",
+        "dev",
+        "care",
+        "tech",
+        "build"
       ]
     },
     {
@@ -559,7 +611,10 @@
       "rotation": true,
       "note": "진학률 하락(64.9%) 시대의 핵심 질문. 비진학 경로 5종을 조건까지 정직하게",
       "jobTags": [
-        "tech"
+        "tech",
+        "founder",
+        "service",
+        "sports"
       ]
     },
     {
@@ -576,7 +631,11 @@
       "rotation": true,
       "note": "전과·복수전공·전공무관 취업 비율 데이터로 '되돌림 가능성' 제시",
       "jobTags": [
-        "care"
+        "care",
+        "edu",
+        "research",
+        "build",
+        "design"
       ]
     },
     {
@@ -710,7 +769,19 @@
       "note": "모든 경로 카드의 표준 필드(교육비·기간·부대비용)와 연결",
       "jobTags": [
         "care",
-        "research"
+        "research",
+        "content",
+        "design",
+        "dev",
+        "edu",
+        "plan",
+        "service",
+        "tech",
+        "build",
+        "public",
+        "founder",
+        "sports",
+        "finance"
       ]
     },
     {
@@ -731,7 +802,10 @@
       ],
       "rotation": true,
       "note": "낙인 없는 표현 유지. 국가장학금·교육급여·무료 프로그램을 경로별로 매핑",
-      "jobTags": []
+      "jobTags": [
+        "care",
+        "research"
+      ]
     },
     {
       "id": "G3",
@@ -799,7 +873,12 @@
       ],
       "rotation": true,
       "note": "검정고시 출신 전형 경로 데이터. 편견 교정은 데이터로만",
-      "jobTags": []
+      "jobTags": [
+        "care",
+        "edu",
+        "research",
+        "dev"
+      ]
     },
     {
       "id": "H3",
@@ -827,7 +906,12 @@
       ],
       "rotation": true,
       "note": "대체 증명 수단(검정고시 성적·자격·포트폴리오·활동 기록) 지도",
-      "jobTags": []
+      "jobTags": [
+        "content",
+        "design",
+        "dev",
+        "build"
+      ]
     },
     {
       "id": "H5",
@@ -993,7 +1077,9 @@
       ],
       "rotation": true,
       "note": "미성년자 사업자등록 가능(법정대리인 동의) + 제한 사항 정직하게",
-      "jobTags": []
+      "jobTags": [
+        "founder"
+      ]
     },
     {
       "id": "K4",
@@ -1058,7 +1144,9 @@
       ],
       "rotation": true,
       "note": "과열 해체형: 도망이 아니라 조합 전략. [렌즈 ⑤]",
-      "jobTags": []
+      "jobTags": [
+        "dev"
+      ]
     },
     {
       "id": "K7",
@@ -1078,7 +1166,10 @@
       ],
       "rotation": true,
       "note": "무료 국가 프로그램 우선 순서. 체험 DB 무료 필터 연결",
-      "jobTags": []
+      "jobTags": [
+        "dev",
+        "founder"
+      ]
     },
     {
       "id": "K8",
@@ -1098,7 +1189,10 @@
       ],
       "rotation": true,
       "note": "⚠ 투기·산업 구분이 답의 핵심. 미성년자 거래 불가 명시, 투자 정보 배제. [렌즈 ④]",
-      "jobTags": []
+      "jobTags": [
+        "dev",
+        "finance"
+      ]
     },
     {
       "id": "K9",
@@ -1119,7 +1213,8 @@
       "rotation": true,
       "note": "'자동'의 과장 해체 + 수익 배분 구조 변화를 정직하게. 크리에이터 지망층 흡인력 높음. [렌즈 ①]",
       "jobTags": [
-        "content"
+        "content",
+        "design"
       ]
     }
   ],

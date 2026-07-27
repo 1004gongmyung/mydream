@@ -334,10 +334,12 @@
   function renderSearch(query) {
     const grade = getGrade();
     const matchedJobs = query ? M.findJobsByQuery(JOBS.jobs, query) : [];
+    // 성직 경로도 직업 검색에서 인식 (빌드 가드 통과 시에만)
+    const matchedClergy = (query && CLERGY.guard.visible) ? Clergy.findPathsByQuery(CLERGY.paths, query) : [];
     let body = "";
     if (!query) {
       body = `<div class="open-question">고민을 문장으로 써도 되고, 직업 이름(간호사, 개발자…)을 넣어도 돼요.</div>`;
-    } else if (matchedJobs.length) {
+    } else if (matchedJobs.length || matchedClergy.length) {
       // 주결과: 인식된 직업의 조건 카드
       const relQs = [];
       const seen = new Set();
@@ -350,10 +352,13 @@
         <div class="section-label">직업 정보 · "${esc(query)}"</div>
         ${matchedJobs.map((j) => `
           <button class="qcard" data-job="${j.id}">${esc(j.name)}<span class="qmeta">조건 카드 — ${esc(j.summary)}</span></button>`).join("")}
-        <div class="section-label">이 직업과 관련된 질문${grade ? ` · ${esc(grade)} 기준` : ""}</div>
-        ${relQs.length
-          ? relQs.slice(0, M.SEARCH_LIMIT).map(qcardHtml).join("")
-          : `<div class="open-question">지금 시기(${esc(grade || "전체")})에 해당하는 연결 질문이 아직 없어요. 위 조건 카드에서 경로·조건을 바로 볼 수 있어요.</div>`}`;
+        ${matchedClergy.map((p) => `
+          <button class="qcard" data-clergy-path="${p.id}">${esc(p.role_name)}<span class="qmeta">성직 경로 — ${esc(Clergy.RELIGION_LABELS[p.religion] || p.religion)} · ${esc(p.denomination)}</span></button>`).join("")}
+        ${matchedJobs.length ? `
+          <div class="section-label">이 직업과 관련된 질문${grade ? ` · ${esc(grade)} 기준` : ""}</div>
+          ${relQs.length
+            ? relQs.slice(0, M.SEARCH_LIMIT).map(qcardHtml).join("")
+            : `<div class="open-question">지금 시기(${esc(grade || "전체")})에 해당하는 연결 질문이 아직 없어요. 위 조건 카드에서 경로·조건을 바로 볼 수 있어요.</div>`}` : ""}`;
     } else {
       const results = M.searchQuestions(content, query, grade);
       body = results.length
@@ -368,6 +373,7 @@
     $screen.querySelector("[data-nav=home]").addEventListener("click", () => go("home"));
     const browseBtn = $screen.querySelector("[data-nav=browse]");
     if (browseBtn) browseBtn.addEventListener("click", () => go("browse"));
+    $screen.querySelectorAll("[data-clergy-path]").forEach((b) => b.addEventListener("click", () => go("clergy/" + b.dataset.clergyPath)));
     wireSearchForm();
     wireCards();
     wireJobLinks();

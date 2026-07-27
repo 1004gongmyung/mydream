@@ -105,23 +105,30 @@
   }
 
   // 직업명 인식 — 입력이 직업명을 담고 있으면 해당 조건 카드를 찾는다 (공백 무시, 양방향 포함)
+  // 병기형 이름("유튜버·크리에이터", "스님(비구·비구니)")은 별칭으로 분해해 문장 속 부분 언급도 잡는다.
   const normText = (t) => String(t || "").replace(/\s+/g, "").toLowerCase();
+  function nameAliases(name) {
+    const aliases = String(name || "").split(/[·()\/,]+/).map(normText).filter((a) => a.length >= 2);
+    return [normText(name), ...aliases];
+  }
+  function matchesName(name, nq) {
+    return nameAliases(name).some((a) => a.includes(nq) || nq.includes(a));
+  }
   function findJobsByQuery(jobs, query) {
     const nq = normText(query);
     if (nq.length < 2) return [];
-    return jobs.filter((j) => {
-      const nn = normText(j.name);
-      return nn.includes(nq) || nq.includes(nn);
-    }).slice(0, 3);
+    return jobs.filter((j) => matchesName(j.name, nq)).slice(0, 3);
   }
 
   // 직업 관련 질문 — jobTags가 그 직업의 직업군과 매칭되는 질문만, 학년 조건 적용 (0건이면 빈 배열 그대로)
+  // 정렬: 태그 수가 적은(=그 직업군에 특화된) 질문 먼저, 보편 질문(전 직업군 태그)은 뒤로
   function questionsForJob(content, job, grade) {
     return content.questions
       .filter((q) => (q.jobTags || []).includes(job.clusterId))
       .filter((q) => !grade || q.grades.includes(grade))
+      .sort((a, b) => a.jobTags.length - b.jobTags.length)
       .slice(0, SEARCH_LIMIT);
   }
 
-  return { GRADES, CARD_COUNT, SEARCH_LIMIT, periodNavFor, rotationFor, groupsFor, searchQuestions, findJobsByQuery, questionsForJob, _internal: { pick, dayIndex, eligible } };
+  return { GRADES, CARD_COUNT, SEARCH_LIMIT, periodNavFor, rotationFor, groupsFor, searchQuestions, findJobsByQuery, questionsForJob, matchesName, _internal: { pick, dayIndex, eligible } };
 });

@@ -52,5 +52,22 @@
     return list.filter((i) => norm(i.name).includes(q));
   }
 
-  return { RELIGION_LABELS, REQUIRED_RELIGIONS, isVisible, instBadges, minorsSafetyIssues, sortPaths, searchInstitutions };
+  // 검색창에서 성직 경로 인식 — 역할명·교단명 매칭 (샘플 제외). 홈 검색의 주결과에 쓰인다.
+  // 병기형 역할명("스님(비구·비구니)", "수녀·수사(수도자)")은 별칭으로 분해해 문장 속 언급도 잡는다.
+  function nameAliases(name) {
+    const aliases = String(name || "").split(/[·()\/,]+/).map(norm).filter((a) => a.length >= 2);
+    return [norm(name), ...aliases];
+  }
+  function findPathsByQuery(paths, query) {
+    const q = norm(query);
+    if (q.length < 2) return [];
+    return paths
+      .filter((p) => !String(p.id).startsWith("sample-"))
+      .filter((p) =>
+        nameAliases(p.role_name).some((a) => a.includes(q) || q.includes(a)) ||
+        norm(p.denomination).includes(q))
+      .slice(0, 3);
+  }
+
+  return { RELIGION_LABELS, REQUIRED_RELIGIONS, isVisible, instBadges, minorsSafetyIssues, sortPaths, searchInstitutions, findPathsByQuery };
 });

@@ -118,6 +118,35 @@ for (const job of JOBS.jobs) {
     tagMap.get(qid).add(job.clusterId);
   }
 }
+// 보완 태그(저작 큐레이션, 2026-07-27) — 역인덱스만으로는 학년×직업군 조합이 얇아서(0~1건 51개 조합),
+// 질문 내용과 직업군의 실제 관련성 기준으로 태그를 보강한다. "*"는 전 직업군 보편 질문
+// (모든 직업 검색에 들어맞는 질문: 좋아하는 걸로 먹고살기·AI 영향·비용). 새 콘텐츠 저작이 아니라 인덱싱이다.
+const MODULES = require(join(here, "..", "data", "modules.data.js"));
+const ALL_CLUSTERS = MODULES.clusters.map((c) => c.id);
+const EXTRA_JOB_TAGS = {
+  A2: "*", A7: "*", G1: "*",
+  A6: ["tech", "service", "founder"],            // 교과 성적 밖 경로(기술·자격·실무)
+  A12: ["tech", "public", "finance", "sports"],  // 복수 경로 — 시험·자격·실기 직업군
+  B4: ["sports", "design"],                      // 기능·예체능 특기 경로
+  C2: ["tech", "dev", "design", "service", "build"], // 특성화고 학과가 실제 있는 직업군
+  C3: ["tech", "dev", "design", "service", "build"],
+  C6: ["tech", "dev"],                           // 마이스터고 특화 분야
+  D2: ["dev", "care", "tech", "build"],          // 이공계 권장과목 직업군
+  E4: ["founder", "service", "sports"],          // 비진학 갈래(취업·창업·군특기)
+  E5: ["edu", "research", "build", "design"],    // 전공-직결 직업군(전과·편입 주제)
+  G2: ["care", "research"],                      // 비용이 큰 긴 학위 경로
+  H2: ["care", "edu", "research", "dev"],        // 검정고시→학위 필수 직업군
+  H4: ["content", "design", "dev", "build"],     // 생기부 대신 포트폴리오 직업군
+  K3: ["founder"], K6: ["dev"], K7: ["dev", "founder"], K8: ["dev", "finance"], K9: ["design"],
+};
+for (const [qid, tags] of Object.entries(EXTRA_JOB_TAGS)) {
+  if (!tagMap.has(qid)) tagMap.set(qid, new Set());
+  const list = tags === "*" ? ALL_CLUSTERS : tags;
+  for (const t of list) {
+    if (!ALL_CLUSTERS.includes(t)) throw new Error(`EXTRA_JOB_TAGS ${qid}: 없는 직업군 ${t}`);
+    tagMap.get(qid).add(t);
+  }
+}
 for (const q of questions) q.jobTags = [...(tagMap.get(q.id) || [])];
 
 // 정합성 검증: 질문·답변 1:1, [확인 후 기입] 잔존 금지(연동 마커 제외)

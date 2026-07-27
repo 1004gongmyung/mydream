@@ -90,3 +90,10 @@ test("데이터 절대 규칙: 경로·기관 전부 출처·기준일 보유, �
     assert.ok(i.source_name && i.source_url && i.verified_at, `${i.id}: 출처/기준일`);
   }
 });
+
+test("검색 인식: 역할 별칭·문장 매칭 — 수녀·스님·목사, 무관 입력은 빈 배열", () => {
+  assert.ok(Clergy.findPathsByQuery(DATA.paths, "수녀").some((p) => p.id === "cath-religious"));
+  assert.ok(Clergy.findPathsByQuery(DATA.paths, "스님이 되고 싶어요").some((p) => p.id === "budd-jogye"));
+  assert.equal(Clergy.findPathsByQuery(DATA.paths, "목사").length, 3, "목사 다교단 매칭(상한 3)");
+  assert.deepEqual(Clergy.findPathsByQuery(DATA.paths, "오늘 날씨"), []);
+});
