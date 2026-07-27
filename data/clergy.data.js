@@ -531,6 +531,228 @@
       ]
     },
     {
+      "id": "prot-kijang",
+      "religion": "PROTESTANT",
+      "denomination": "한국기독교장로회",
+      "role_name": "목사",
+      "summary": "교회 공동체의 예배를 인도하고 설교·상담·교육을 맡는 사람이에요. 교인들의 삶의 중요한 순간에 함께하고, 교회 행정과 운영도 실제 업무의 큰 부분이에요.",
+      "min_entry_age": null,
+      "is_open_to_minors": false,
+      "official_contact_name": "한국기독교장로회 총회",
+      "official_contact_phone": null,
+      "official_contact_url": "https://www.prok.org",
+      "reality_notes": "이 교단의 인준 신학교는 한신대학교예요. 학사 전공과 무관하게 신학대학원(M.Div.)을 마치고 교단 목사고시를 통과해야 안수로 이어져요. 교단마다 인준 신학교가 다르니 소속 교회의 교단 확인이 첫 순서예요.",
+      "source_name": "한국기독교장로회 총회 공식 안내(2026-07 확인)",
+      "source_url": "https://www.prok.org",
+      "verified_at": "2026-07-27",
+      "stages": [
+        {
+          "id": "kijang-s1",
+          "step_order": 1,
+          "name": "4년제 대학 졸업(전공 무관)",
+          "typical_duration": "4년",
+          "prerequisites": null,
+          "is_reversible": true,
+          "reversibility_note": "학사 과정은 어느 진로로든 이어져요."
+        },
+        {
+          "id": "kijang-s2",
+          "step_order": 2,
+          "name": "한신대 신학대학원(M.Div.)",
+          "typical_duration": null,
+          "prerequisites": "학사 학위",
+          "is_reversible": true,
+          "reversibility_note": "중도에 나오면 이수 학점·학위 과정 기록이 남아요."
+        },
+        {
+          "id": "kijang-s3",
+          "step_order": 3,
+          "name": "전도사 과정·교단 목사고시",
+          "typical_duration": null,
+          "prerequisites": "신학대학원 수료",
+          "is_reversible": true,
+          "reversibility_note": "고시 전까지는 언제든 방향을 바꿀 수 있어요."
+        },
+        {
+          "id": "kijang-s4",
+          "step_order": 4,
+          "name": "목사 안수",
+          "typical_duration": null,
+          "prerequisites": "목사고시 합격",
+          "is_reversible": false,
+          "reversibility_note": "안수는 교단 제도상 되돌리기 어려운 단계예요. 그 전까지는 되돌릴 수 있어요."
+        }
+      ],
+      "exploratory": [
+        {
+          "id": "kijang-e1",
+          "name": "소속 교단 확인해보기",
+          "description": "다니는(또는 아는) 교회가 어느 교단인지 물어봐요. 교단에 따라 인준 신학교와 과정이 통째로 달라져요.",
+          "min_age": null,
+          "requires_guardian_consent": false,
+          "duration": "5분",
+          "official_contact_url": null
+        },
+        {
+          "id": "kijang-e2",
+          "name": "총회·신학대 안내 읽어보기",
+          "description": "교단 총회와 한신대의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.",
+          "min_age": null,
+          "requires_guardian_consent": false,
+          "duration": "반나절",
+          "official_contact_url": "https://www.prok.org"
+        }
+      ]
+    },
+    {
+      "id": "prot-kiseong",
+      "religion": "PROTESTANT",
+      "denomination": "기독교대한성결교회",
+      "role_name": "목사",
+      "summary": "교회 공동체의 예배를 인도하고 설교·상담·교육을 맡는 사람이에요. 교인들의 삶의 중요한 순간에 함께하고, 교회 행정과 운영도 실제 업무의 큰 부분이에요.",
+      "min_entry_age": null,
+      "is_open_to_minors": false,
+      "official_contact_name": "기독교대한성결교회 총회",
+      "official_contact_phone": null,
+      "official_contact_url": "http://www.kehc.org",
+      "reality_notes": "이 교단의 인준 신학교는 서울신학대학교예요. 신학대학원 과정 뒤 교단 고시를 거쳐 안수를 받는 구조예요. 같은 개신교라도 교단마다 인준 학교와 절차가 다르니 소속 교회의 교단부터 확인해요.",
+      "source_name": "기독교대한성결교회 총회 공식 안내(2026-07 확인)",
+      "source_url": "http://www.kehc.org",
+      "verified_at": "2026-07-27",
+      "stages": [
+        {
+          "id": "kiseong-s1",
+          "step_order": 1,
+          "name": "4년제 대학 졸업(전공 무관)",
+          "typical_duration": "4년",
+          "prerequisites": null,
+          "is_reversible": true,
+          "reversibility_note": "학사 과정은 어느 진로로든 이어져요."
+        },
+        {
+          "id": "kiseong-s2",
+          "step_order": 2,
+          "name": "서울신학대 신학대학원(M.Div.)",
+          "typical_duration": null,
+          "prerequisites": "학사 학위",
+          "is_reversible": true,
+          "reversibility_note": "중도에 나오면 이수 학점·학위 과정 기록이 남아요."
+        },
+        {
+          "id": "kiseong-s3",
+          "step_order": 3,
+          "name": "전도사 과정·교단 고시",
+          "typical_duration": null,
+          "prerequisites": "신학대학원 수료",
+          "is_reversible": true,
+          "reversibility_note": "고시 전까지는 언제든 방향을 바꿀 수 있어요."
+        },
+        {
+          "id": "kiseong-s4",
+          "step_order": 4,
+          "name": "목사 안수",
+          "typical_duration": null,
+          "prerequisites": "교단 고시 합격",
+          "is_reversible": false,
+          "reversibility_note": "안수는 교단 제도상 되돌리기 어려운 단계예요."
+        }
+      ],
+      "exploratory": [
+        {
+          "id": "kiseong-e1",
+          "name": "소속 교단 확인해보기",
+          "description": "다니는(또는 아는) 교회가 어느 교단인지 물어봐요. 성결교회라면 서울신학대가 인준 신학교예요.",
+          "min_age": null,
+          "requires_guardian_consent": false,
+          "duration": "5분",
+          "official_contact_url": null
+        },
+        {
+          "id": "kiseong-e2",
+          "name": "총회·신학대 안내 읽어보기",
+          "description": "교단 총회와 서울신학대의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.",
+          "min_age": null,
+          "requires_guardian_consent": false,
+          "duration": "반나절",
+          "official_contact_url": "http://www.kehc.org"
+        }
+      ]
+    },
+    {
+      "id": "prot-kichim",
+      "religion": "PROTESTANT",
+      "denomination": "기독교한국침례회",
+      "role_name": "목사",
+      "summary": "교회 공동체의 예배를 인도하고 설교·상담·교육을 맡는 사람이에요. 침례교는 각 교회의 자율을 중시하는 전통이 있어서 교회 공동체와의 관계가 특히 중요해요.",
+      "min_entry_age": null,
+      "is_open_to_minors": false,
+      "official_contact_name": "기독교한국침례회(한국침례신학대학교 안내)",
+      "official_contact_phone": null,
+      "official_contact_url": "https://www.kbtus.ac.kr",
+      "reality_notes": "이 교단의 인준 신학교는 한국침례신학대학교 한 곳이에요. 침례교는 개교회 중심 전통이라 안수 절차가 교회·지방회 중심으로 진행되는 등 장로교단과 결이 달라요. 소속 교회의 교단 확인이 첫 순서인 건 똑같아요.",
+      "source_name": "한국침례신학대학교(교단 직영) 공식 안내(2026-07 확인)",
+      "source_url": "https://www.kbtus.ac.kr",
+      "verified_at": "2026-07-27",
+      "stages": [
+        {
+          "id": "kichim-s1",
+          "step_order": 1,
+          "name": "4년제 대학 졸업(전공 무관)",
+          "typical_duration": "4년",
+          "prerequisites": null,
+          "is_reversible": true,
+          "reversibility_note": "학사 과정은 어느 진로로든 이어져요."
+        },
+        {
+          "id": "kichim-s2",
+          "step_order": 2,
+          "name": "한국침례신학대 신학대학원(M.Div.)",
+          "typical_duration": null,
+          "prerequisites": "학사 학위",
+          "is_reversible": true,
+          "reversibility_note": "중도에 나오면 이수 학점·학위 과정 기록이 남아요."
+        },
+        {
+          "id": "kichim-s3",
+          "step_order": 3,
+          "name": "전도사 과정·안수 준비",
+          "typical_duration": null,
+          "prerequisites": "신학대학원 수료",
+          "is_reversible": true,
+          "reversibility_note": "안수 전까지는 언제든 방향을 바꿀 수 있어요."
+        },
+        {
+          "id": "kichim-s4",
+          "step_order": 4,
+          "name": "목사 안수(교회·지방회 중심)",
+          "typical_duration": null,
+          "prerequisites": "교단 절차 완료",
+          "is_reversible": false,
+          "reversibility_note": "안수는 제도상 되돌리기 어려운 단계예요. 절차 세부는 교회·지방회마다 달라 공식 창구로 확인해요."
+        }
+      ],
+      "exploratory": [
+        {
+          "id": "kichim-e1",
+          "name": "소속 교단 확인해보기",
+          "description": "다니는(또는 아는) 교회가 어느 교단인지 물어봐요. 침례교라면 한국침례신학대가 인준 신학교예요.",
+          "min_age": null,
+          "requires_guardian_consent": false,
+          "duration": "5분",
+          "official_contact_url": null
+        },
+        {
+          "id": "kichim-e2",
+          "name": "신학대 안내 읽어보기",
+          "description": "한국침례신학대의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.",
+          "min_age": null,
+          "requires_guardian_consent": false,
+          "duration": "반나절",
+          "official_contact_url": "https://www.kbtus.ac.kr"
+        }
+      ]
+    },
+    {
       "id": "cath-religious",
       "religion": "CATHOLIC",
       "denomination": "한국 천주교(수도회)",
@@ -873,6 +1095,57 @@
       "website": "https://www.uhs.ac.kr",
       "source_name": "기독교대한감리회 공식 안내(2026-07 확인)",
       "source_url": "https://www.kmc.or.kr",
+      "verified_at": "2026-07-27"
+    },
+    {
+      "id": "kijang-inst-hanshin",
+      "religion": "PROTESTANT",
+      "denomination": "한국기독교장로회",
+      "name": "한신대학교(신학과·신학대학원)",
+      "is_denomination_approved": true,
+      "approving_body": "한국기독교장로회 총회",
+      "is_accredited_university": true,
+      "degree_awarded": "신학사·신학석사(M.Div.)",
+      "program_years": null,
+      "region_sido": "경기",
+      "address": null,
+      "website": "https://www.hs.ac.kr",
+      "source_name": "한국기독교장로회 총회 공식 안내(2026-07 확인)",
+      "source_url": "https://www.prok.org",
+      "verified_at": "2026-07-27"
+    },
+    {
+      "id": "kiseong-inst-stu",
+      "religion": "PROTESTANT",
+      "denomination": "기독교대한성결교회",
+      "name": "서울신학대학교",
+      "is_denomination_approved": true,
+      "approving_body": "기독교대한성결교회 총회",
+      "is_accredited_university": true,
+      "degree_awarded": "신학사·신학석사(M.Div.)",
+      "program_years": null,
+      "region_sido": "경기",
+      "address": null,
+      "website": "https://www.stu.ac.kr",
+      "source_name": "기독교대한성결교회 총회 공식 안내(2026-07 확인)",
+      "source_url": "http://www.kehc.org",
+      "verified_at": "2026-07-27"
+    },
+    {
+      "id": "kichim-inst-kbtus",
+      "religion": "PROTESTANT",
+      "denomination": "기독교한국침례회",
+      "name": "한국침례신학대학교",
+      "is_denomination_approved": true,
+      "approving_body": "기독교한국침례회",
+      "is_accredited_university": true,
+      "degree_awarded": "신학사·신학석사(M.Div.)",
+      "program_years": null,
+      "region_sido": "대전",
+      "address": null,
+      "website": "https://www.kbtus.ac.kr",
+      "source_name": "한국침례신학대학교(교단 직영) 공식 안내(2026-07 확인)",
+      "source_url": "https://www.kbtus.ac.kr",
       "verified_at": "2026-07-27"
     }
   ]

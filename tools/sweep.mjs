@@ -49,6 +49,7 @@ const checks = [
   ["clergy-minors", P("중3", "clergy/budd-jogye"), "보호자와 꼭 상의"],
   ["clergy-nun", P("중3", "clergy/cath-religious"), "종신서원"],
   ["clergy-methodist", P("중3", "clergy/prot-methodist"), "감리교신학대"],
+  ["clergy-kijang", P("중3", "clergy/prot-kijang"), "한신대"],
   ["jobs-clergy-entry", P("고1", "jobs"), "종교 성직 경로"],
   ["guide-E7", P("고3", "guide/E7"), "감정 말고 조건으로"],
   ["guide-C4", P("중3", "guide/C4"), "이 순서로 비교해요"],

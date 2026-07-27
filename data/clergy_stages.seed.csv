@@ -27,6 +27,18 @@ meth-s1,prot-methodist,1,4년제 대학 졸업(전공 무관),4년,,true,학사 
 meth-s2,prot-methodist,2,인준 신학대학원(감신대·목원대·협성대),,학사 학위,true,중도에 나오면 이수 학점·학위 과정 기록이 남아요.
 meth-s3,prot-methodist,3,수련 과정·연회 고시,,인준 과정 수료,true,고시 전까지는 언제든 방향을 바꿀 수 있어요.
 meth-s4,prot-methodist,4,목사 안수,,연회 고시 합격,false,안수는 교단 제도상 되돌리기 어려운 단계예요.
+kijang-s1,prot-kijang,1,4년제 대학 졸업(전공 무관),4년,,true,학사 과정은 어느 진로로든 이어져요.
+kijang-s2,prot-kijang,2,한신대 신학대학원(M.Div.),,학사 학위,true,중도에 나오면 이수 학점·학위 과정 기록이 남아요.
+kijang-s3,prot-kijang,3,전도사 과정·교단 목사고시,,신학대학원 수료,true,고시 전까지는 언제든 방향을 바꿀 수 있어요.
+kijang-s4,prot-kijang,4,목사 안수,,목사고시 합격,false,안수는 교단 제도상 되돌리기 어려운 단계예요. 그 전까지는 되돌릴 수 있어요.
+kiseong-s1,prot-kiseong,1,4년제 대학 졸업(전공 무관),4년,,true,학사 과정은 어느 진로로든 이어져요.
+kiseong-s2,prot-kiseong,2,서울신학대 신학대학원(M.Div.),,학사 학위,true,중도에 나오면 이수 학점·학위 과정 기록이 남아요.
+kiseong-s3,prot-kiseong,3,전도사 과정·교단 고시,,신학대학원 수료,true,고시 전까지는 언제든 방향을 바꿀 수 있어요.
+kiseong-s4,prot-kiseong,4,목사 안수,,교단 고시 합격,false,안수는 교단 제도상 되돌리기 어려운 단계예요.
+kichim-s1,prot-kichim,1,4년제 대학 졸업(전공 무관),4년,,true,학사 과정은 어느 진로로든 이어져요.
+kichim-s2,prot-kichim,2,한국침례신학대 신학대학원(M.Div.),,학사 학위,true,중도에 나오면 이수 학점·학위 과정 기록이 남아요.
+kichim-s3,prot-kichim,3,전도사 과정·안수 준비,,신학대학원 수료,true,안수 전까지는 언제든 방향을 바꿀 수 있어요.
+kichim-s4,prot-kichim,4,목사 안수(교회·지방회 중심),,교단 절차 완료,false,안수는 제도상 되돌리기 어려운 단계예요. 절차 세부는 교회·지방회마다 달라 공식 창구로 확인해요.
 rel-s1,cath-religious,1,성소 모임·수도회 탐색,,,true,모임 참여는 탐색일 뿐 아무것도 확정되지 않아요.
 rel-s2,cath-religious,2,입회·지원기,6개월~1년,수도회별 입회 조건,true,지원기는 서로를 알아보는 기간이라 언제든 떠날 수 있어요.
 rel-s3,cath-religious,3,청원기,약 1년,지원기 수료,true,청원기까지는 자유롭게 되돌릴 수 있어요.

@@ -12,6 +12,12 @@ hapdong-e1,prot-hapdong,소속 교단 확인해보기,다니는(또는 아는) �
 hapdong-e2,prot-hapdong,총회·신학대 입시 안내 읽어보기,교단 총회와 인준 신학교의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.,,false,반나절,https://www.gapck.org
 meth-e1,prot-methodist,소속 교단 확인해보기,다니는(또는 아는) 교회가 어느 교단인지 물어봐요. 감리회라면 인준 신학대학원 세 곳이 후보가 돼요.,,false,5분,
 meth-e2,prot-methodist,인준 신학대 안내 읽어보기,감신대·목원대·협성대의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.,,false,반나절,https://www.kmc.or.kr
+kijang-e1,prot-kijang,소속 교단 확인해보기,다니는(또는 아는) 교회가 어느 교단인지 물어봐요. 교단에 따라 인준 신학교와 과정이 통째로 달라져요.,,false,5분,
+kijang-e2,prot-kijang,총회·신학대 안내 읽어보기,교단 총회와 한신대의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.,,false,반나절,https://www.prok.org
+kiseong-e1,prot-kiseong,소속 교단 확인해보기,다니는(또는 아는) 교회가 어느 교단인지 물어봐요. 성결교회라면 서울신학대가 인준 신학교예요.,,false,5분,
+kiseong-e2,prot-kiseong,총회·신학대 안내 읽어보기,교단 총회와 서울신학대의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.,,false,반나절,http://www.kehc.org
+kichim-e1,prot-kichim,소속 교단 확인해보기,다니는(또는 아는) 교회가 어느 교단인지 물어봐요. 침례교라면 한국침례신학대가 인준 신학교예요.,,false,5분,
+kichim-e2,prot-kichim,신학대 안내 읽어보기,한국침례신학대의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.,,false,반나절,https://www.kbtus.ac.kr
 rel-e1,cath-religious,교구 성소 모임 알아보기,각 교구와 수도회가 성소 모임을 운영해요. 본당 사무실에 묻는 게 공식 경로예요. 참여는 탐색이지 결정이 아니에요.,,true,정기 모임,https://www.cbck.or.kr
 rel-e2,cath-religious,수도회 소개 자료 읽어보기,수도회마다 영성과 하는 일이 달라요. 관심 있는 수도회의 공식 소개 자료부터 읽어봐요.,,false,반나절,https://www.cbck.or.kr
 islam-e1,islam-imam,중앙회 방문·상담,서울중앙성원 안내 등 공식 창구에서 궁금한 걸 물어봐요. 유학 조건도 여기서 확인해요.,,false,1회,http://www.koreaislam.org

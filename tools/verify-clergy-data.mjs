@@ -48,10 +48,11 @@ if (stale.length) {
 
 // ③ 출처 URL 응답 — 네트워크 실패는 보고만
 const urls = [...new Set([...DATA.paths, ...DATA.institutions].map((x) => x.source_url))];
+const UA = { "User-Agent": "Mozilla/5.0 (compatible; MydreamVerify/1.0)" }; // UA 없는 요청을 거부하는 서버 대응
 for (const u of urls) {
   try {
-    let res = await fetch(u, { method: "HEAD", redirect: "follow", signal: AbortSignal.timeout(8000) });
-    if (res.status === 405) res = await fetch(u, { method: "GET", redirect: "follow", signal: AbortSignal.timeout(8000) });
+    let res = await fetch(u, { method: "HEAD", redirect: "follow", headers: UA, signal: AbortSignal.timeout(8000) });
+    if (res.status === 405 || res.status === 400) res = await fetch(u, { method: "GET", redirect: "follow", headers: UA, signal: AbortSignal.timeout(8000) });
     console.log(`  출처 ${res.ok ? "✓" : "△ HTTP " + res.status}: ${u}`);
   } catch (e) {
     console.log(`  출처 △ 확인 실패(${e.name}): ${u}`);
