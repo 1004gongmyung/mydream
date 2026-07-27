@@ -32,6 +32,10 @@ const checks = [
   ["parents", P("중2", "parents"), "같은 자료를 보는 대화"],
   ["jobdex", P("중2", "jobdex"), "낯선 직업 도감"],
   ["paths", P("고2", "paths"), "여러 개의 문"],
+  ["answer-I2", P("중2", "q/I2"), "4개 언어 요약 카드"],
+  ["guide-E7", P("고3", "guide/E7"), "감정 말고 조건으로"],
+  ["guide-C4", P("중3", "guide/C4"), "이 순서로 비교해요"],
+  ["guide-A4", P("중2", "guide/A4"), "이렇게 뜯어봐요"],
   // 인터랙션 흐름 (e2e 자동 주행)
   ["flow-crisis", E("crisis"), "지금 이야기 나눌 수 있는 곳"],
   ["flow-search", E("search"), "관련 질문"],
@@ -42,6 +46,7 @@ const checks = [
   ["flow-signal", E("signal"), "확인해볼래요?"],
   ["flow-portfolio", E("portfolio"), "문장 초안"],
   ["flow-parents", E("parents"), "대화를 여는 질문"],
+  ["flow-guide", E("guide"), "감정 말고 조건으로"],
 ];
 
 let fail = 0;

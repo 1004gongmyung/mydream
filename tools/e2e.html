@@ -25,13 +25,13 @@
         { date: "2026-07-23", text: "친구 영상 편집 도와줄 때 재밌었다" },
       ]));
     }
-    location.hash = { reverse: "#reverse", compass: "#compass", crisis: "#home", search: "#home", journal: "#journal", quest: "#quests", signal: "#signal", shield: "#shield", portfolio: "#portfolio", parents: "#parents" }[FLOW] || "#home";
+    location.hash = { reverse: "#reverse", compass: "#compass", crisis: "#home", search: "#home", journal: "#journal", quest: "#quests", signal: "#signal", shield: "#shield", portfolio: "#portfolio", parents: "#parents", guide: "#q/E7" }[FLOW] || "#home";
   </script>
 </head>
 <body>
   <div id="app" class="app">
     <header class="topbar">
-      <button id="brandBtn" class="brand" type="button">🧭 마이진로</button>
+      <button id="brandBtn" class="brand" type="button">🧭 마이드림</button>
       <button id="gradeBtn" class="grade-pill" type="button"></button>
     </header>
     <main id="screen" class="screen"></main>
@@ -49,6 +49,7 @@
   <script src="../data/dday.data.js"></script>
   <script src="../data/jobdex.data.js"></script>
   <script src="../data/paths.data.js"></script>
+  <script src="../data/guides.data.js"></script>
   <script src="../js/content.js"></script>
   <script src="../js/compass.js"></script>
   <script src="../js/reverse.js"></script>
@@ -102,6 +103,8 @@
         setTimeout(() => { const p = document.querySelectorAll("[data-pick]"); if (p[2]) p[2].click(); }, 200);
       } else if (FLOW === "parents") {
         click('[data-worry="stability"]');
+      } else if (FLOW === "guide") {
+        click("#l3Btn"); // 답변(E7)의 L3 버튼 → 가이드 카드로 전환되는지
       }
     }, 150);
   </script>

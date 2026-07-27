@@ -1,9 +1,9 @@
-# 마이진로 — 청소년 진로탐색 웹앱
+# 마이드림 — 청소년 진로탐색 웹앱
 
-> 브랜드 (2026-07-25): **마이진로 최종 확정** (드림웨이 검토 철회 — 동일 상호 다수). 사용자 노출 문자열은 전부 변경.
-> 코드 내부 식별자(`MAPSI_*` 전역, `mapsi.*` localStorage 키, 폴더명 `mapsi-app`)는 기존 사용자 저장 데이터 호환을 위해 유지한다.
+> 브랜드 (2026-07-27): **마이드림**으로 변경 (이력: 맵시 → 진로코칭 → 마이진로 → 드림웨이 검토 → 마이진로 → 마이드림). 사용자 노출 문자열은 전부 변경.
+> 코드 내부 식별자(`MAPSI_*` 전역, `mapsi.*` localStorage 키, 폴더명 `mapsi-app`)와 저장소·배포 URL(`myjinro`)은 기존 사용자 저장 데이터·링크 호환을 위해 유지한다. KIPRIS 상표 확인은 남은 과제.
 
-청소년 진로탐색 앱 '마이진로'의 표층(질문 레이어 + 시기 내비게이션)에서 출발한 MVP.
+청소년 진로탐색 앱 '마이드림'의 표층(질문 레이어 + 시기 내비게이션)에서 출발한 MVP.
 설계 근거: 「앱_통합설계_v2_지도와나침반.md」 / 콘텐츠: 「답변엔진_63문_v3.md」·「질문레이어_v2.md」
 
 ## 배포 (2026-07-25)
@@ -42,10 +42,12 @@ mapsi-app/
   data/explore.data.js  저작 시드 — 체험 DB 9곳 (검증된 공식 창구만)
   data/quest.data.js    저작 시드 — 탐험 미션 15개 (5역량+관찰, 강소·신기술 40%↑)
   data/shield.data.js   저작 시드 — 노동권 정보 (최저임금 2026 검증치, 연 1회 갱신)
+  data/guides.data.js   저작 시드 — 가이드 카드 14개 (L3 버튼의 미니 도구·절차·기준표, 새 수치 금지 원칙)
   tools/build-content.mjs  마크다운 원본 → data/ 생성
   tools/preview.html    개발용: 학년 지정해 화면 바로 열기
-  tools/e2e.html        개발용: 헤드리스 클릭 주행 (?flow=compass|reverse|crisis|search|journal|quest|signal|shield|portfolio|parents)
-  tools/sweep.mjs       개발용: 전 화면 렌더링 스윕 — 서버 실행 후 `node tools/sweep.mjs` (32개 라우트·흐름 마커 검사)
+  tools/e2e.html        개발용: 헤드리스 클릭 주행 (?flow=compass|reverse|crisis|search|journal|quest|signal|shield|portfolio|parents|guide)
+  tools/sweep.mjs       개발용: 전 화면 렌더링 스윕 — 서버 실행 후 `node tools/sweep.mjs` (38개 라우트·흐름 마커 검사)
+  tools/audit-links.mjs 개발용: 클릭 목적지 전수 감사 — `node tools/audit-links.mjs` (라우트·질문 ID·L3 타깃·가이드 링크 정합 검사)
   test/content.test.mjs 콘텐츠·회전 로직 테스트 (9)
   test/modules.test.mjs 나침반·역방향 로직 테스트 (13)
   test/care.test.mjs    위기 감지·안심 DB·검색 테스트 (8)
@@ -54,7 +56,7 @@ mapsi-app/
   test/signal-shield.test.mjs 신호 리포트·방패 계산기 테스트 (10)
 ```
 
-테스트 실행 (57개): `node --test test/content.test.mjs test/modules.test.mjs test/care.test.mjs test/lens.test.mjs test/modules-bcd.test.mjs test/signal-shield.test.mjs`
+테스트 실행 (85개): `node --test test/content.test.mjs test/modules.test.mjs test/care.test.mjs test/lens.test.mjs test/modules-bcd.test.mjs test/signal-shield.test.mjs test/stage2.test.mjs test/daily.test.mjs test/paths.test.mjs test/guides.test.mjs`
 
 ## 콘텐츠 수정 워크플로우 (중요)
 
@@ -78,6 +80,7 @@ mapsi-app/
 ## 나침반·역방향 (로드맵 3단계 — 구현 완료)
 
 - **진입은 질문 카드의 L3 버튼으로만** (통합설계: 기능을 입구에 내세우지 않는다) — "나침반 시작"(A1·A11·B3 등) → `#compass`, "역방향 지도"(D1) → `#reverse`, "검사 바로가기"(A3) → 커리어넷 검사 외부 링크
+- **가이드 카드**(`#guide/<질문ID>`, 2026-07-27): 별도 화면이 없던 L3 버튼 14개(해석 시작·비교표·고입 나침반·절차 가이드·기준표·제도 카드·체크리스트·4분면 등)를 질문별 정적 가이드로 구현 — 미니 절차·판단 기준·자기점검 카드. **새 수치 금지**(내용은 해당 답변의 검증된 L1/L2에서만 재사용, 테스트로 강제), 대입 판단 주제는 담임·상담 병기. "과목 지도"(D2·D4)는 역방향 지도로 라우팅. 이로써 **63문 전체 L3 버튼이 목적지를 가짐**(`test/guides.test.mjs` 전수 커버 테스트)
 - 나침반: 6축 양자택일(건너뛰기 허용) → 직업군 6~10개 **가설** 제시(단정 금지 — "이런 하루를 사는 사람이 많은 직업군") + 겹친 취향 근거 + 렌즈 한 줄(최대 1개)
 - 역방향: "시간이 빨리 가는 과목" 선택(등급 안 물음) → 계열 가설 + 기여 과목 + 이공계 권장과목 안내(D2 답변 연결)
 - 결과는 기기(localStorage)에만 저장 — 누적 기록의 시작점
@@ -85,7 +88,7 @@ mapsi-app/
 ## 안심 DB + 위기 라우팅 (로드맵 4단계 — 구현 완료)
 
 - **검색 기능**: 홈 상단 "지금 고민을 검색해도 돼요" → 질문 63문 매칭(상한 8개). 검색 전 **반드시 위기 감지를 통과** — 위기 계열이면 검색·답변을 실행하지 않고 즉시 안내 화면 전환
-- **위기 안내 화면**(`#care-now`): 판단·상담 문구 없이 연결만 — 1388 전화(tel:)·문자(sms:)·사이버상담 채팅 버튼 + "돌아가기" 경로. "마이진로는 상담 도구가 아니라서, 더 잘 들어줄 수 있는 곳으로 연결해요" 명시
+- **위기 안내 화면**(`#care-now`): 판단·상담 문구 없이 연결만 — 1388 전화(tel:)·문자(sms:)·사이버상담 채팅 버튼 + "돌아가기" 경로. "마이드림은 상담 도구가 아니라서, 더 잘 들어줄 수 있는 곳으로 연결해요" 명시
 - **도움 창구**(`#help`, 안심 DB): 상황 4종(마음/폭력·괴롭힘/알바·일터/학교 밖) × 공공 창구(1388·109·1577-0199·117·112·1366·1350·청소년근로권익센터·꿈드림·cyber1388). 전 화면 하단 푸터에서 진입 가능
 - **감지 규칙**: 공백 무시 부분 일치, 과잉 감지가 과소 감지보다 안전(화면에서 되돌아가기 제공). 저널·체크인 등 입력 기능이 추가되면 같은 `MapsiCare.detectCrisis`를 반드시 거칠 것
 - 정서 안전 규칙 테스트로 강제: 안심 DB에 진단명·"힘내" 류 판단 표현 금지

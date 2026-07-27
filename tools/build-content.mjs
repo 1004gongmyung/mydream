@@ -117,7 +117,7 @@ if (allText.includes("[확인 후 기입]")) throw new Error("미검증 placehol
 
 const content = {
   meta: {
-    brand: "마이진로",
+    brand: "마이드림",
     builtFrom: ["질문레이어_v2.md", "답변엔진_63문_v3.md"],
     questionCount: qIds.length,
   },

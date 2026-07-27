@@ -282,6 +282,12 @@ body {
 .journal-del { background: none; border: 0; color: var(--ink-soft); font-size: 16px; cursor: pointer; padding: 0 4px; }
 .explore-open { display: inline-block; margin-top: 10px; }
 
+/* 가이드 카드의 외부 링크 버튼 — ghost-btn과 같은 자리, 링크임을 색으로 구분 */
+.guide-link {
+  display: block; text-align: center; margin-top: 10px; padding: 13px; border-radius: var(--radius);
+  background: var(--brand-soft); color: var(--brand); font-size: 14px; font-weight: 700; text-decoration: none;
+}
+
 /* 첫 일자리 방패 */
 .calc-row { display: flex; gap: 10px; margin-top: 12px; }
 .calc-label { flex: 1; font-size: 12px; font-weight: 700; color: var(--ink-soft); }

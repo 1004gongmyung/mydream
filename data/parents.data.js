@@ -1,4 +1,4 @@
-// 부모 대화 카드 시드 — 걱정 유형별 데이터 카드 + 대화 질문 + 부모 공유용 다국어 요약
+﻿// 부모 대화 카드 시드 — 걱정 유형별 데이터 카드 + 대화 질문 + 부모 공유용 다국어 요약
 // 원칙: 설득 스크립트가 아니라 '같은 자료 보기'. 부모 비난·일반화 금지. 수치는 검증분만(칩 필수).
 // 다국어 요약: 쉬운 한국어·영어·중국어·베트남어 — I1("부모님이 한국 입시를 잘 모르셔서") 직결.
 (function (root, factory) {
@@ -32,7 +32,7 @@
         id: "info", label: "\"그 직업은 잘 몰라서 걱정돼\"",
         parentLine: "모르는 길이라 걱정되는 거예요. 그건 반대가 아니라 정보가 필요하다는 신호예요.",
         facts: [
-          { text: "마이진로의 조건 카드는 경로·조건·구조를 출처 등급(①국가통계~④경험)과 함께 보여줘요. 좋은 면만 보여주지 않아요." },
+          { text: "마이드림의 조건 카드는 경로·조건·구조를 출처 등급(①국가통계~④경험)과 함께 보여줘요. 좋은 면만 보여주지 않아요." },
           { text: "직업별 임금·전망 원자료는 고용24(고용노동부)에서 함께 확인할 수 있어요.", chip: { grade: "②", label: "고용24" } },
         ],
         bridge: "의견 대 의견은 안 끝나요. 같은 화면을 보면 대화가 짧아져요.",
@@ -60,9 +60,9 @@
       ],
       texts: {
         ko: {
-          title: "부모님께 — '마이진로' 소개",
+          title: "부모님께 — '마이드림' 소개",
           body: [
-            "마이진로는 아이의 진로 탐색을 돕는 무료 앱이에요.",
+            "마이드림은 아이의 진로 탐색을 돕는 무료 앱이에요.",
             "직업을 정해 주지 않아요. 아이가 자기 신호(좋아하는 것, 잘하는 것)를 모으게 도와요.",
             "정보에는 출처를 붙이고, 좋은 면만 보여주지 않아요.",
             "아이와 같은 화면을 보면서 이야기해 보세요.",
@@ -70,9 +70,9 @@
           ],
         },
         en: {
-          title: "For Parents — About '마이진로' (My Career Path)",
+          title: "For Parents — About '마이드림' (My Dream)",
           body: [
-            "'마이진로' (My Career Path) is a free app that helps your child explore careers.",
+            "'마이드림' (My Dream) is a free app that helps your child explore careers.",
             "It does not choose a job for them. It helps them collect signals about what fits.",
             "All information shows its source, including the difficult parts.",
             "Please talk with your child while looking at the same screen.",
@@ -80,9 +80,9 @@
           ],
         },
         zh: {
-          title: "致家长 — 关于'마이진로'(我的进路)",
+          title: "致家长 — 关于'마이드림'(我的梦想)",
           body: [
-            "'마이진로'是一款帮助孩子探索职业方向的免费应用。",
+            "'마이드림'是一款帮助孩子探索职业方向的免费应用。",
             "它不会替孩子选择职业，而是帮助孩子了解自己。",
             "所有信息都注明出处，也不回避不利的信息。",
             "请和孩子一起看同一个页面聊一聊。",
@@ -90,9 +90,9 @@
           ],
         },
         vi: {
-          title: "Gửi phụ huynh — Về '마이진로' (My Career Path)",
+          title: "Gửi phụ huynh — Về '마이드림' (My Dream)",
           body: [
-            "'마이진로' là ứng dụng miễn phí giúp con bạn khám phá nghề nghiệp.",
+            "'마이드림' là ứng dụng miễn phí giúp con bạn khám phá nghề nghiệp.",
             "Ứng dụng không chọn nghề thay con, mà giúp con hiểu bản thân mình.",
             "Mọi thông tin đều ghi rõ nguồn, kể cả những điều khó khăn.",
             "Hãy cùng con xem một màn hình và trò chuyện.",

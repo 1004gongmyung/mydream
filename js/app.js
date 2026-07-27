@@ -13,6 +13,7 @@
   const DDAY = window.MAPSI_DDAY_DATA;
   const JOBDEX = window.MAPSI_JOBDEX_DATA;
   const PATHS = window.MAPSI_PATHS_DATA;
+  const GUIDES = window.MAPSI_GUIDES_DATA;
   const Compass = window.MapsiCompass;
   const Reverse = window.MapsiReverse;
   const Care = window.MapsiCare;
@@ -90,6 +91,8 @@
     "경로 지도": "paths", "전환기 지도": "paths", "학교 지도": "paths",
     "산업 지도": "jobs", "비용표": "jobs", "후보 카드": "jobs",
     "AI 시작 지도": "explore", "조합 지도": "explore", "실험 가이드": "explore",
+    // 과목 지도 = 역방향 지도(과목 취향 → 계열)가 그 기능
+    "과목 지도": "reverse",
   };
   const TARGET_LINKS = { "검사 바로가기": "https://www.career.go.kr/cnet/front/examen/examenMain.do" };
 
@@ -351,7 +354,7 @@
           <a class="care-sms" href="sms:${esc(p.contact)}">문자 보내기</a>
           <a class="care-chat" href="${esc(p.chat.url)}" target="_blank" rel="noopener">${esc(p.chat.label)}</a>
         </div>
-        <p class="care-note">마이진로는 상담 도구가 아니라서, 더 잘 들어줄 수 있는 곳으로 연결해요.</p>
+        <p class="care-note">마이드림은 상담 도구가 아니라서, 더 잘 들어줄 수 있는 곳으로 연결해요.</p>
         <button class="ghost-btn" data-nav="help">다른 상황별 도움 창구 보기</button>
         <button class="ghost-btn" data-nav="home">진로 질문을 찾고 있었어요 — 돌아가기</button>
       </div>`;
@@ -433,12 +436,39 @@
     $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
     document.getElementById("l3Btn").addEventListener("click", () => {
       const target = a.l3.target;
+      if (GUIDES.byQuestion[id]) return go("guide/" + id); // 질문 전용 가이드 카드가 최우선
       if (target && TARGET_ROUTES[target]) return go(TARGET_ROUTES[target]);
       if (target && TARGET_LINKS[target]) return window.open(TARGET_LINKS[target], "_blank", "noopener");
-      document.getElementById("l3Note").classList.add("show");
+      const $note = document.getElementById("l3Note");
+      $note.classList.add("show");
+      $note.scrollIntoView({ behavior: "smooth", block: "nearest" }); // 모바일에서 '아무 반응 없음'으로 보이지 않게
     });
     const browseLink = document.getElementById("l3BrowseLink");
     if (browseLink) browseLink.addEventListener("click", () => go("browse"));
+    window.scrollTo(0, 0);
+  }
+
+  // ---- 가이드 카드 (L3 버튼이 약속한 미니 도구·절차·기준표) ----
+  function renderGuide(id) {
+    const g = GUIDES.byQuestion[id];
+    if (!g) return go("home");
+    $screen.innerHTML = `
+      <button class="answer-back" data-nav="back">← 뒤로</button>
+      <div class="tool-kicker">${esc(g.kicker)}</div>
+      <h1 class="result-title">${esc(g.title)}</h1>
+      <p class="result-sub">${esc(g.intro)}</p>
+      ${g.items.map((it) => `
+        <div class="cluster-card">
+          <div class="cluster-name">${esc(it.head)}</div>
+          <div class="job-path">${esc(it.body)}</div>
+        </div>`).join("")}
+      ${g.chip ? chipsHtml([g.chip]) : ""}
+      <div class="open-question">${esc(g.note)}</div>
+      ${g.links.map((l) => l.url
+        ? `<a class="guide-link" href="${esc(l.url)}" target="_blank" rel="noopener">${esc(l.label)} →</a>`
+        : `<button class="ghost-btn" data-route="${l.route}">${esc(l.label)} →</button>`).join("")}`;
+    $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
+    $screen.querySelectorAll("[data-route]").forEach((b) => b.addEventListener("click", () => go(b.dataset.route)));
     window.scrollTo(0, 0);
   }
 
@@ -685,7 +715,7 @@
       <button class="answer-back" data-nav="back">← 뒤로</button>
       <div class="tool-kicker">탐험 퀘스트</div>
       <h1 class="result-title">완료 조건은 딱 하나, 앱 밖에서 하고 오기</h1>
-      <p class="result-sub">${doneTotal === 0 ? "하나면 충분해요. 제일 만만한 걸로 골라요." : `지금까지 ${doneTotal}개 탐험했어요. 보상은 배지뿐 — 그게 마이진로 방식이에요.`}</p>
+      <p class="result-sub">${doneTotal === 0 ? "하나면 충분해요. 제일 만만한 걸로 골라요." : `지금까지 ${doneTotal}개 탐험했어요. 보상은 배지뿐 — 그게 마이드림 방식이에요.`}</p>
       <div class="pick-summary">${progress.map((p) => `<span class="pick-tag">${esc(p.skill.name)} ${p.done}/${p.total}</span>`).join("")}</div>
       ${QUEST.skills.map((skill) => `
         <div class="section-label">${esc(skill.name)}</div>
@@ -1057,6 +1087,7 @@
     if (hash === "parents") return renderParents();
     if (hash === "jobdex") return renderJobdex();
     if (hash === "paths") return renderPaths();
+    if (hash.startsWith("guide/")) return renderGuide(hash.slice(6));
     if (hash.startsWith("q/")) return renderAnswer(hash.slice(2));
     return renderHome();
   }
