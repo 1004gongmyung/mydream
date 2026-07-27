@@ -1,0 +1,4 @@
+id,religion,denomination,name,is_denomination_approved,approving_body,is_accredited_university,degree_awarded,program_years,region_sido,address,website,source_name,source_url,verified_at
+sample-inst-approved,PROTESTANT,(샘플) 한빛교단,(샘플) 한빛신학대학원대학교,true,(샘플) 한빛교단 총회,true,신학석사(M.Div.),3,서울,(가상 주소),https://example.com/sample,샘플 데이터(실제 기관 아님),https://example.com/sample,2026-07-27
+sample-inst-unapproved,PROTESTANT,(샘플) 한빛교단,(샘플) 새길신학교,false,,true,신학사,4,경기,(가상 주소),,샘플 데이터(실제 기관 아님),https://example.com/sample,2026-07-27
+sample-inst-nondegree,BUDDHIST,(샘플) 한빛종단,(샘플) 한빛승가교육원,true,(샘플) 한빛종단 교육원,false,,4,부산,(가상 주소),,샘플 데이터(실제 기관 아님),https://example.com/sample,2026-07-27

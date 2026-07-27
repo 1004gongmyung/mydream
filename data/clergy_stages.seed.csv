@@ -1,0 +1,5 @@
+id,path_id,step_order,name,typical_duration,prerequisites,is_reversible,reversibility_note
+sample-prot-s1,sample-prot-pastor,1,신학대학원(교단 인준교),3년,4년제 학사 학위,true,중도에 그만두면 이수 학점과 학위 과정 기록이 남아요. 다른 진로로 옮길 수 있어요.
+sample-prot-s2,sample-prot-pastor,2,목사 안수,,교단별 고시·수련 과정,false,안수는 교단 제도상 되돌리기 어려운 단계예요. 안수 전 단계까지는 언제든 진로를 바꿀 수 있어요.
+sample-budd-s1,sample-budd-monk,1,행자 생활,6개월~1년,종단 상담 후 입산,true,행자 기간은 언제든 그만두고 일상으로 돌아갈 수 있어요. 기록이 남지 않아요.
+sample-budd-s2,sample-budd-monk,2,수계(사미·사미니계),,행자 과정 수료,false,수계 이후는 제도적으로 되돌리기 어려워요. 되돌릴 경우 종단 절차가 따로 필요해요.

@@ -19,6 +19,8 @@
   const ARTPREP = window.MAPSI_ARTPREP_DATA;
   const ALTS = window.MAPSI_ALTSCHOOLS_DATA;
   const Alt = window.MapsiAltschools;
+  const CLERGY = window.MAPSI_CLERGY_DATA;
+  const Clergy = window.MapsiClergy;
   const Compass = window.MapsiCompass;
   const Reverse = window.MapsiReverse;
   const Care = window.MapsiCare;
@@ -699,6 +701,130 @@
     window.scrollTo(0, 0);
   }
 
+  // ---- 성직자 진로 (포교 아님 — 직업 정보. 빌드 가드: 개신교·천주교·불교 실데이터 확보 전엔 비노출) ----
+  const clergyState = { query: "" };
+  const clergyVisible = () => CLERGY.guard.visible;
+  const clergyPaths = () => Clergy.sortPaths(CLERGY.paths.filter((p) => !p.id.startsWith("sample-")));
+
+  function renderClergyGate() {
+    $screen.innerHTML = `
+      <button class="answer-back" data-nav="back">← 뒤로</button>
+      <div class="tool-kicker">종교와 직업</div>
+      <h1 class="result-title">이 정보는 아직 준비 중이에요</h1>
+      <p class="result-sub">성직 경로는 특정 종교만 먼저 보여주면 공정하지 않아서, 개신교·천주교·불교 세 종교의 검증이 모두 끝나면 함께 열려요.</p>
+      <div class="open-question">그때까지는 담임 선생님, 그리고 각 종단의 공식 상담 창구가 정확한 정보처예요.</div>`;
+    $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
+    window.scrollTo(0, 0);
+  }
+
+  function renderClergy() {
+    if (!clergyVisible()) return renderClergyGate();
+    const list = clergyPaths();
+    const searched = clergyState.query ? Clergy.searchInstitutions(CLERGY.institutions.filter((i) => !i.id.startsWith("sample-")), clergyState.query) : null;
+    $screen.innerHTML = `
+      <button class="answer-back" data-nav="back">← 뒤로</button>
+      <div class="tool-kicker">종교와 직업</div>
+      <h1 class="result-title">성직도 하나의 직업 경로예요</h1>
+      <p class="result-sub">특정 종교를 권하지 않아요. 조건 카드와 같은 방식으로, <strong>이 길이 어떻게 생겼는지</strong>만 보여줘요. 순서는 종교 이름 가나다순이에요.</p>
+      ${list.map((p) => `
+        <button class="qcard" data-clergy-path="${p.id}">
+          ${esc(p.role_name)}
+          <span class="qmeta">${esc(Clergy.RELIGION_LABELS[p.religion] || p.religion)} · ${esc(p.denomination)}</span>
+        </button>`).join("")}
+      <div class="section-label">양성기관이 궁금하면 — 이름으로 확인해보기</div>
+      <form id="clergySearchForm" class="search-form" autocomplete="off">
+        <input id="clergySearchInput" class="search-input" type="search" placeholder="학교·교육기관 이름" value="${esc(clergyState.query)}" maxlength="40" />
+        <button class="search-btn" type="submit">확인</button>
+      </form>
+      ${searched ? (searched.length ? searched.map((i) => `
+        <div class="cluster-card">
+          <div class="alt-badges">${Clergy.instBadges(i).map((b) => `<span class="alt-badge ${b.kind}">${esc(b.text)}</span>`).join("")}</div>
+          <div class="cluster-name">${esc(i.name)}</div>
+          <div class="cluster-day">${esc(Clergy.RELIGION_LABELS[i.religion] || i.religion)} · ${esc(i.denomination)} · ${esc(i.region_sido)}</div>
+        </div>`).join("") : `
+        <div class="cluster-card">
+          <div class="alt-badges"><span class="alt-badge warn">이 목록에서 확인 안 됨</span></div>
+          <div class="job-path">"${esc(clergyState.query)}" — 확인되지 않은 기관이에요.</div>
+          <div class="job-path soft">교단 인준 여부는 해당 교단 총회나 종단 교육기관에서 확인할 수 있어요.</div>
+        </div>`) : ""}
+      <div class="dday-note">이 화면은 종단 공식 기관까지만 다뤄요. 개별 교회·성당·사찰 정보는 싣지 않아요.</div>`;
+    $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
+    $screen.querySelectorAll("[data-clergy-path]").forEach((b) => b.addEventListener("click", () => go("clergy/" + b.dataset.clergyPath)));
+    document.getElementById("clergySearchForm").addEventListener("submit", (e) => {
+      e.preventDefault();
+      const text = document.getElementById("clergySearchInput").value.trim();
+      if (text && Care.detectCrisis(CARE, text)) return go("care-now");
+      clergyState.query = text;
+      renderClergy();
+    });
+    window.scrollTo(0, 0);
+  }
+
+  function renderClergyDetail(id) {
+    if (!clergyVisible()) return renderClergyGate();
+    const p = CLERGY.paths.find((x) => x.id === id && !x.id.startsWith("sample-"));
+    if (!p) return go("clergy");
+    const insts = CLERGY.institutions.filter((i) => !i.id.startsWith("sample-") && i.religion === p.religion && i.denomination === p.denomination);
+    $screen.innerHTML = `
+      <button class="answer-back" data-nav="back">← 뒤로</button>
+      <div class="tool-kicker">종교와 직업 · ${esc(Clergy.RELIGION_LABELS[p.religion] || p.religion)}</div>
+      <h1 class="result-title">${esc(p.role_name)}</h1>
+      <p class="result-sub">${esc(p.denomination)}</p>
+      <div class="cluster-card">
+        <div class="cluster-name">하는 일</div>
+        <div class="job-path">${esc(p.summary)}</div>
+      </div>
+      <div class="section-label">지금 해볼 수 있는 것 — 전부 되돌릴 수 있어요</div>
+      ${p.exploratory.map((x) => `
+        <div class="cluster-card">
+          <div class="cluster-name">${esc(x.name)}</div>
+          <div class="job-path">${esc(x.description)}</div>
+          <div class="job-path soft">${[x.min_age ? "만 " + x.min_age + "세부터" : null, x.requires_guardian_consent ? "보호자 동의 필요" : null, x.duration].filter(Boolean).map(esc).join(" · ")}</div>
+          ${x.official_contact_url ? `<a class="guide-link" href="${esc(x.official_contact_url)}" target="_blank" rel="noopener">공식 안내 보기 → <span class="fresh-tag">수시 업데이트</span></a>` : ""}
+        </div>`).join("")}
+      ${p.is_open_to_minors ? `
+        <div class="lens-counter">
+          <strong>이 경로는 미성년 진입이 제도상 가능해요. 그래서 더 천천히 가요.</strong><br>
+          결정 전에 보호자와 꼭 상의하세요. 공식 상담 창구: ${esc(p.official_contact_name)} <a class="help-call" href="tel:${esc(p.official_contact_phone)}">${esc(p.official_contact_phone)}</a>
+        </div>
+        <button class="ghost-btn" data-route="parents">부모님과 이야기하는 법 — 대화 카드 열기 →</button>` : ""}
+      <div class="section-label">전체 경로 단계</div>
+      ${p.stages.map((s) => `
+        <div class="cluster-card">
+          <div class="cluster-head"><span class="cluster-name">${s.step_order}. ${esc(s.name)}</span>
+            ${!s.is_reversible ? `<span class="alt-badge warn">되돌리기 어려움</span>` : ""}</div>
+          ${s.typical_duration ? `<div class="job-path soft">· 기간 — ${esc(s.typical_duration)}</div>` : ""}
+          ${s.prerequisites ? `<div class="job-path soft">· 조건 — ${esc(s.prerequisites)}</div>` : ""}
+          ${s.reversibility_note ? `<div class="${s.is_reversible ? "job-path soft" : "cluster-why"}">${esc(s.reversibility_note)}</div>` : ""}
+        </div>`).join("")}
+      ${insts.length ? `
+        <div class="section-label">양성기관 — 교단 인준과 학위 인정은 따로 봐요</div>
+        ${insts.map((i) => `
+          <div class="cluster-card">
+            <div class="alt-badges">${Clergy.instBadges(i).map((b) => `<span class="alt-badge ${b.kind}">${esc(b.text)}</span>`).join("")}</div>
+            <div class="cluster-name">${esc(i.name)}</div>
+            <div class="cluster-day">${esc(i.region_sido)}${i.program_years ? " · " + i.program_years + "년 과정" : ""}${i.approving_body ? " · 인준: " + esc(i.approving_body) : ""}</div>
+            ${i.website ? `<a class="guide-link" href="${esc(i.website)}" target="_blank" rel="noopener">기관 홈페이지 → <span class="fresh-tag">수시 업데이트</span></a>` : ""}
+          </div>`).join("")}` : ""}
+      <div class="answer-l2">
+        <div class="l2-title">솔직하게 말하면</div>
+        <div class="body">${esc(p.reality_notes)}</div>
+      </div>
+      <div class="section-label">공식 상담 창구</div>
+      <div class="cluster-card">
+        <div class="cluster-name">${esc(p.official_contact_name)}</div>
+        ${p.official_contact_phone ? `<a class="help-call" href="tel:${esc(p.official_contact_phone)}">${esc(p.official_contact_phone)}</a>` : ""}
+        <a class="guide-link" href="${esc(p.official_contact_url)}" target="_blank" rel="noopener">공식 창구 열기 → <span class="fresh-tag">수시 업데이트</span></a>
+      </div>
+      <div class="cluster-card">
+        <div class="job-path soft">기준일 ${esc(p.verified_at)} · 출처 ${esc(p.source_name)}</div>
+        <div class="job-path soft">최종 확인은 해당 종단에 문의하세요.</div>
+      </div>`;
+    $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
+    $screen.querySelectorAll("[data-route]").forEach((b) => b.addEventListener("click", () => go(b.dataset.route)));
+    window.scrollTo(0, 0);
+  }
+
   // ---- 가이드 카드 (L3 버튼이 약속한 미니 도구·절차·기준표) ----
   function renderGuide(id) {
     const g = GUIDES.byQuestion[id];
@@ -866,8 +992,11 @@
       <h1 class="result-title">미화 없이, 조건부터 봐요</h1>
       <p class="result-sub">좋은 직업·나쁜 직업이 아니라, <strong>조건이 다른 직업</strong>이 있을 뿐이에요.</p>
       ${JOBS.jobs.map((j) => `
-        <button class="qcard" data-job="${j.id}">${esc(j.name)}<span class="qmeta">${esc(j.summary)}</span></button>`).join("")}`;
+        <button class="qcard" data-job="${j.id}">${esc(j.name)}<span class="qmeta">${esc(j.summary)}</span></button>`).join("")}
+      ${CLERGY.guard.visible ? `<button class="browse-link" data-clergy-list>종교 성직 경로(목사·신부·승려 등)도 직업 정보로 볼 수 있어요 →</button>` : ""}`;
     $screen.querySelector("[data-nav=back]").addEventListener("click", () => history.back());
+    const clergyBtn = $screen.querySelector("[data-clergy-list]");
+    if (clergyBtn) clergyBtn.addEventListener("click", () => go("clergy"));
     wireJobLinks();
     window.scrollTo(0, 0);
   }
@@ -1345,6 +1474,8 @@
     if (hash === "artprep") return renderArtprep();
     if (hash === "altschools") return renderAltschools();
     if (hash.startsWith("altschool/")) return renderAltschoolDetail(hash.slice(10));
+    if (hash === "clergy") return renderClergy();
+    if (hash.startsWith("clergy/")) return renderClergyDetail(hash.slice(7));
     if (hash.startsWith("guide/")) return renderGuide(hash.slice(6));
     if (hash.startsWith("q/")) return renderAnswer(hash.slice(2));
     return renderHome();

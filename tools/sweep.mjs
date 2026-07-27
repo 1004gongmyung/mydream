@@ -44,6 +44,7 @@ const checks = [
   ["altschools-coverage", P("중3", "altschools"), "여기 없다고 인가·등록이 아닌 게 아니에요"],
   ["altschool-detail", P("중3", "altschool/gg-haneulkkum"), "학력 인정"],
   ["altschool-detail-jb", P("중3", "altschool/jb-pureunkkum"), "대안교육 특성화고"],
+  ["clergy-gated", P("중3", "clergy"), "아직 준비 중이에요"],
   ["guide-E7", P("고3", "guide/E7"), "감정 말고 조건으로"],
   ["guide-C4", P("중3", "guide/C4"), "이 순서로 비교해요"],
   ["guide-A4", P("중2", "guide/A4"), "이렇게 뜯어봐요"],

@@ -1,0 +1,5 @@
+id,path_id,name,description,min_age,requires_guardian_consent,duration,official_contact_url
+sample-prot-e1,sample-prot-pastor,교단 공식 진로 상담 받아보기,교단 총회의 진로 담당 부서에 전화나 방문으로 상담을 신청해요. 결정이 아니라 질문하러 가는 자리예요.,,false,1회,https://example.com/sample
+sample-prot-e2,sample-prot-pastor,신학교 공개 강좌 참관,인준 신학교가 여는 공개 강좌나 입시 설명회를 들어봐요. 어떤 공부를 하게 되는지 미리 볼 수 있어요.,14,true,반나절,
+sample-budd-e1,sample-budd-monk,템플스테이 체험형 참가,주말 단기 프로그램으로 사찰의 하루를 겪어봐요. 언제든 집으로 돌아갈 수 있는 공식 프로그램이에요.,13,true,1박 2일,https://example.com/sample
+sample-budd-e2,sample-budd-monk,종단 교육원 상담,출가 절차와 조건을 공식 창구에서 물어봐요. 상담만으로는 아무것도 확정되지 않아요.,,false,1회,

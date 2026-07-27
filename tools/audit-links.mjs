@@ -36,6 +36,8 @@ const MAJORS = d("majors.data.js");
 const ARTPREP = d("artprep.data.js");
 const ALTS = d("altschools.data.js");
 const Alt = require(path.join(root, "js", "altschools.js"));
+const CLERGY = d("clergy.data.js");
+const Clergy = require(path.join(root, "js", "clergy.js"));
 
 const appSrc = readFileSync(path.join(root, "js", "app.js"), "utf8");
 
@@ -54,7 +56,7 @@ const TARGET_LINKS = extractObject("TARGET_LINKS");
 const STATIC_ROUTES = new Set([
   "home", "onboarding", "browse", "compass", "reverse", "search", "care-now", "help",
   "lens", "jobs", "explore", "quests", "journal", "signal", "shield", "portfolio",
-  "parents", "jobdex", "paths", "hischool", "majors", "artprep", "altschools",
+  "parents", "jobdex", "paths", "hischool", "majors", "artprep", "altschools", "clergy",
 ]);
 const qids = new Set(content.questions.map((q) => q.id));
 const jobIds = new Set(JOBS.jobs.map((j) => j.id));
@@ -67,6 +69,7 @@ function validRoute(r) {
   if (r.startsWith("lens/")) return lensIds.has(r.slice(5));
   if (r.startsWith("guide/")) return !!GUIDES.byQuestion[r.slice(6)];
   if (r.startsWith("altschool/")) return ALTS.schools.some((s) => s.id === r.slice(10));
+  if (r.startsWith("clergy/")) return CLERGY.paths.some((p) => p.id === r.slice(7));
   return false;
 }
 
@@ -167,6 +170,16 @@ for (const s of ALTS.schools) {
 }
 if (ALTS.allSample) n("대안학교", `현재 전부 샘플 데이터(${ALTS.schools.length}건) — 실제 명단은 사람이 확인한 CSV 주입 필요 (docs/alt-school-module.md)`);
 if (!ALTS.schools.some((s) => s.legal_status === "REGISTERED")) n("대안학교", `Tier 2(등록 대안교육기관) 미수록 — 교육부 '대안교육기관 현황' hwpx 자료 확인 후 확충 과제 (docs/alt-school-module.md)`);
+
+// 8e. 성직자 진로 — 빌드 가드 정합·안전장치·필수 필드
+if (CLERGY.guard.visible !== Clergy.isVisible(CLERGY.paths)) p("성직자", "빌드 가드 판정이 생성물과 로직에서 다름 — 로더 재실행 필요");
+for (const cp of CLERGY.paths) {
+  const issues = Clergy.minorsSafetyIssues(cp);
+  if (issues.length) p("성직자", `${cp.id} — 미성년 안전장치 위반: ${issues.join(", ")}`);
+  if (!cp.verified_at || !cp.source_name || !cp.source_url) p("성직자", `${cp.id} — 기준일/출처 누락`);
+  for (const st of cp.stages) if (!st.is_reversible && !st.reversibility_note) p("성직자", `${cp.id}/${st.id} — 비가역 단계 노트 없음`);
+}
+if (!CLERGY.guard.visible) n("성직자", `빌드 가드 비노출 상태 — 실데이터 부족: ${CLERGY.guard.missing.join(", ")} (docs/clergy-module.md)`);
 
 // 8c. 학교 명단 기준일 경과 검사 — 11개월부터 재검증 필요 알림
 const fm = /^(\d{4})-(\d{2})$/.exec(HISCHOOL.checkedAt || "");

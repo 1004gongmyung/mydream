@@ -52,7 +52,9 @@ mapsi-app/
   tools/build-content.mjs  마크다운 원본 → data/ 생성
   tools/preview.html    개발용: 학년 지정해 화면 바로 열기
   tools/e2e.html        개발용: 헤드리스 클릭 주행 (?flow=compass|reverse|crisis|search|journal|quest|signal|shield|portfolio|parents|guide)
-  tools/sweep.mjs       개발용: 전 화면 렌더링 스윕 — 서버 실행 후 `node tools/sweep.mjs` (50개 라우트·흐름 마커 검사)
+  tools/sweep.mjs       개발용: 전 화면 렌더링 스윕 — 서버 실행 후 `node tools/sweep.mjs` (51개 라우트·흐름 마커 검사)
+  tools/load-clergy.mjs        성직자 4개 CSV 조인 → data/clergy.data.js (안전장치·빌드 가드 판정)
+  tools/verify-clergy-data.mjs 성직자 검증 — 빌드 가드·180일·출처 URL·미성년 전화·개별 시설 패턴
   tools/load-alt-schools.mjs   대안학교 CSV → data/altschools.data.js (필수 필드·정합 검사, 불량 행 스킵)
   tools/verify-alt-schools.mjs 대안학교 검증 — 기준일 180일 경과·출처 URL 응답·법적지위×학력인정 정합
   tools/audit-links.mjs 개발용: 클릭 목적지 전수 감사 — `node tools/audit-links.mjs` (라우트·질문 ID·L3 타깃·가이드 링크 정합 검사)
@@ -64,7 +66,7 @@ mapsi-app/
   test/signal-shield.test.mjs 신호 리포트·방패 계산기 테스트 (10)
 ```
 
-테스트 실행 (100개): `node --test test/content.test.mjs test/modules.test.mjs test/care.test.mjs test/lens.test.mjs test/modules-bcd.test.mjs test/signal-shield.test.mjs test/stage2.test.mjs test/daily.test.mjs test/paths.test.mjs test/guides.test.mjs test/school.test.mjs test/altschools.test.mjs`
+테스트 실행 (107개): `node --test test/content.test.mjs test/modules.test.mjs test/care.test.mjs test/lens.test.mjs test/modules-bcd.test.mjs test/signal-shield.test.mjs test/stage2.test.mjs test/daily.test.mjs test/paths.test.mjs test/guides.test.mjs test/school.test.mjs test/altschools.test.mjs test/clergy.test.mjs`
 
 ## 콘텐츠 수정 워크플로우 (중요)
 
@@ -124,6 +126,14 @@ mapsi-app/
 - **상세**(`#altschool/<id>`): 배지 상단 고정, null 필드는 표시하지 않음(Tier 2 "상세 정보 미제공"), **학력 미인정이면 검정고시 안내 카드**(#q/H2·고교 지도 연결, 테스트 강제), 하단 고정 푸터 "기준일·출처·최종 확인은 관할 교육청"
 - **데이터 절대 규칙**: `accredits_diploma`는 `legal_status`에서 파생 금지(둘 다 원본 확인 후 명시 입력 — 로더·감사·테스트 3중 검증), `verified_at` 없는 레코드 거부, **모델이 학교 데이터 생성·추정 금지 — 확인된 데이터만 주입**
 - **실데이터**(2026-07-27, 1~2차 배치): **전국 16개 시도 100곳 — 인가 대안학교(각종학교) 51·특성화중 22·특성화고 27, 전부 학력 인정**. 출처: 교육부 「2024 기재요령」 참고자료(전국, 2024-03 기준) + 경기도교육청 2025 현황(경기 최신 우선 — 신규 지정 4곳 반영·휴교 1곳 제외) + 전북교육청 대안교육지원센터. 교육부 문서의 학력 인정 대응표가 이 모듈 정합 규칙의 공식 근거. **Tier 2(등록 기관 259곳, 2024-06 기준)는 hwpx 자료 수동 확인 후 확충 과제** — 감사 스크립트가 미수록을 알림. 갱신 절차·수록 현황: `docs/alt-school-module.md`
+
+## 성직자 진로 모듈 (2026-07-27 신설 — 설계: mydream-clergy-path-module-prompt.md, 현재 빌드 가드로 비노출)
+
+- **중립 원칙**: 포교 아님 — 직업 정보. 다른 직업 카드와 동일 컴포넌트(전용 CSS 금지, 테스트 강제), 종교별 탭·추천 정렬 없음, 정통성(이단) 판정 금지, 개별 교회·사찰 미수록(종단 공식 기관만)
+- **빌드 가드**: 개신교·천주교·불교 각 1건 이상 실데이터가 없으면 모듈 전체 비노출(`#clergy`는 '준비 중' 게이트만) — 한 종교만 보이는 상태 차단. 샘플 행은 판정 제외
+- **핵심 데이터 축**: ① 단계별 `is_reversible`(비가역 단계는 경고 배지+'무엇이 남는지' 노트 필수) ② 양성기관의 **교단 인준/학위 인정 2축 분리**(합치기·파생 금지 — 교단 인준 없는 신학교 진학 피해 방지) ③ '지금 해볼 수 있는 것'(되돌릴 수 있는 실험)을 비가역 단계보다 먼저 표시
+- **미성년 안전장치**(테스트 강제): 진입 가능 경로는 상담 전화 필수(로더 거부)+보호자 상의 안내+부모 카드(#parents) 연결 3종 렌더
+- 수록 범위(기획 확정): 개신교·천주교·불교 + 원불교 + 성공회 + 이슬람(국내 양성기관 없음 사실 카드). 절차·원칙: `docs/clergy-module.md`
 
 ## 조건 대시보드 · 체험 지도 · 퀘스트 · 강점 저널 (구현 완료)
 
