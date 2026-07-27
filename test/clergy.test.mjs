@@ -1,4 +1,4 @@
-// 성직자 진로 모듈 테스트 — 스펙 5종(빌드 가드·미성년 안전장치·비가역 경고·배지 독립·동일 컴포넌트) + 중립성
+﻿// 성직자 진로 모듈 테스트 — 스펙 5종(빌드 가드·미성년 안전장치·비가역 경고·배지 독립·동일 컴포넌트) + 중립성
 import test from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
@@ -94,6 +94,8 @@ test("데이터 절대 규칙: 경로·기관 전부 출처·기준일 보유, �
 test("검색 인식: 역할 별칭·문장 매칭 — 수녀·스님·목사, 무관 입력은 빈 배열", () => {
   assert.ok(Clergy.findPathsByQuery(DATA.paths, "수녀").some((p) => p.id === "cath-religious"));
   assert.ok(Clergy.findPathsByQuery(DATA.paths, "스님이 되고 싶어요").some((p) => p.id === "budd-jogye"));
+  assert.ok(Clergy.findPathsByQuery(DATA.paths, "승려").some((p) => p.id === "budd-jogye"), "승려 별칭");
+  assert.ok(Clergy.findPathsByQuery(DATA.paths, "수도자").some((p) => p.id === "cath-religious"), "수도자 별칭");
   assert.equal(Clergy.findPathsByQuery(DATA.paths, "목사").length, 3, "목사 다교단 매칭(상한 3)");
   assert.deepEqual(Clergy.findPathsByQuery(DATA.paths, "오늘 날씨"), []);
 });

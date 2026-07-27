@@ -58,6 +58,12 @@
     const aliases = String(name || "").split(/[·()\/,]+/).map(norm).filter((a) => a.length >= 2);
     return [norm(name), ...aliases];
   }
+  // 역할명 분해로 안 잡히는 흔한 다른 이름 (경로 id별)
+  const PATH_EXTRA_ALIASES = {
+    "budd-jogye": ["승려", "출가"],
+    "cath-priest": ["신부님"],
+    "cath-religious": ["수도자"],
+  };
   function findPathsByQuery(paths, query) {
     const q = norm(query);
     if (q.length < 2) return [];
@@ -65,6 +71,7 @@
       .filter((p) => !String(p.id).startsWith("sample-"))
       .filter((p) =>
         nameAliases(p.role_name).some((a) => a.includes(q) || q.includes(a)) ||
+        (PATH_EXTRA_ALIASES[p.id] || []).some((x) => { const nx = norm(x); return nx.includes(q) || q.includes(nx); }) ||
         norm(p.denomination).includes(q))
       .slice(0, 3);
   }

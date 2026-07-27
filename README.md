@@ -11,6 +11,7 @@
 - **서비스 URL**: https://1004gongmyung.github.io/mydream/
 - 저장소: https://github.com/1004gongmyung/mydream (공개, GitHub Pages — main 브랜치 루트)
 - **업데이트 배포 방법**: 이 폴더에서 수정 → 테스트 → `git add -A; git commit -m "메시지"; git push` — 푸시하면 1~2분 내 자동 반영
+- **캐시 버전(중요)**: 데이터(data/)나 로직(js/)을 고쳤으면 `index.html`의 `?v=숫자`를 하나 올려서 함께 배포한다 — 안 올리면 이미 방문한 폰이 옛 파일을 캐시로 계속 써서 "반영 안 됨"으로 보인다(v2.8에서 도입)
 
 ## 실행하는 법 (셋 중 아무거나)
 
