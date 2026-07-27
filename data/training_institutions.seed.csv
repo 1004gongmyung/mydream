@@ -1,4 +1,9 @@
-id,religion,denomination,name,is_denomination_approved,approving_body,is_accredited_university,degree_awarded,program_years,region_sido,address,website,source_name,source_url,verified_at
-sample-inst-approved,PROTESTANT,(샘플) 한빛교단,(샘플) 한빛신학대학원대학교,true,(샘플) 한빛교단 총회,true,신학석사(M.Div.),3,서울,(가상 주소),https://example.com/sample,샘플 데이터(실제 기관 아님),https://example.com/sample,2026-07-27
-sample-inst-unapproved,PROTESTANT,(샘플) 한빛교단,(샘플) 새길신학교,false,,true,신학사,4,경기,(가상 주소),,샘플 데이터(실제 기관 아님),https://example.com/sample,2026-07-27
-sample-inst-nondegree,BUDDHIST,(샘플) 한빛종단,(샘플) 한빛승가교육원,true,(샘플) 한빛종단 교육원,false,,4,부산,(가상 주소),,샘플 데이터(실제 기관 아님),https://example.com/sample,2026-07-27
+﻿id,religion,denomination,name,is_denomination_approved,approving_body,is_accredited_university,degree_awarded,program_years,region_sido,address,website,source_name,source_url,verified_at
+prot-inst-puts,PROTESTANT,대한예수교장로회(통합),장로회신학대학교,true,대한예수교장로회총회(통합),true,신학사·신학석사(M.Div.),,서울,,https://www.puts.ac.kr,대한예수교장로회총회(통합) 직영 신학대 안내(2026-07 확인),https://new.pck.or.kr,2026-07-27
+cath-inst-cuk,CATHOLIC,한국 천주교(교구 사제),가톨릭대학교 신학대학(성신교정),true,천주교 서울대교구,true,신학사,,서울,,https://www.catholic.ac.kr,한국천주교주교회의(2026-07 확인),https://www.cbck.or.kr,2026-07-27
+budd-inst-sangha,BUDDHIST,대한불교조계종,중앙승가대학교,true,대한불교조계종,true,불교학사,4,경기,,https://www.sangha.ac.kr,대한불교조계종 출가 안내(2026-07 확인),http://monk.buddhism.or.kr,2026-07-27
+budd-inst-dongguk,BUDDHIST,대한불교조계종,동국대학교 불교학부,true,대한불교조계종,true,학사,4,서울,,https://www.dongguk.edu,대한불교조계종 출가 안내(2026-07 확인),http://monk.buddhism.or.kr,2026-07-27
+won-inst-wku,WON_BUDDHIST,원불교,원광대학교 원불교학과,true,원불교 교정원,true,학사,4,전북,,https://wonbuddhism.wku.ac.kr,원불교 교정원·원광대 원불교학과(2026-07 확인),https://www.won.or.kr,2026-07-27
+won-inst-grad,WON_BUDDHIST,원불교,원불교대학원대학교,true,원불교 교정원,true,석사,2,전북,,,원불교 교정원(2026-07 확인),https://www.won.or.kr,2026-07-27
+won-inst-youngsan,WON_BUDDHIST,원불교,영산선학대학교,true,원불교 교정원,true,학사,4,전남,,,원불교 교정원(2026-07 확인),https://www.won.or.kr,2026-07-27
+angl-inst-skhu,PROTESTANT,대한성공회,성공회대학교(신학과·신학전문대학원),true,대한성공회,true,신학사·신학석사(M.Div.),,서울,,https://www.skhu.ac.kr,대한성공회(2026-07 확인),https://anglicankr.church,2026-07-27

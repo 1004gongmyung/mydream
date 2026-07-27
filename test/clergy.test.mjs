@@ -14,16 +14,14 @@ const appSrc = readFileSync(join(here, "..", "js", "app.js"), "utf8");
 const cssSrc = readFileSync(join(here, "..", "css", "style.css"), "utf8");
 
 test("빌드 가드: 3개 종교 실데이터가 모두 있어야만 노출 — 샘플은 판정 제외", () => {
-  // 샘플뿐인 현재 데이터는 비노출
-  assert.equal(Clergy.isVisible(DATA.paths), false, "샘플만으로 노출되면 안 됨");
   assert.equal(DATA.guard.visible, Clergy.isVisible(DATA.paths), "생성물 가드와 로직 판정 일치");
-  // 3개 종교 실데이터 → 노출
+  // 실데이터 3종 확보 상태 — 어느 한 종교라도 빠지는 회귀가 생기면 여기서 잡힌다
+  assert.equal(DATA.guard.visible, true, "개신교·천주교·불교 실데이터 확보 후엔 노출 상태여야 함");
+  // 가드 로직 자체 검증 (합성 데이터)
   const real = ["PROTESTANT", "CATHOLIC", "BUDDHIST"].map((r, i) => ({ id: "p" + i, religion: r }));
   assert.equal(Clergy.isVisible(real), true);
-  // 하나라도 빠지면 비노출
-  assert.equal(Clergy.isVisible(real.slice(0, 2)), false, "천주교 0건이면 전체 비노출");
-  // 샘플이 끼어도 판정은 실데이터 기준
-  assert.equal(Clergy.isVisible([...real.slice(0, 2), { id: "sample-x", religion: "BUDDHIST" }]), false);
+  assert.equal(Clergy.isVisible(real.slice(0, 2)), false, "한 종교라도 0건이면 전체 비노출");
+  assert.equal(Clergy.isVisible([...real.slice(0, 2), { id: "sample-x", religion: "BUDDHIST" }]), false, "샘플은 판정에서 제외");
 });
 
 test("미성년 안전장치: 진입 가능 경로엔 상담 전화 필수, 화면엔 보호자 안내·부모 카드 연결", () => {
@@ -71,7 +69,8 @@ test("동일 컴포넌트: 성직자 화면은 기존 카드 컴포넌트만 사
 
 test("중립성: 교리·권유·정통성 판정 표현 금지, 개별 교회·사찰 미수록, 종교별 탭·추천 없음", () => {
   const text = JSON.stringify(DATA);
-  for (const b of ["이단", "사이비", "참된 ", "믿으세요", "전도", "권해요", "추천", "구원받"]) {
+  // "전도사"(직책명)·"교구 추천"(제도 용어)은 허용 — 앱이 권유하는 형태의 표현만 금지
+  for (const b of ["이단", "사이비", "참된 ", "믿으세요", "전도하", "포교하", "권해요", "추천해", "추천 순위", "구원받"]) {
     assert.ok(!text.includes(b), `금지 표현: ${b}`);
   }
   for (const i of DATA.institutions) {

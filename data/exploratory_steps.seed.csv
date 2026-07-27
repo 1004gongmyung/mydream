@@ -1,5 +1,11 @@
-id,path_id,name,description,min_age,requires_guardian_consent,duration,official_contact_url
-sample-prot-e1,sample-prot-pastor,교단 공식 진로 상담 받아보기,교단 총회의 진로 담당 부서에 전화나 방문으로 상담을 신청해요. 결정이 아니라 질문하러 가는 자리예요.,,false,1회,https://example.com/sample
-sample-prot-e2,sample-prot-pastor,신학교 공개 강좌 참관,인준 신학교가 여는 공개 강좌나 입시 설명회를 들어봐요. 어떤 공부를 하게 되는지 미리 볼 수 있어요.,14,true,반나절,
-sample-budd-e1,sample-budd-monk,템플스테이 체험형 참가,주말 단기 프로그램으로 사찰의 하루를 겪어봐요. 언제든 집으로 돌아갈 수 있는 공식 프로그램이에요.,13,true,1박 2일,https://example.com/sample
-sample-budd-e2,sample-budd-monk,종단 교육원 상담,출가 절차와 조건을 공식 창구에서 물어봐요. 상담만으로는 아무것도 확정되지 않아요.,,false,1회,
+﻿id,path_id,name,description,min_age,requires_guardian_consent,duration,official_contact_url
+prot-e1,prot-tonghap,소속 교단 확인해보기,다니는(또는 아는) 교회가 어느 교단인지 물어봐요. 교단에 따라 인준 신학교와 과정이 통째로 달라져서 이게 첫 정보예요.,,false,5분,
+prot-e2,prot-tonghap,총회·신학대 입시 안내 읽어보기,교단 총회와 인준 신학대의 입학 안내를 읽어봐요. 결정이 아니라 정보 수집이에요.,,false,반나절,https://new.pck.or.kr
+cath-e1,cath-priest,교구 예비신학생 모임 알아보기,각 교구가 사제직에 관심 있는 중·고생 모임을 운영해요. 본당 사무실에 묻는 게 공식 경로예요.,,true,정기 모임,https://www.cbck.or.kr
+cath-e2,cath-priest,본당 신부님과 진로 상담,결정이 아니라 질문하러 가는 자리예요. 과정·조건을 직접 들어봐요.,,false,1회,
+budd-e1,budd-jogye,템플스테이 체험 참가,사찰의 하루를 1박 2일로 겪어보고 언제든 돌아와요. 종단 산하 공식 프로그램이에요.,,true,1박 2일,https://www.templestay.com
+budd-e2,budd-jogye,출가 상담 전화 걸어보기,상담만으로는 아무것도 확정되지 않아요. 조건과 절차를 공식 창구에서 들어봐요.,,false,1회,http://monk.buddhism.or.kr
+won-e1,won-gyomu,교당 진로 상담,가까운 교당 교무에게 과정을 물어봐요. 추천 제도가 있어서 상담이 공식 첫 단계예요.,,false,1회,https://www.won.or.kr
+won-e2,won-gyomu,원불교학과 안내 읽어보기,예비교무 과정이 어떤 공부인지 학과 안내로 미리 봐요.,,false,반나절,https://wonbuddhism.wku.ac.kr
+angl-e1,angl-priest,교구 사무처 상담,성직 과정의 조건(견진·청원 등)을 공식 창구에서 확인해요. 상담은 결정이 아니에요.,,false,1회,https://anglicankr.church
+islam-e1,islam-imam,중앙회 방문·상담,서울중앙성원 안내 등 공식 창구에서 궁금한 걸 물어봐요. 유학 조건도 여기서 확인해요.,,false,1회,http://www.koreaislam.org
