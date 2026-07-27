@@ -22,6 +22,24 @@
   const CLERGY = window.MAPSI_CLERGY_DATA;
   const Clergy = window.MapsiClergy;
   const JOBDICT = window.MAPSI_JOBDICT_DATA;
+  const CAREER = window.MAPSI_CAREERNET_DATA;
+
+  // 커리어넷 스냅샷 상세 카드 — 있으면 표시, 없으면 아무것도 만들지 않는다 (가짜 응답 금지)
+  function careernetHtml(ourName) {
+    if (!CAREER.available) return "";
+    const d = CAREER.details[ourName];
+    if (!d) return "";
+    return `
+      <div class="cluster-card">
+        <div class="cluster-name">커리어넷 직업 정보${d.cnName && d.cnName !== ourName ? ` — ${esc(d.cnName)}` : ""}</div>
+        ${d.work ? `<div class="job-path">· <strong>하는 일</strong> — ${esc(d.work)}</div>` : ""}
+        ${d.recruit ? `<div class="job-path">· <strong>되는 길</strong> — ${esc(d.recruit)}</div>` : ""}
+        ${d.certificate ? `<div class="job-path">· <strong>관련 자격</strong> — ${esc(d.certificate)}</div>` : ""}
+        ${d.depart ? `<div class="job-path">· <strong>관련 학과</strong> — ${esc(d.depart)}</div>` : ""}
+        ${d.wage ? `<div class="job-path soft">· 임금 정보 — ${esc(d.wage)} (조사 시점 기준)</div>` : ""}
+        ${chipsHtml([{ grade: "②", label: `커리어넷 직업백과 · ${CAREER.fetchedAt} 수집` }])}
+      </div>`;
+  }
   const Compass = window.MapsiCompass;
   const Reverse = window.MapsiReverse;
   const Care = window.MapsiCare;
@@ -369,7 +387,8 @@
             <div class="job-path">${esc(e.line)}</div>
             ${relJob ? `<button class="inline-link job-inline" data-job="${relJob.id}">비슷한 결의 조건 카드: ${esc(relJob.name)} →</button>` : ""}
             ${e.route ? `<button class="ghost-btn" data-route="${e.route}">${esc(e.routeLabel || "안내 보기")} →</button>` : ""}
-          </div>`;
+          </div>
+          ${careernetHtml(e.name)}`;
         }).join("")}
         ${matchedDict.length ? `
           <div class="dday-note">이 직업의 자세한 정보(하는 일·전망·되는 길)는 공식 창구에서 이름으로 검색해요.</div>
@@ -383,11 +402,22 @@
             ? relQs.slice(0, M.SEARCH_LIMIT).map(qcardHtml).join("")
             : `<div class="open-question">지금 시기(${esc(grade || "전체")})에 해당하는 연결 질문이 아직 없어요. 위 카드에서 경로·조건을 바로 볼 수 있어요.</div>`}` : ""}`;
     } else {
+      // 최종 폴백: 커리어넷 직업백과 전체 목록에서 직업명 인식 (스냅샷 수집 후 작동)
+      const matchedCareer = CAREER.available ? M.findByNames(CAREER.jobs, query) : [];
       const results = M.searchQuestions(content, query, grade);
-      body = results.length
-        ? `<div class="section-label">"${esc(query)}" 관련 질문 · ${results.length}개${grade ? ` · ${esc(grade)} 기준` : ""}</div>${results.map(qcardHtml).join("")}`
-        : `<div class="open-question">"${esc(query)}"에 딱 맞는 질문을 못 찾았어요. 단어를 바꿔보거나, 전체 질문에서 골라봐도 좋아요.</div>
-           <button class="browse-link" data-nav="browse">전체 질문 보기</button>`;
+      body = `
+        ${matchedCareer.length ? `
+          <div class="section-label">직업 정보 · "${esc(query)}"</div>
+          ${matchedCareer.map((c) => `
+            <div class="cluster-card">
+              <div class="cluster-name">${esc(c.name)}</div>
+              <div class="job-path soft">커리어넷 직업백과에 있는 직업이에요. 하는 일·되는 길은 커리어넷에서 이 이름으로 검색해요.</div>
+            </div>`).join("")}
+          ${typeLinksHtml([{ url: "https://www.career.go.kr", label: "커리어넷 — 직업정보 검색" }])}` : ""}
+        ${results.length
+          ? `<div class="section-label">"${esc(query)}" 관련 질문 · ${results.length}개${grade ? ` · ${esc(grade)} 기준` : ""}</div>${results.map(qcardHtml).join("")}`
+          : (matchedCareer.length ? "" : `<div class="open-question">"${esc(query)}"에 딱 맞는 질문을 못 찾았어요. 단어를 바꿔보거나, 전체 질문에서 골라봐도 좋아요.</div>
+             <button class="browse-link" data-nav="browse">전체 질문 보기</button>`)}`;
     }
     $screen.innerHTML = `
       <button class="answer-back" data-nav="home">← 홈으로</button>
@@ -1080,6 +1110,7 @@
       </div>
       <div class="lens-career"><span class="lens-career-label">이 일에서 AI가 못 하는 것</span>${esc(j.aiNote)}</div>
       ${sLine ? `<div class="lens-line">${esc(sLine.line)} <span class="lens-ref">→ 렌즈 ${esc(sLine.lens)}</span></div>` : ""}
+      ${careernetHtml(j.name)}
       <div class="cluster-card">
         <div class="cluster-name">임금</div>
         <div class="job-path soft">${esc(JOBS.wagePendingNote)}</div>
