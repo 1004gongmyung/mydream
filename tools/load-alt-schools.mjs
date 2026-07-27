@@ -113,6 +113,8 @@ writeFileSync(outPath,
   "});\n", "utf8");
 
 console.log(`OK: ${schools.length}건 적재 → data/altschools.data.js${data.allSample ? " (전부 샘플 데이터)" : ""}`);
-for (const w of warnings) console.log("  경고: " + w);
+if (warnings.length) {
+  console.log(`  보강 대상(Tier 1 선택 필드 비어 있음): ${warnings.length}건 — 예: ${warnings.slice(0, 5).join(" / ")}${warnings.length > 5 ? " 외" : ""}`);
+}
 for (const s of skipped) console.log("  스킵: " + s);
 process.exitCode = 0;

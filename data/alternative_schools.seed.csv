@@ -28,3 +28,74 @@ jb-gosan,고산고등학교,SPECIALIZED_HIGH,true,1,HIGH,전북,완주,상세 �
 jb-jipyeongseon-high,지평선고등학교,SPECIALIZED_HIGH,true,1,HIGH,전북,김제,상세 주소는 학교알리미에서 학교명으로 확인,,,,,,,,,,,,,전북교육청 대안교육지원센터,https://school.jbedu.kr/dream/M0104/,2026-07-27
 jb-sein,세인고등학교,SPECIALIZED_HIGH,true,1,HIGH,전북,완주,상세 주소는 학교알리미에서 학교명으로 확인,,,,,,,,,,,,,전북교육청 대안교육지원센터,https://school.jbedu.kr/dream/M0104/,2026-07-27
 jb-pureunkkum,푸른꿈고등학교,SPECIALIZED_HIGH,true,1,HIGH,전북,무주,상세 주소는 학교알리미에서 학교명으로 확인,,,,,,,,,,,,,전북교육청 대안교육지원센터,https://school.jbedu.kr/dream/M0104/,2026-07-27
+se-practical-music,서울실용음악고등학교,ACCREDITED_ALT,true,1,HIGH,서울,중구,서울 중구 신당동 (상세 주소는 학교알리미 확인),,,,,,,,,ARTS,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+se-yeomyung,여명학교,ACCREDITED_ALT,true,1,HIGH,서울,중구,서울 중구 남산동 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+se-jiguchon,지구촌학교,ACCREDITED_ALT,true,1,ELEMENTARY,서울,구로구,서울 구로구 오류동 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+se-dasom,서울다솜관광고등학교,ACCREDITED_ALT,true,1,HIGH,서울,종로구,서울 종로구 숭인동 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+bs-songjeong,송정중학교,ACCREDITED_ALT,true,1,MIDDLE,부산,강서구,부산 강서구 송정동 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+bs-jangdaehyun,장대현중고등학교,ACCREDITED_ALT,true,1,MIDDLE|HIGH,부산,강서구,부산 강서구 신호동 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+dg-haeol,대구해올중고등학교,ACCREDITED_ALT,true,1,MIDDLE|HIGH,대구,달서구,대구 달서구 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+ic-cheongdam,인천청담고등학교,ACCREDITED_ALT,true,1,HIGH,인천,연수구,인천 연수구 동춘동 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+ic-haemil,인천해밀학교,ACCREDITED_ALT,true,1,HIGH,인천,남동구,인천 남동구 구월동 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+ic-hannuri,인천한누리학교,ACCREDITED_ALT,true,1,ELEMENTARY|MIDDLE|HIGH,인천,남동구,인천 남동구 논현동 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gj-wolgwang-ele,월광기독학교(초등과정),ACCREDITED_ALT,true,1,ELEMENTARY,광주,서구,광주 서구 화정동 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+dj-saesori-high,새소리음악고등학교,ACCREDITED_ALT,true,1,HIGH,대전,서구,대전 서구 도마동 (상세 주소는 학교알리미 확인),,,,,,,,,ARTS,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+dj-saesori-mid,새소리음악중학교,ACCREDITED_ALT,true,1,MIDDLE,대전,서구,대전 서구 도마동 (상세 주소는 학교알리미 확인),,,,,,,,,ARTS,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+us-goun,울산고운중학교,ACCREDITED_ALT,true,1,MIDDLE,울산,울주군,울산 울주군 두서면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+sj-neulbeot,세종늘벗학교,ACCREDITED_ALT,true,1,MIDDLE|HIGH,세종,조치원읍,세종 조치원읍 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gw-haemil,해밀학교,ACCREDITED_ALT,true,1,MIDDLE,강원,홍천군,강원 홍천군 남면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gw-nocheon,노천초등학교,ACCREDITED_ALT,true,1,ELEMENTARY,강원,홍천군,강원 홍천군 동면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+cb-global,글로벌선진학교,ACCREDITED_ALT,true,1,MIDDLE|HIGH,충북,음성군,충북 음성군 원남면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+cb-polytech-dasom,한국폴리텍다솜고등학교,ACCREDITED_ALT,true,1,HIGH,충북,제천시,충북 제천시 강제동 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+cb-dada,다다예술학교,ACCREDITED_ALT,true,1,ELEMENTARY|MIDDLE,충북,청주시,충북 청주시 상당구 (상세 주소는 학교알리미 확인),,,,,,,,,ARTS,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+cb-eunyeoul-mid,은여울중학교,ACCREDITED_ALT,true,1,MIDDLE,충북,진천군,충북 진천군 문백면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+cb-eunyeoul-high,은여울고등학교,ACCREDITED_ALT,true,1,HIGH,충북,진천군,충북 진천군 문백면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+cn-yeohae,여해학교,ACCREDITED_ALT,true,1,MIDDLE,충남,아산시,충남 아산시 염치읍 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+cn-dream,드림학교,ACCREDITED_ALT,true,1,HIGH,충남,천안시,충남 천안시 충절로 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+cn-dasarang,충남다사랑학교,ACCREDITED_ALT,true,1,HIGH,충남,아산시,충남 아산시 둔포면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+jn-wolgwang,월광기독학교(중·고등과정),ACCREDITED_ALT,true,1,MIDDLE|HIGH,전남,함평군,전남 함평군 대동면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+jn-stjoseph,성요셉상호문화고등학교,ACCREDITED_ALT,true,1,HIGH,전남,강진군,전남 강진군 강진읍 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+jn-ieum,이음학교,ACCREDITED_ALT,true,1,,전남,광양시,전남 광양시 광양읍 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+jn-songgang,송강고등학교,ACCREDITED_ALT,true,1,HIGH,전남,담양군,전남 담양군 봉산면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gb-handong,한동글로벌학교,ACCREDITED_ALT,true,1,ELEMENTARY|MIDDLE|HIGH,경북,포항시,경북 포항시 북구 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gb-gvcs-mungyeong,글로벌선진학교문경,ACCREDITED_ALT,true,1,MIDDLE|HIGH,경북,문경시,경북 문경시 영순면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gb-sanjayeon,산자연중학교,ACCREDITED_ALT,true,1,MIDDLE,경북,영천시,경북 영천시 화북면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gb-namuwa,나무와중학교,ACCREDITED_ALT,true,1,MIDDLE,경북,영천시,경북 영천시 대창면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gb-lincoln,링컨중고등학교,ACCREDITED_ALT,true,1,MIDDLE|HIGH,경북,김천시,경북 김천시 대덕면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gb-daekyung-art,대경문화예술고등학교,ACCREDITED_ALT,true,1,HIGH,경북,경산시,경북 경산시 자인면 (상세 주소는 학교알리미 확인),,,,,,,,,ARTS,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gn-kkumkium,경남꿈키움중학교,ACCREDITED_ALT,true,1,MIDDLE,경남,진주시,경남 진주시 이반성면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gn-goseong-music,경남고성음악고등학교,ACCREDITED_ALT,true,1,HIGH,경남,고성군,경남 고성군 하일면 (상세 주소는 학교알리미 확인),,,,,,,,,ARTS,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gn-miryang-film,밀양영화고등학교,ACCREDITED_ALT,true,1,HIGH,경남,밀양시,경남 밀양시 상남면 (상세 주소는 학교알리미 확인),,,,,,,,,ARTS,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gn-gimhae-geumgok,김해금곡고등학교,ACCREDITED_ALT,true,1,HIGH,경남,김해시,경남 김해시 한림면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gn-geochang-theater,거창연극고등학교,ACCREDITED_ALT,true,1,HIGH,경남,거창군,경남 거창군 위천면 (상세 주소는 학교알리미 확인),,,,,,,,,ARTS,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gn-namhae-bomulseom,남해보물섬고등학교,ACCREDITED_ALT,true,1,HIGH,경남,남해군,경남 남해군 창선면 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+dg-hanulan,한울안중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,대구,달성군,대구 달성군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+dg-gachang,가창중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,대구,달성군,대구 달성군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gj-pyeongdong,평동중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,광주,광주시,광주 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gj-salesio,살레시오여자중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,광주,광주시,광주 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+dj-dongmyung-mid,동명중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,대전,대전시,대전 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gw-palryeol-mid,팔렬중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,강원,홍천군,강원 홍천군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gw-gajeong,가정중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,강원,춘천시,강원 춘천시 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+jn-yongjeong,용정중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,전남,보성군,전남 보성군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+jn-seongjisonghak,성지송학중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,전남,영광군,전남 영광군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+jn-cheongram,청람중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,전남,강진군,전남 강진군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+jn-nasan-art,나산실용예술중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,전남,함평군,전남 함평군 (상세 주소는 학교알리미 확인),,,,,,,,,ARTS,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gn-sangju,상주중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,경남,남해군,경남 남해군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gn-daebyeong,대병중학교,SPECIALIZED_MIDDLE,true,1,MIDDLE,경남,합천군,경남 합천군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+dg-dalgubeol,달구벌고등학교,SPECIALIZED_HIGH,true,1,HIGH,대구,동구,대구 동구 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+ic-sanmaeul,산마을고등학교,SPECIALIZED_HIGH,true,1,HIGH,인천,강화군,인천 강화군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gj-dongmyung-high,동명고등학교,SPECIALIZED_HIGH,true,1,HIGH,광주,광산구,광주 광산구 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gw-jeonin,전인고등학교,SPECIALIZED_HIGH,true,1,HIGH,강원,춘천시,강원 춘천시 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gw-palryeol-high,팔렬고등학교,SPECIALIZED_HIGH,true,1,HIGH,강원,홍천군,강원 홍천군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gw-hyeoncheon,현천고등학교,SPECIALIZED_HIGH,true,1,HIGH,강원,횡성군,강원 횡성군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+cb-yangeop,양업고등학교,SPECIALIZED_HIGH,true,1,HIGH,충북,청주시,충북 청주시 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+cn-hanmaeum,한마음고등학교,SPECIALIZED_HIGH,true,1,HIGH,충남,천안시,충남 천안시 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+cn-community-vision,공동체비전고등학교,SPECIALIZED_HIGH,true,1,HIGH,충남,서천군,충남 서천군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+jn-yeongsanseongji,영산성지고등학교,SPECIALIZED_HIGH,true,1,HIGH,전남,영광군,전남 영광군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+jn-hanbit,한빛고등학교,SPECIALIZED_HIGH,true,1,HIGH,전남,담양군,전남 담양군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+jn-hanul,한울고등학교,SPECIALIZED_HIGH,true,1,HIGH,전남,곡성군,전남 곡성군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gb-hwarang,경주화랑고등학교,SPECIALIZED_HIGH,true,1,HIGH,경북,경주시,경북 경주시 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gn-gandhi,간디고등학교,SPECIALIZED_HIGH,true,1,HIGH,경남,산청군,경남 산청군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gn-hapcheon-peace,합천평화고등학교,SPECIALIZED_HIGH,true,1,HIGH,경남,합천군,경남 합천군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gn-jirisan,지리산고등학교,SPECIALIZED_HIGH,true,1,HIGH,경남,산청군,경남 산청군 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
+gn-taebong,태봉고등학교,SPECIALIZED_HIGH,true,1,HIGH,경남,창원시,경남 창원시 (상세 주소는 학교알리미 확인),,,,,,,,,,,,,교육부 기재요령 참고자료 — 대안학교 현황(2024-03),https://star.moe.go.kr/afile/fileDownload/1Immn,2026-07-27
